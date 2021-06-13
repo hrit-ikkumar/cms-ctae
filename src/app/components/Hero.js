@@ -31,7 +31,7 @@ const HeroContainer = styled.section`
   justify-content: center;
   align-items: center;
   background: rgba(0, 0, 0, 0.6)
-    url("https://images.unsplash.com/photo-1549231517-daf62e76a86e?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1103&q=80")
+    url("https://images.unsplash.com/photo-1604933762161-67313106146c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=750&q=80")
     center/cover fixed no-repeat;
   background-blend-mode: darken;
 `;

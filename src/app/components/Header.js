@@ -178,7 +178,7 @@ const HeaderLeft = styled.div`
 const HeaderTitle = styled.h3`
   margin-left: 20px;
   color: #fff;
-  font-size: 21px;
+  font-size: 27px;
   border-top: 2px solid #fff;
   border-bottom: 2px solid #fff;
 `;
