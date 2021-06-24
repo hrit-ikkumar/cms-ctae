@@ -18,6 +18,9 @@ mongoConnect.then(
 );
 
 var authRouter = require("./routes/Auth/auth");
+var clubRouter = require("./routes/Club/club");
+var clubEventRouter = require("./routes/Club/Event/event");
+var clubPostRouter = require("./routes/Club/Post/post");
 
 var app = express();
 
@@ -32,6 +35,10 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/auth", authRouter);
+app.use("/admin/club", clubRouter);
+app.use("/club/event", clubEventRouter);
+app.use("/club/post", clubPostRouter);
+
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
