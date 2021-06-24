@@ -39,7 +39,6 @@ app.use("/admin/club", clubRouter);
 app.use("/club/event", clubEventRouter);
 app.use("/club/post", clubPostRouter);
 
-
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   next(createError(404));
