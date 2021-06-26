@@ -109,7 +109,8 @@ function RegisterScreen() {
           url: "/auth/signUp",
           data: registrationData,
         }).then((res) => {
-          if (res.statusCode !== 200) {
+          if (res.status !== 200) {
+            setIsLoading(false);
             throw new Error();
           } else {
             dispatchFormState({ type: RESET_FORM });

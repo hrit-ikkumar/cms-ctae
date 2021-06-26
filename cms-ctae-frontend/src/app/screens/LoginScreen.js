@@ -103,7 +103,6 @@ function LoginScreen() {
             dispatchFormState({ type: RESET_FORM });
             setIsLoading(false);
             dispatch(signIn(res.data));
-            console.log("reached to the end of login state");
             history.push("/");
             return;
           }
