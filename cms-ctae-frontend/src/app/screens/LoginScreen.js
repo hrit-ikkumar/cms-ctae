@@ -2,7 +2,7 @@ import React, { useCallback, useReducer, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 
 import FormInput from "../components/FormInput";
-import { auth } from "../features/firebase";
+
 import {
   RegisterScreenContainer,
   FormContainer,
@@ -82,10 +82,7 @@ function LoginScreen() {
 
       try {
         setIsLoading(true);
-        await auth.signInWithEmailAndPassword(
-          formData.values.email,
-          formData.values.password
-        );
+        // login will come here...
         dispatchFormState({ type: RESET_FORM });
         setIsLoading(false);
         history.replace("/");

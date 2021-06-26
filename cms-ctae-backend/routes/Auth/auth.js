@@ -3,7 +3,7 @@ var router = express.Router();
 const User = require("../../Model/User"); // mongoose.model('User');
 const Club = require("../../Model/Club"); // mongoose.model('Club')
 const { SimpleUser, ClubWiseUser } = User;
-const {auth} = require("../../firebase.config");
+
 /* GET users listing. */
 router.post("/signUp", async (req, res, next) => {
   const {
@@ -17,7 +17,6 @@ router.post("/signUp", async (req, res, next) => {
     clubName,
     clubPosition,
   } = req.body;
-  console.log(req.body);
   const newUser = {
     type,
     name,
@@ -43,6 +42,7 @@ router.post("/signUp", async (req, res, next) => {
               newUserObject
                 .save()
                 .then((result) => {
+                  console.log(result);
                   res.statusCode = 200;
                   res.send(result);
                   return;

@@ -1,15 +1,16 @@
 import React, { useCallback, useReducer, useState } from "react";
 import { Button } from "@material-ui/core";
 import { Link, useHistory } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import axios from "axios";
 
 import FormInput from "../components/FormInput";
-import { auth, db } from "../features/firebase";
+import { authSlice } from "../features/authSlice";
 import styled from "styled-components";
-import { config } from "../../config";
 
 const UPDATE_FORM = "UPDATE_FORM";
 const RESET_FORM = "RESET_FORM";
+const signIn = authSlice.reducer.signIn;
 
 const initialState = {
   values: {
@@ -64,6 +65,7 @@ const formReducer = (state, action) => {
 };
 
 function RegisterScreen() {
+  const dispatch = useDispatch();
   const history = useHistory();
   const [formData, dispatchFormState] = useReducer(formReducer, initialState);
   const [isLoading, setIsLoading] = useState(false);
@@ -84,10 +86,10 @@ function RegisterScreen() {
 
   const formSubmitHandler = useCallback(
     async (event) => {
-      event.preventDefault();
 
+      event.preventDefault();
       if (!formData.isFormValid) {
-        alert("Check form for errors!");
+        alert("Please check your inputs in form!");
         return;
       }
       try {
@@ -101,22 +103,20 @@ function RegisterScreen() {
           clubName: formData.values.clubName,
           clubPosition: formData.values.clubPosition,
           phone: formData.values.phone,
-          whatsAppPhone: formData.values.whatsAppPhone
+          whatsAppPhone: formData.values.whatsAppPhone,
         };
-        // await db.collection("users").doc(user.uid).set(registrationData);
-        
         await axios({
-          method: 'post',
-          url: '/auth/signUp',
-          data: registrationData
-        })
-        .then((res) => {
+          method: "post",
+          url: "/auth/signUp",
+          data: registrationData,
+        }).then((res) => {
           if (res.statusCode !== 200) {
             throw new Error();
           } else {
             dispatchFormState({ type: RESET_FORM });
             setIsLoading(false);
-            history.replace("/");
+            dispatch(signIn(res.body));
+            history.push("/");
             return;
           }
         });
@@ -125,7 +125,7 @@ function RegisterScreen() {
         alert("This account already exits or please check your information.");
       }
     },
-    [formData, history]
+    [dispatch, formData, history]
   );
 
   return (

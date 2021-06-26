@@ -6,7 +6,6 @@ import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 
 import { selectUser } from "../features/authSlice";
-import { db, storage } from "../features/firebase";
 
 function Event({ eventData }) {
   const user = useSelector(selectUser);
@@ -14,24 +13,11 @@ function Event({ eventData }) {
   const [participants, setParticipants] = useState([]);
 
   useEffect(() => {
-    const unsubscribe = db
-      .collection("events")
-      .doc(eventData.id)
-      .collection("participants")
-      .onSnapshot((snapshot) =>
-        setParticipants(snapshot.docs.map((doc) => doc.id))
-      );
-
-    return unsubscribe;
+    // fetch participants
   }, [eventData.id]);
 
   const enrollInEventHandler = (event) => {
-    event.preventDefault();
-    db.collection("events")
-      .doc(eventData.id)
-      .collection("participants")
-      .doc(user.uid)
-      .set(user);
+    // participant section add
   };
 
   const editEvent = () => {
@@ -39,12 +25,7 @@ function Event({ eventData }) {
   };
 
   const deleteEvent = async () => {
-    try {
-      await db.collection("events").doc(eventData.id).delete();
-      await storage.refFromURL(eventData.poster).delete();
-    } catch (error) {
-      alert(error.message);
-    }
+    // delete event here
   };
 
   return (

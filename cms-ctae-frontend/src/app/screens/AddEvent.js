@@ -6,7 +6,7 @@ import { useSelector } from "react-redux";
 import styled, { css } from "styled-components";
 
 import FormInput, { InputContainer, LabelField } from "../components/FormInput";
-import { db, storage } from "../features/firebase";
+
 import { selectEvents } from "../features/eventsSlice";
 import { SubmitButton } from "./RegisterScreen";
 
@@ -93,17 +93,7 @@ function AddEvent() {
   }, [eventId, dispatchFormState, eventData]);
 
   useEffect(() => {
-    if (eventId) {
-      const unsubscribe = db
-        .collection("events")
-        .doc(eventId)
-        .collection("participants")
-        .onSnapshot((snapshot) =>
-          setParticipants(snapshot.docs.map((doc) => doc.data()))
-        );
-
-      return unsubscribe;
-    }
+    // get all the participants here
   }, [eventId]);
 
   const selectPoster = (event) => {
@@ -140,24 +130,13 @@ function AddEvent() {
       try {
         setIsLoading(true);
         if (poster) {
-          const imageType = poster.name.split(".").pop();
-          const imageName = `IMG-${Date.now()}.${imageType}`;
-
-          const uploadTask = await storage
-            .ref(`posters/${imageName}`)
-            .put(poster);
-          url = await uploadTask.ref.getDownloadURL();
+          // upload poster here..
         }
 
         if (eventId) {
-          await db
-            .collection("events")
-            .doc(eventId)
-            .update({ ...formData.values, poster: url });
+          // set eventId here
         } else {
-          await db
-            .collection("events")
-            .add({ ...formData.values, poster: url });
+          // set both the things here post and eventId
         }
         dispatchFormState({ type: RESET_FORM });
         setIsLoading(false);

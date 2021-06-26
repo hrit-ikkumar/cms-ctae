@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { auth, db } from "./firebase";
 
 export const authSlice = createSlice({
   name: "auth",
@@ -20,8 +19,8 @@ export const { signIn, signOut } = authSlice.actions;
 
 export const signInAsync = (authUser) => async (dispatch) => {
   try {
-    const user = await db.collection("users").doc(authUser.uid).get();
-    dispatch(signIn(user.data()));
+    const user = null;
+    dispatch(signIn(user));
   } catch (error) {
     throw error.message;
   }
@@ -29,7 +28,6 @@ export const signInAsync = (authUser) => async (dispatch) => {
 
 export const signOutAsync = () => async (dispatch) => {
   try {
-    await auth.signOut();
     dispatch(signOut());
   } catch (error) {
     throw error.message;

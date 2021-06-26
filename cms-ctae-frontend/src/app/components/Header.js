@@ -82,7 +82,7 @@ function Header() {
         <HeaderRightLink to="/events" $isActive={pathname === "/events"}>
           <TabContainer className="events">Events</TabContainer>
         </HeaderRightLink>
-        {user ? (
+        {user && user.name ? (
           <HeaderRightLink to="/profile" $isActive={pathname === "/profile"}>
             <TabContainer className="register">
               Hey, {user.name.slice(0, 7)}
