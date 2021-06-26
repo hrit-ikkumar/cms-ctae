@@ -3,11 +3,10 @@ var router = express.Router();
 const User = require("../../Model/User"); // mongoose.model('User');
 const Club = require("../../Model/Club"); // mongoose.model('Club')
 const { SimpleUser, ClubWiseUser } = User;
-
+const {auth} = require("../../firebase.config");
 /* GET users listing. */
 router.post("/signUp", async (req, res, next) => {
   const {
-    uId,
     type,
     name,
     email,
@@ -18,8 +17,8 @@ router.post("/signUp", async (req, res, next) => {
     clubName,
     clubPosition,
   } = req.body;
+  console.log(req.body);
   const newUser = {
-    uId,
     type,
     name,
     email,
@@ -35,7 +34,7 @@ router.post("/signUp", async (req, res, next) => {
     .then((result) => {
       if (result != null) {
         const CurrentClubUser = ClubWiseUser(result.clubCode);
-        CurrentClubUser.findOne({ uId: newUser.uId })
+        CurrentClubUser.findOne({ email: newUser.email })
           .then((result) => {
             if (result != null) {
               throw error;
@@ -68,11 +67,15 @@ router.post("/signUp", async (req, res, next) => {
             }
           });
       } else {
-        return "NOT_FOUND";
+        res.statusCode = 406; // NOT_ACCEPTABLE ERRORS
+        res.send();
+        return;
       }
     })
     .catch((err) => {
-      return "NOT_FOUND";
+      res.statusCode = 406; // NOT_ACCEPTABLE ERRORS
+      res.send();
+      return;
     });
 });
 

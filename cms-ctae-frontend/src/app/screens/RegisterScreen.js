@@ -1,30 +1,37 @@
 import React, { useCallback, useReducer, useState } from "react";
 import { Button } from "@material-ui/core";
 import { Link, useHistory } from "react-router-dom";
+import axios from "axios";
 
 import FormInput from "../components/FormInput";
 import { auth, db } from "../features/firebase";
 import styled from "styled-components";
+import { config } from "../../config";
 
 const UPDATE_FORM = "UPDATE_FORM";
 const RESET_FORM = "RESET_FORM";
+
 const initialState = {
   values: {
     name: "",
     email: "",
+    clubName: "",
+    clubPosition: "",
     course: "",
     year: "",
     phone: "",
-    whatsappPhone: "",
+    whatsAppPhone: "",
     password: "",
   },
   validities: {
     name: false,
     email: false,
     course: false,
+    clubName: false,
+    clubPosition: false,
     year: false,
     phone: false,
-    whatsappPhone: false,
+    whatsAppPhone: false,
     password: false,
   },
   isFormValid: false,
@@ -83,31 +90,39 @@ function RegisterScreen() {
         alert("Check form for errors!");
         return;
       }
-
       try {
         setIsLoading(true);
-        const { user } = await auth.createUserWithEmailAndPassword(
-          formData.values.email,
-          formData.values.password
-        );
         const registrationData = {
-          uid: user.uid,
           type: "user",
           name: formData.values.name,
-          email: user.email,
+          email: formData.values.email,
+          password: formData.values.password,
           course: formData.values.course,
-          year: formData.values.year,
+          clubName: formData.values.clubName,
+          clubPosition: formData.values.clubPosition,
           phone: formData.values.phone,
-          whatsappPhone: formData.values.whatsappPhone,
+          whatsAppPhone: formData.values.whatsAppPhone
         };
-        await db.collection("users").doc(user.uid).set(registrationData);
-        // dispatch(signIn(formData.values));
-        dispatchFormState({ type: RESET_FORM });
-        setIsLoading(false);
-        history.replace("/");
+        // await db.collection("users").doc(user.uid).set(registrationData);
+        
+        await axios({
+          method: 'post',
+          url: '/auth/signUp',
+          data: registrationData
+        })
+        .then((res) => {
+          if (res.statusCode !== 200) {
+            throw new Error();
+          } else {
+            dispatchFormState({ type: RESET_FORM });
+            setIsLoading(false);
+            history.replace("/");
+            return;
+          }
+        });
       } catch (error) {
         setIsLoading(false);
-        alert(error.message);
+        alert("This account already exits or please check your information.");
       }
     },
     [formData, history]
@@ -159,8 +174,24 @@ function RegisterScreen() {
           />
           <FormInput
             onInputChange={onInputChange}
+            label="Club Name"
+            id="clubName"
+            required
+            minLength={3}
+            errorText="Invalid Club Name"
+          />
+          <FormInput
+            onInputChange={onInputChange}
+            label="Club Position"
+            id="clubPosition"
+            required
+            minLength={3}
+            errorText="Invalid Club Position"
+          />
+          <FormInput
+            onInputChange={onInputChange}
             label="whatsapp Phone"
-            id="whatsappPhone"
+            id="whatsAppPhone"
             required
             minLength={10}
             errorText="Invalid WhatsApp Contact!"

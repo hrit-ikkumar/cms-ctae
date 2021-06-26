@@ -3,6 +3,7 @@ var express = require("express");
 var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
+
 const mongoose = require("mongoose");
 const config = require("./config");
 const MongoDBURL = config.MONGODB_URL;
@@ -31,6 +32,8 @@ app.set("view engine", "jade");
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+// Body-parser middleware
+
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
