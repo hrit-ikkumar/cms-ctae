@@ -1,7 +1,7 @@
 import React, { useCallback, useReducer, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { signIn } from "../features/authSlice";
+import { signIn, signInAsync } from "../features/authSlice";
 import axios from "axios";
 import FormInput from "../components/FormInput";
 
@@ -96,12 +96,13 @@ function LoginScreen() {
           url: "/auth/login",
           data: loginData,
         }).then((res) => {
-          if (res.statusCode !== 200) {
-            throw new Error();
+          console.log(res);
+          if (res.status !== 200) {
+            alert("Not able to create user");
           } else {
             dispatchFormState({ type: RESET_FORM });
             setIsLoading(false);
-            dispatch(signIn(formData.values));
+            dispatch(signIn(res.data));
             console.log("reached to the end of login state");
             history.push("/");
             return;
@@ -116,7 +117,7 @@ function LoginScreen() {
         alert(error.message);
       }
     },
-    [formData, dispatchFormState, history]
+    [ dispatch ,formData, dispatchFormState, history]
   );
 
   return (

@@ -9,7 +9,7 @@ import { selectUser, signOutAsync } from "../features/authSlice";
 
 function Header() {
   const user = useSelector(selectUser);
-  console.log("USER: "+ user);
+  console.log("USER: " + user);
   const dispatch = useDispatch();
   const [headerColor, setHeaderColor] = useState(false);
   const [isNavOpened, setIsNavOpened] = useState(false);
@@ -80,13 +80,15 @@ function Header() {
         <HeaderRightLink to="/" $isActive={pathname === "/"}>
           <TabContainer className="home">Home</TabContainer>
         </HeaderRightLink>
-        <HeaderRightLink to="/events" $isActive={pathname === "/events"}>
-          <TabContainer className="events">Events</TabContainer>
-        </HeaderRightLink>
+        {user && (
+          <HeaderRightLink to="/events" $isActive={pathname === "/events"}>
+            <TabContainer className="events">Events</TabContainer>
+          </HeaderRightLink>
+        )}
         {user && user.name ? (
           <HeaderRightLink to="/profile" $isActive={pathname === "/profile"}>
             <TabContainer className="register">
-              Hey, {user.name.slice(0,1)}
+              Hey, {user.name.split(" ")[0]}
             </TabContainer>
           </HeaderRightLink>
         ) : (
@@ -94,11 +96,11 @@ function Header() {
             <TabContainer className="register">Sign Up</TabContainer>
           </HeaderRightLink>
         )}
-        {user && user.name && (
+        {/* {user && user.name && (
           <HeaderRightLink to="/admin" $isActive={pathname === "/admin"}>
             <TabContainer>Admin</TabContainer>
           </HeaderRightLink>
-        )}
+        )} */}
         {user && user.name ? (
           <HeaderRightTab $isActive={false} onClick={signOutUser}>
             <TabContainer className="login">Log Out</TabContainer>

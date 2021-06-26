@@ -114,7 +114,7 @@ function RegisterScreen() {
           } else {
             dispatchFormState({ type: RESET_FORM });
             setIsLoading(false);
-            dispatch(signIn(res.body));
+            dispatch(signIn(res.data));
             history.push("/");
             return;
           }
