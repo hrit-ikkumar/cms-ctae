@@ -27,15 +27,11 @@ function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    let unsubscribe;
-    dispatch(signIn({}));
-    return unsubscribe;
+    // do nothing
   }, [dispatch]);
 
   useEffect(() => {
-    let unsubscribe;
-
-    return unsubscribe;
+    // do nothing
   }, [dispatch]);
 
   return (

@@ -5,12 +5,11 @@ import { useDispatch } from "react-redux";
 import axios from "axios";
 
 import FormInput from "../components/FormInput";
-import { authSlice } from "../features/authSlice";
+import { signIn } from "../features/authSlice";
 import styled from "styled-components";
 
 const UPDATE_FORM = "UPDATE_FORM";
 const RESET_FORM = "RESET_FORM";
-const signIn = authSlice.reducer.signIn;
 
 const initialState = {
   values: {

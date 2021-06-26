@@ -19,6 +19,7 @@ export const { signIn, signOut } = authSlice.actions;
 
 export const signInAsync = (authUser) => async (dispatch) => {
   try {
+    console.log(JSON.stringify(authUser));
     const user = null;
     dispatch(signIn(user));
   } catch (error) {

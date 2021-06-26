@@ -1,5 +1,7 @@
 import React, { useCallback, useReducer, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { signIn } from "../features/authSlice";
 import axios from "axios";
 import FormInput from "../components/FormInput";
 
@@ -42,7 +44,6 @@ const formReducer = (state, action) => {
       for (let key in validities) {
         isFormValid = isFormValid && validities[key];
       }
-
       return {
         ...state,
         values,
@@ -55,6 +56,7 @@ const formReducer = (state, action) => {
 };
 
 function LoginScreen() {
+  const dispatch = useDispatch();
   const history = useHistory();
   const [formData, dispatchFormState] = useReducer(formReducer, initialState);
   const [isLoading, setIsLoading] = useState(false);
@@ -99,6 +101,8 @@ function LoginScreen() {
           } else {
             dispatchFormState({ type: RESET_FORM });
             setIsLoading(false);
+            dispatch(signIn(formData.values));
+            console.log("reached to the end of login state");
             history.push("/");
             return;
           }
