@@ -1,6 +1,6 @@
 import React, { useCallback, useReducer, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
-
+import axios from "axios";
 import FormInput from "../components/FormInput";
 
 import {
@@ -18,10 +18,12 @@ const initialState = {
   values: {
     email: "",
     password: "",
+    clubName: ""
   },
   validities: {
     email: false,
     password: false,
+    clubName: false
   },
   isFormValid: false,
 };
@@ -82,7 +84,26 @@ function LoginScreen() {
 
       try {
         setIsLoading(true);
-        // login will come here...
+        const loginData = {
+          email: formData.values.email,
+          password: formData.values.password,
+          clubName: formData.values.clubName,
+        };
+        await axios({
+          method: "post",
+          url: "/auth/login",
+          data: loginData,
+        }).then((res) => {
+          if (res.statusCode !== 200) {
+            throw new Error();
+          } else {
+            dispatchFormState({ type: RESET_FORM });
+            setIsLoading(false);
+            history.push("/");
+            return;
+          }
+        })
+        .catch((err) => alert(err));
         dispatchFormState({ type: RESET_FORM });
         setIsLoading(false);
         history.replace("/");
@@ -116,6 +137,15 @@ function LoginScreen() {
             required
             minLength={6}
             errorText="Password must be atleast 6 characters long!"
+          />
+          <FormInput
+            id="clubName"
+            onInputChange={onInputChange}
+            label="Club Name"
+            inputType="text"
+            required
+            minLength={6}
+            errorText="Club Name should be there!"
           />
           <SubmitButton
             type="submit"

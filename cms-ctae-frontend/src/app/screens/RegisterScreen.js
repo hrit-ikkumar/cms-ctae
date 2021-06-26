@@ -119,7 +119,8 @@ function RegisterScreen() {
             history.push("/");
             return;
           }
-        });
+        })
+        .catch((err) => alert(err));
       } catch (error) {
         setIsLoading(false);
         alert("This account already exits or please check your information.");

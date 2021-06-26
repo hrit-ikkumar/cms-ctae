@@ -5,5 +5,11 @@ module.exports = function (app) {
       target: "http://localhost:3002/",
       changeOrigin: true
     })
-  )
+  );
+  app.use(
+    proxy("/auth/login", {
+      target: "http://localhost:3002/",
+      changeOrigin: true
+    })
+  );
 };

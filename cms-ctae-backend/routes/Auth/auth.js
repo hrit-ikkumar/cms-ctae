@@ -81,6 +81,7 @@ router.post("/signUp", async (req, res, next) => {
 
 router.post("/login", (req, res, next) => {
   const { email, password, clubName } = req.body;
+  console.log(req.body);
   Club.findOne({ clubName: clubName })
     .then((clubDetail) => {
       if (clubDetail != null) {
