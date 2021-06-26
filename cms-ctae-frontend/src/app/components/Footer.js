@@ -5,7 +5,7 @@ function Footer() {
     <FooterContainer>
       <CopyrightContainer className="copyright">
         <h4>
-          &copy; {new Date().getFullYear()} | Hritik & Mudit (Final Year Project) | made with love ❤️
+          &copy; {new Date().getFullYear()} | Hritik (Final Year Project) | made by Dept. of CSE ❤️
         </h4>
       </CopyrightContainer>
     </FooterContainer>
