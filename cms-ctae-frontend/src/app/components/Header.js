@@ -9,7 +9,6 @@ import { selectUser, signOutAsync } from "../features/authSlice";
 
 function Header() {
   const user = useSelector(selectUser);
-  console.log("USER: " + user);
   const dispatch = useDispatch();
   const [headerColor, setHeaderColor] = useState(false);
   const [isNavOpened, setIsNavOpened] = useState(false);

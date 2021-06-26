@@ -7,6 +7,7 @@ const Club = require("../../../Model/Club");
 // GET ALL THE EVENTS OF A CLUB
 router.get('/', (req, res, next) => {
   const {clubName} = req.body;
+  console.log(req.body);
   Club.findOne({ clubName: clubName })
     .then((result) => {
       if (result != null) {
@@ -15,6 +16,7 @@ router.get('/', (req, res, next) => {
         .then((value) => {
           if(value != null) {
             res.statusCode = 200;
+            console.log(value);
             res.send(value);
             return;
           }

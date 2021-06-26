@@ -2,6 +2,7 @@ import React, { useCallback, useReducer, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { signIn, signInAsync } from "../features/authSlice";
+import {setEvents} from "../features/eventsSlice";
 import axios from "axios";
 import FormInput from "../components/FormInput";
 
@@ -96,7 +97,6 @@ function LoginScreen() {
           url: "/auth/login",
           data: loginData,
         }).then((res) => {
-          console.log(res);
           if (res.status !== 200) {
             alert("Not able to create user");
           } else {

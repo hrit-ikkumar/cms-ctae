@@ -109,9 +109,9 @@ function RegisterScreen() {
           url: "/auth/signUp",
           data: registrationData,
         }).then((res) => {
-          if (res.status !== 200) {
+          if (res.status != 200) {
             setIsLoading(false);
-            throw new Error();
+            alert("We are not able to create your account. Please check credentials.");
           } else {
             dispatchFormState({ type: RESET_FORM });
             setIsLoading(false);
@@ -120,7 +120,11 @@ function RegisterScreen() {
             return;
           }
         })
-        .catch((err) => alert(err));
+        .catch((err) => 
+        {
+          setIsLoading(false);
+          alert("We are not able to create your account. Please check credentials.");
+        });
       } catch (error) {
         setIsLoading(false);
         alert("This account already exits or please check your information.");

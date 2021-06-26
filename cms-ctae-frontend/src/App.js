@@ -14,7 +14,7 @@ import PrivateRoute from "./app/components/PrivateRoute";
 import ProtectedRoute from "./app/components/ProtectedRoute";
 
 
-import { signIn, signOutAsync } from "./app/features/authSlice";
+import { selectUser, signIn, signOutAsync } from "./app/features/authSlice";
 import { setEvents } from "./app/features/eventsSlice";
 import ClubProfileScreen from "./app/screens/ClubProfileScreen";
 import AdminProfileScreen from "./app/screens/AdminProfileScreen";
@@ -22,6 +22,8 @@ import AdminFeedsScreen from "./app/screens/AdminFeedsScreen";
 import AdminMembersScreen from "./app/screens/AdminMembersScreen";
 import AdminEventsScreen from "./app/screens/AdminEventsScreen";
 import AdminGalleryScreen from "./app/screens/AdminGalleryScreen";
+
+import axios from "axios";
 
 function App() {
   const dispatch = useDispatch();
@@ -31,7 +33,7 @@ function App() {
   }, [dispatch]);
 
   useEffect(() => {
-    // do nothing
+
   }, [dispatch]);
 
   return (
@@ -72,9 +74,9 @@ function App() {
           <ProtectedRoute path="/register">
             <RegisterScreen />
           </ProtectedRoute>
-          <Route path="/events">
+          <PrivateRoute path="/events">
             <EventsScreen />
-          </Route>
+          </PrivateRoute>
           <Route path="/">
             <HomeScreen />
           </Route>

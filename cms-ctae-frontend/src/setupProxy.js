@@ -12,4 +12,11 @@ module.exports = function (app) {
       changeOrigin: true
     })
   );
+
+  app.use(
+    proxy("/club/event", {
+      target: "http://localhost:3002/",
+      changeOrigin: true
+    })
+  );
 };
