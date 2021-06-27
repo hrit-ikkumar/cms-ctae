@@ -16,7 +16,7 @@ const initialState = {
     course: "",
     year: "",
     phone: "",
-    whatsappPhone: "",
+    whatsAppPhone: "",
   },
   validities: {
     name: false,
@@ -24,7 +24,7 @@ const initialState = {
     course: false,
     year: false,
     phone: false,
-    whatsappPhone: false,
+    whatsAppPhone: false,
   },
   isFormValid: false,
 };
@@ -87,7 +87,7 @@ function ProfileScreen() {
           course: formData.values.course,
           year: formData.values.year,
           phone: formData.values.phone,
-          whatsappPhone: formData.values.whatsappPhone,
+          whatsAppPhone: formData.values.whatsAppPhone,
         };
         // update profile data
          
@@ -146,8 +146,8 @@ function ProfileScreen() {
             onInputChange={onInputChange}
           />
           <FormInput
-            label="Whatsapp Contact"
-            id="whatsappPhone"
+            label="whatsAppPhone Contact"
+            id="whatsAppPhone"
             required
             minLength={10}
             initialValue={user.phone}

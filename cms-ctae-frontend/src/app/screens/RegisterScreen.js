@@ -97,6 +97,7 @@ function RegisterScreen() {
           type: "user",
           name: formData.values.name,
           email: formData.values.email,
+          year: formData.values.year,
           password: formData.values.password,
           course: formData.values.course,
           clubName: formData.values.clubName,

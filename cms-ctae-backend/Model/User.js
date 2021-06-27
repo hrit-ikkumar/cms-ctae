@@ -22,6 +22,10 @@ var User = new Schema({
     type: String,
     default: "B.Tech.",
   },
+  year: {
+    type: String,
+    default: "First Year",
+  },
   whatsAppPhone: {
     type: String,
   },
