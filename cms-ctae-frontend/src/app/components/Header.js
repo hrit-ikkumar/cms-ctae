@@ -80,13 +80,13 @@ function Header() {
           <TabContainer className="home">Home</TabContainer>
         </HeaderRightLink>
         {user && (
-          <HeaderRightLink to="/events" $isActive={pathname === "/events"}>
-            <TabContainer className="events">Events</TabContainer>
+          <HeaderRightLink to="/club" $isActive={pathname === "/club"}>
+            <TabContainer className="club">Club</TabContainer>
           </HeaderRightLink>
         )}
         {user && (
-          <HeaderRightLink to="/club" $isActive={pathname === "/club"}>
-            <TabContainer className="club">Club</TabContainer>
+          <HeaderRightLink to="/events" $isActive={pathname === "/events"}>
+            <TabContainer className="events">Events</TabContainer>
           </HeaderRightLink>
         )}
         {user && user.name ? (

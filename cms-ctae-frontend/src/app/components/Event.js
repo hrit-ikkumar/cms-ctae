@@ -5,12 +5,14 @@ import moment from "moment";
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 
+
 import { selectUser } from "../features/authSlice";
 
 function Event({ eventData }) {
   const user = useSelector(selectUser);
   const history = useHistory();
-  const [participants, setParticipants] = useState([]);
+
+  const [participants, setParticipants] = useState(eventData.participants);
 
   useEffect(() => {
     // fetch participants
@@ -21,7 +23,7 @@ function Event({ eventData }) {
   };
 
   const editEvent = () => {
-    history.push(`/event/edit/${eventData.id}`);
+    history.push(`/events/edit/${eventData._id}`);
   };
 
   const deleteEvent = async () => {

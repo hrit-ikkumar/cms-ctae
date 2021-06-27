@@ -5,7 +5,7 @@ const Club = require("../../../Model/Club");
 
 const { SimplePost, ClubWisePost } = Post;
 
-router.get("/", (req, res, next) => {
+router.post("/getPost", (req, res, next) => {
   const { clubName } = req.body;
   Club.findOne({ clubName: clubName })
     .then((result) => {

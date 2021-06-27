@@ -19,7 +19,7 @@ function Hero() {
         <Test>Team work is dream work!</Test>
         <ButtonsContainer>
           <EventsButton onClick={goToEventsHandler}>Go To Events</EventsButton>
-          <ClubsButton onClick={goToClub}>Our Clubs</ClubsButton>
+          <ClubsButton onClick={goToClub}>Our Club</ClubsButton>
         </ButtonsContainer>
       </ClubDescription>
     </HeroContainer>

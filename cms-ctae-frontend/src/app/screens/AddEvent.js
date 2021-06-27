@@ -5,7 +5,6 @@ import "react-datetime/css/react-datetime.css";
 import { useSelector } from "react-redux";
 import styled, { css } from "styled-components";
 
-
 import FormInput, { InputContainer, LabelField } from "../components/FormInput";
 
 import { selectEvents } from "../features/eventsSlice";
@@ -62,13 +61,15 @@ const formReducer = (state, action) => {
 
 function AddEvent() {
   const history = useHistory();
+  const { eventId } = useParams();
+  const events = useSelector(selectEvents);
+  const currentEvent = events.filter((event) => event._id === eventId)[0];
   const [formData, dispatchFormState] = useReducer(formReducer, initialState);
   const [isLoading, setIsLoading] = useState(false);
-  const [poster, setPoster] = useState(null);
-  const [participants, setParticipants] = useState([]);
-  const events = useSelector(selectEvents);
-  const { eventId } = useParams();
-  const eventData = events.find((event) => event.id === eventId);
+  const [poster, setPoster] = useState(currentEvent.poster);
+  const [participants, setParticipants] = useState(currentEvent.participants);
+
+  const eventData = currentEvent;
 
   useEffect(() => {
     if (eventId) {

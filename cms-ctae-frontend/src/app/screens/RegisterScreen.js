@@ -109,7 +109,7 @@ function RegisterScreen() {
           url: "/auth/signUp",
           data: registrationData,
         }).then((res) => {
-          if (res.status != 200) {
+          if (res.status !== 200) {
             setIsLoading(false);
             alert("We are not able to create your account. Please check credentials.");
           } else {

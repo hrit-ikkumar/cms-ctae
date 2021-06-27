@@ -1,22 +1,22 @@
 import React from "react";
 import styled from "styled-components";
+import { useSelector } from "react-redux";
+
+import { selectClubInfo, selectClubPostData } from "../features/clubSlice";
 
 function ProfileRight() {
+  const clubInfo = useSelector(selectClubInfo);
+  const clubPost = useSelector(selectClubPostData);
   return (
     <ProfileRightContainer id="members">
       <ProfileRightTitle>Club Members</ProfileRightTitle>
-      {Array(10)
-        .fill()
-        .map((_, index) => (
+      {clubInfo && clubInfo.clubMembers &&
+        clubInfo.clubMembers.map((_, index) => (
           <MemberCard key={index}>
-            <MemberImage
-              src={
-                "https://www.codechef.com/sites/default/files/uploads/pictures/ab42d8bf38939a7b8f5dc0d5ff9e5672.jpeg"
-              }
-            />
+            <MemberImage src={clubInfo.clubMembers[index].image} />
             <MemberDetails>
-              <MemberName>Hritik Kumar Sharma</MemberName>
-              <MemberTitle>Coordinator</MemberTitle>
+              <MemberName>{clubInfo.clubMembers[index].name}</MemberName>
+              <MemberTitle>{clubInfo.clubMembers[index].position}</MemberTitle>
             </MemberDetails>
           </MemberCard>
         ))}

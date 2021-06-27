@@ -19,4 +19,16 @@ module.exports = function (app) {
       changeOrigin: true
     })
   );
+  app.use(
+    proxy("/admin/club/getClubData", {
+      target: "http://localhost:3002/",
+      changeOrigin: true
+    })
+  );
+  app.use(
+    proxy("/club/post/getPost", {
+      target: "http://localhost:3002/",
+      changeOrigin: true
+    })
+  );
 };

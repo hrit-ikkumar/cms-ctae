@@ -2,12 +2,23 @@ import React from "react";
 import styled, { css } from "styled-components";
 import FacebookIcon from "@material-ui/icons/Facebook";
 import InstagramIcon from "@material-ui/icons/Instagram";
+import LinkedInIcon from "@material-ui/icons/LinkedIn";
+
+import { selectUser } from "../features/authSlice";
 import EmailIcon from "@material-ui/icons/Email";
 import { Button } from "@material-ui/core";
+import { selectClubInfo, selectClubPostData } from "../features/clubSlice";
 
+import { useSelector } from "react-redux";
 import Logo from "../assets/images/LOGO_PC.png";
 
-function ProfileLeft({ clubData }) {
+function ProfileLeft() {
+  const user = useSelector(selectUser);
+  const clubInfo = useSelector(selectClubInfo);
+  const clubPost = useSelector(selectClubPostData);
+
+  const clubData = user.clubName;
+  console.log("clubData: " + clubData);
   return (
     <ProfileLeftContainer>
       <ProfileHeaderContainer>
@@ -21,41 +32,53 @@ function ProfileLeft({ clubData }) {
           <ProfileName>{clubData}</ProfileName>
         </ProfileLogoName>
         <ProfileLeftDescription>
-        Objectives of the Programming Club:
-          <br/><br/>
-          &nbsp;o   Promote excellence in Computer Science and Engineering education and overall practice. 
-          <br/><br/>
-          &nbsp;o   Gain technical and collaborative skills to design real-life projects.
-          <br/><br/>
-          &nbsp;o   Learn steps of the engineering design cycle 
-          (discover- evaluate, design- evaluate, develop evaluate, deliver- evaluate) 
+          <h3>Objectives of Club: </h3>
+          {/* club objectives section */}
+          <ol>
+            {clubInfo &&
+              clubInfo.clubObjectives &&
+              clubInfo.clubObjectives.map((text) => <li>{text}</li>)}
+          </ol>
         </ProfileLeftDescription>
         <SocialWrapper>
-          <JoinButton>JOIN</JoinButton>
-          <MembersButton href="#members">Members</MembersButton>
+          {/* <JoinButton>JOIN</JoinButton>
+          <MembersButton href="#members">Members</MembersButton> */}
           <SocialLinksContainer>
-            <SocialLink href="https://github.com" target="_blank">
-              <InstagramIcon />
-            </SocialLink>
-            <SocialLink href="https://github.com" target="_blank">
-              <FacebookIcon />
-            </SocialLink>
-            <SocialLink href="https://github.com" target="_blank">
-              <EmailIcon />
-            </SocialLink>
+            {clubInfo && clubInfo.socialMedia && clubInfo.socialMedia.linkedin && (
+              <SocialLink href={clubInfo.socialMedia.linkedin} target="_blank">
+                <LinkedInIcon />
+              </SocialLink>
+            )}
+            {clubInfo && clubInfo.socialMedia && clubInfo.socialMedia.email && (
+              <SocialLink href={clubInfo.socialMedia.email} target="_blank">
+                <EmailIcon />
+              </SocialLink>
+            )}
+            {clubInfo &&
+              clubInfo.socialMedia &&
+              clubInfo.socialMedia.instagram && (
+                <SocialLink
+                  href={clubInfo.socialMedia.instagram}
+                  target="_blank"
+                >
+                  <InstagramIcon />
+                </SocialLink>
+              )}
+            {clubInfo && clubInfo.socialMedia && clubInfo.socialMedia.facebook && (
+              <SocialLink href={clubInfo.socialMedia.facebook} target="_blank">
+                <FacebookIcon />
+              </SocialLink>
+            )}
           </SocialLinksContainer>
         </SocialWrapper>
       </ProfileHeaderContainer>
       <ProfileGalleryContainer>
         <GalleryTitle>Our Picture Gallery</GalleryTitle>
         <GalleryGrid>
-          {Array(9)
-            .fill()
-            .map((_, index) => (
-              <GalleryPicture
-                key={index}
-                src={`https://images.pexels.com/photos/739407/pexels-photo-739407.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500`}
-              />
+          {clubInfo &&
+            clubInfo.clubPhotos &&
+            clubInfo.clubPhotos.map((_, index) => (
+              <GalleryPicture key={index} src={clubInfo.clubPhotos[index]} />
             ))}
         </GalleryGrid>
       </ProfileGalleryContainer>
@@ -120,7 +143,7 @@ const ProfileLogo = styled.img`
 `;
 
 const ProfileName = styled.h1`
-  margin: 0 0 10px 20px;
+  margin: 0 0 0px 20px;
   font-family: "Antonio", sans-serif;
   font-size: 2rem;
 `;

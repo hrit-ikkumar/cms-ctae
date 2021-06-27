@@ -5,10 +5,12 @@ const Club = require("../../Model/Club"); // mongoose.model('User');
 // All Club Details 
 router.post('/getClubData', (req, res, next) => {
   const {clubName} = req.body;
+  console.log(clubName);
   Club.findOne({clubName: clubName})
   .then((result) => {
     if(result!=null) {
       res.statusCode = 200;
+      console.log(result);
       res.send(result);
       return;
     }

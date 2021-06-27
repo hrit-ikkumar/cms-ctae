@@ -89,7 +89,8 @@ function ProfileScreen() {
           phone: formData.values.phone,
           whatsappPhone: formData.values.whatsappPhone,
         };
-        // update profile data 
+        // update profile data
+         
       } catch (error) {
         alert(error.message);
       }

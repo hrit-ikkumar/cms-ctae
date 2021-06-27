@@ -41,14 +41,17 @@ function App() {
           <ProtectedRoute path="/register">
             <RegisterScreen />
           </ProtectedRoute>
-          
+
           <ProtectedRoute path="/login">
             <LoginScreen />
           </ProtectedRoute>
 
-
           <PrivateRoute path="/club">
             <ClubProfileScreen />
+          </PrivateRoute>
+
+          <PrivateRoute path="/events/edit/:eventId">
+            <AddEvent />
           </PrivateRoute>
 
           <PrivateRoute path="/events">
@@ -59,13 +62,10 @@ function App() {
             <ProfileScreen />
           </PrivateRoute>
 
-
           <Route path="/">
             <HomeScreen />
           </Route>
-          {/* <PrivateRoute path="/event/edit/:eventId">
-            <AddEvent />
-          </PrivateRoute>
+          {/* 
           <PrivateRoute path="/admin/feeds">
             <AdminFeedsScreen />
           </PrivateRoute>
