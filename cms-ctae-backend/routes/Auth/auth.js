@@ -44,14 +44,12 @@ router.post("/signUp", async (req, res, next) => {
               newUserObject
                 .save()
                 .then((result) => {
-                  console.log(result);
                   res.statusCode = 200;
                   res.send(result);
                   return;
                 })
                 .catch((err) => {
                   if (err != null) {
-                    console.log(err);
                     res.statusCode = 500;
                     res.send();
                     return;
@@ -83,7 +81,7 @@ router.post("/signUp", async (req, res, next) => {
 
 router.post("/login", (req, res, next) => {
   const { email, password, clubName } = req.body;
-  console.log(req.body);
+
   Club.findOne({ clubName: clubName })
     .then((clubDetail) => {
       if (clubDetail != null) {

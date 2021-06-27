@@ -7,7 +7,7 @@ const Club = require("../../../Model/Club");
 // GET ALL THE EVENTS OF A CLUB
 router.post('/getEvents', (req, res, next) => {
   let {clubName} = req.body;
-  console.log(req.body);
+
   Club.findOne({ clubName: clubName })
     .then((result) => {
       if (result != null) {
@@ -16,7 +16,7 @@ router.post('/getEvents', (req, res, next) => {
         .then((value) => {
           if(value != null) {
             res.statusCode = 200;
-            console.log(value);
+
             res.send(value);
             return;
           }
@@ -46,7 +46,7 @@ router.post('/getEvents', (req, res, next) => {
 // CREATE A NEW EVENT IN CLUB
 router.post("/create", (req, res, next) => {
   const { title, meetUrl, dateTime, description, poster, clubName, participants } = req.body;
-  console.log(req.body);
+
   Club.findOne({ clubName: clubName })
     .then((result) => {
       if (result != null) {
