@@ -26,6 +26,10 @@ let Post = new Schema({
     type: String,
     default: "",
   },
+  imageLink: {
+    type: String,
+    default: "",
+  }
 });
 
 module.exports = {

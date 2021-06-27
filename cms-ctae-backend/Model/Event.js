@@ -22,6 +22,10 @@ var Event = new Schema({
     type: String,
     required: true,
   },
+  participants: {
+    type: Array,
+    required: true
+  }
 });
 
 module.exports = {

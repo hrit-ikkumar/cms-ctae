@@ -146,7 +146,7 @@ function ProfileScreen() {
             onInputChange={onInputChange}
           />
           <FormInput
-            label="whatsAppPhone Contact"
+            label="whatsApp Phone"
             id="whatsAppPhone"
             required
             minLength={10}

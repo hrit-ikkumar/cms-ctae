@@ -38,7 +38,7 @@ router.post("/getPost", (req, res, next) => {
 });
 
 router.post("/create", (req, res, next) => {
-  const { title, author, authorTitle, dateTime, content, link, clubName } =
+  const { title, author, authorTitle, dateTime, content, link, clubName, imageLink } =
     req.body;
   Club.findOne({ clubName: clubName })
     .then((result) => {

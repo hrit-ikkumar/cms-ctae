@@ -30,10 +30,15 @@ router.post('/getClubData', (req, res, next) => {
 
 // Create a new Club in System
 router.post('/register', (req, res, next) => {
-  const {clubName, clubCode} = req.body;
+  const {clubName, clubCode, clubLogo, clubPhotos, clubObjectives, socialMedia, clubMembers} = req.body;
   const newClub = {
     clubName:clubName,
-    clubCode:clubCode
+    clubCode:clubCode,
+    clubLogo: clubLogo,
+    clubPhotos:clubPhotos,
+    clubObjectives:clubObjectives,
+    socialMedia:socialMedia,
+    clubMembers:clubMembers
   }
   Club.findOne({clubName: newClub.clubName})
   .then((result) => {
