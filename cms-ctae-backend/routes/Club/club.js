@@ -3,8 +3,9 @@ var router = express.Router();
 const Club = require("../../Model/Club"); // mongoose.model('User');
 
 // All Club Details 
-router.get('/', (req, res, next) => {
-  Club.find({})
+router.post('/getClubData', (req, res, next) => {
+  const {clubName} = req.body;
+  Club.findOne({clubName: clubName})
   .then((result) => {
     if(result!=null) {
       res.statusCode = 200;

@@ -84,6 +84,11 @@ function Header() {
             <TabContainer className="events">Events</TabContainer>
           </HeaderRightLink>
         )}
+        {user && (
+          <HeaderRightLink to="/club" $isActive={pathname === "/club"}>
+            <TabContainer className="club">Club</TabContainer>
+          </HeaderRightLink>
+        )}
         {user && user.name ? (
           <HeaderRightLink to="/profile" $isActive={pathname === "/profile"}>
             <TabContainer className="register">
@@ -187,7 +192,7 @@ const HeaderTitle = styled.h3`
 
 const HeaderRight = styled.nav`
   display: flex;
-  width: 22%;
+  width: 30%;
   justify-content: space-around;
   align-items: center;
 

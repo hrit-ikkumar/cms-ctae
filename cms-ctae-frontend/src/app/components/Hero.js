@@ -9,13 +9,17 @@ function Hero() {
     history.push("/events");
   };
 
+  const goToClub = () => {
+    history.push("/club");
+  }
+
   return (
     <HeroContainer>
       <ClubDescription>
         <Test>Team work is dream work!</Test>
         <ButtonsContainer>
           <EventsButton onClick={goToEventsHandler}>Go To Events</EventsButton>
-          <ClubsButton href="#clubs">Our Clubs</ClubsButton>
+          <ClubsButton onClick={goToClub}>Our Clubs</ClubsButton>
         </ButtonsContainer>
       </ClubDescription>
     </HeroContainer>

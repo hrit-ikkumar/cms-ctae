@@ -13,7 +13,6 @@ import AddEvent from "./app/screens/AddEvent";
 import PrivateRoute from "./app/components/PrivateRoute";
 import ProtectedRoute from "./app/components/ProtectedRoute";
 
-
 import { selectUser, signIn, signOutAsync } from "./app/features/authSlice";
 import { setEvents } from "./app/features/eventsSlice";
 import ClubProfileScreen from "./app/screens/ClubProfileScreen";
@@ -32,19 +31,39 @@ function App() {
     // do nothing
   }, [dispatch]);
 
-  useEffect(() => {
-
-  }, [dispatch]);
+  useEffect(() => {}, [dispatch]);
 
   return (
     <Router>
       <AppContainer>
         <Header />
         <Switch>
-          <Route path="/clubs/:clubId">
+          <ProtectedRoute path="/register">
+            <RegisterScreen />
+          </ProtectedRoute>
+          
+          <ProtectedRoute path="/login">
+            <LoginScreen />
+          </ProtectedRoute>
+
+
+          <PrivateRoute path="/club">
             <ClubProfileScreen />
+          </PrivateRoute>
+
+          <PrivateRoute path="/events">
+            <EventsScreen />
+          </PrivateRoute>
+
+          <PrivateRoute path="/profile">
+            <ProfileScreen />
+          </PrivateRoute>
+
+
+          <Route path="/">
+            <HomeScreen />
           </Route>
-          <PrivateRoute path="/event/edit/:eventId">
+          {/* <PrivateRoute path="/event/edit/:eventId">
             <AddEvent />
           </PrivateRoute>
           <PrivateRoute path="/admin/feeds">
@@ -64,22 +83,7 @@ function App() {
           </PrivateRoute>
           <PrivateRoute path="/event/create">
             <AddEvent />
-          </PrivateRoute>
-          <PrivateRoute path="/profile">
-            <ProfileScreen />
-          </PrivateRoute>
-          <ProtectedRoute path="/login">
-            <LoginScreen />
-          </ProtectedRoute>
-          <ProtectedRoute path="/register">
-            <RegisterScreen />
-          </ProtectedRoute>
-          <PrivateRoute path="/events">
-            <EventsScreen />
-          </PrivateRoute>
-          <Route path="/">
-            <HomeScreen />
-          </Route>
+          </PrivateRoute> */}
         </Switch>
       </AppContainer>
     </Router>

@@ -5,8 +5,11 @@ const { SimpleEvent, ClubWiseEvent } = Event;
 const Club = require("../../../Model/Club");
 
 // GET ALL THE EVENTS OF A CLUB
-router.get('/', (req, res, next) => {
-  const {clubName} = req.body;
+router.post('/getEvents', (req, res, next) => {
+  let {clubName} = req.body;
+  if(clubName == null) {
+    clubName = "Programming Club, CTAE"
+  }
   console.log(req.body);
   Club.findOne({ clubName: clubName })
     .then((result) => {

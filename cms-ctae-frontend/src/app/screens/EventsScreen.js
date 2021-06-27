@@ -16,59 +16,46 @@ import axios from "axios";
 function EventsScreen() {
   const dispatch = useDispatch();
   const events = useSelector(selectEvents);
-  const [eventData, setEventData] = useState([]);
   const user = useSelector(selectUser);
   const history = useHistory();
 
-  const fetchData = useCallback(
-    async () => {
-      await axios({
-        method: "get",
-        url: "/club/event",
-        data: {
-          clubName: user.clubName,
-        },
+  const fetchData = useCallback(async () => {
+    await axios({
+      method: "post",
+      url: "/club/event/getEvents",
+      data: {
+        clubName: user.clubName,
+      },
+    })
+      .then((result) => {
+        if (result.status !== 200) {
+          alert("Not able to fetch events");
+          return;
+        } else {
+          console.log(result.data);
+          dispatch(setEvents(result.data));
+          return;
+        }
       })
-        .then((result) => {
-          console.log("resul aayaa");
-          if (result.status != 200) {
-            alert("Not able to fetch events");
-          } else {
-            console.log(result.data);
-            dispatch(setEvents(result.data));
-            setEventData(result.data);
-            return;
-          }
-        })
-        .catch((err) => {
-          console.log("err de diya");
-          if (err != null) {
-            alert("Something is wrong");
-            return;
-          }
-        });
-    } 
-  );
-  useEffect(() => {
-    console.log("HOOK IS CALLED");
-    console.log(user);
-    console.log(user.clubName);
-    if (user != null && user.clubName != null) {
-      console.log("start");
-      fetchData();
-      console.log("end");
-    }
-  }, [fetchData, user]);
+      .catch((err) => {
+        if (err != null) {
+          alert("Something is wrong");
+          return;
+        }
+      });
+  }, [dispatch, user.clubName]);
 
-  if (eventData != null) {
-    console.log(eventData);
-    dispatch(setEvents(eventData));
-  }
+  useEffect(() => {
+    if (user != null) fetchData();
+  }, [fetchData, user]);
 
   return (
     <EventsContainer>
       {user?.type.toLowerCase() === "admin" && (
-        <Button onClick={() => history.push("/event/create")}>
+        <Button style={{
+          backgroundColor: '#0000FF',
+          color: '#FFFFFF',
+        }} onClick={() => history.push("/event/create")}>
           Add An Event
         </Button>
       )}

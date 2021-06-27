@@ -106,6 +106,12 @@ router.post("/login", (req, res, next) => {
             }
           });
       }
+      else
+      {
+        res.statusCode = 406; // NOT_ACCEPTABLE ERRORS
+        res.send();
+        return;
+      }
     })
     .catch((err) => {
       if (err != null) {
