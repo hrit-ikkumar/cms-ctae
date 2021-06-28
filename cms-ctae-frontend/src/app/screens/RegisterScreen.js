@@ -220,13 +220,15 @@ function RegisterScreen() {
             required
             minLength={6}
           />
-          <SubmitButton
-            type="submit"
-            onClick={formSubmitHandler}
-            disabled={isLoading}
-          >
-            {isLoading ? "Registering..." : "Register"}
-          </SubmitButton>
+          <AlignCenter>
+            <SubmitButton
+              type="submit"
+              onClick={formSubmitHandler}
+              disabled={isLoading}
+            >
+              {isLoading ? "Registering..." : "Register"}
+            </SubmitButton>
+          </AlignCenter>
         </FromWrapper>
         <FromLinkContainer>
           Already have an account?{" "}
@@ -240,6 +242,14 @@ function RegisterScreen() {
 }
 
 export default RegisterScreen;
+
+const AlignCenter = styled.div`
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+`;
 
 export const RegisterScreenContainer = styled.div`
   width: 100%;

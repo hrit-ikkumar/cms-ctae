@@ -158,7 +158,7 @@ const FieldContainer = styled.div`
   display: flex;
 `;
 const InputField = styled.input`
-  min-width: 250px;
+  min-width: 300px;
   padding: 5px;
   border: none;
   outline-width: 0;

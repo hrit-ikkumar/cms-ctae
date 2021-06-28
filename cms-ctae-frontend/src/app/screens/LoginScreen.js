@@ -2,6 +2,7 @@ import React, { useCallback, useReducer, useState } from "react";
 import { Link, useHistory, useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { signIn } from "../features/authSlice";
+import styled from "styled-components";
 
 import axios from "axios";
 import FormInput from "../components/FormInput";
@@ -63,7 +64,6 @@ function LoginScreen() {
   const search = location.search;
   const params = new URLSearchParams(search);
   const clubName = params.get("clubName");
-
 
   const [formData, dispatchFormState] = useReducer(formReducer, initialState);
   const [isLoading, setIsLoading] = useState(false);
@@ -160,13 +160,15 @@ function LoginScreen() {
             minLength={6}
             errorText="Club Name should be there!"
           />
-          <SubmitButton
-            type="submit"
-            onClick={formSubmitHandler}
-            disabled={isLoading}
-          >
-            {isLoading ? "Logging in..." : "Log In"}
-          </SubmitButton>
+          <AlignCenter>
+            <SubmitButton
+              type="submit"
+              onClick={formSubmitHandler}
+              disabled={isLoading}
+            >
+              {isLoading ? "Logging in..." : "Log In"}
+            </SubmitButton>
+          </AlignCenter>
         </FromWrapper>
         <FromLinkContainer>
           Don't have an account?{" "}
@@ -180,3 +182,11 @@ function LoginScreen() {
 }
 
 export default LoginScreen;
+
+const AlignCenter = styled.div`
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+`;

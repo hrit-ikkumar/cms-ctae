@@ -133,7 +133,7 @@ function ViewAndEditEvent() {
         ...formData.values,
         clubName: user.clubName,
         poster,
-        prevData: eventData
+        prevData: eventData,
       };
       try {
         setIsLoading(true);
@@ -171,7 +171,14 @@ function ViewAndEditEvent() {
         alert(error.message);
       }
     },
-    [formData.isFormValid, formData.values, eventData, user.clubName, poster, history]
+    [
+      formData.isFormValid,
+      formData.values,
+      eventData,
+      user.clubName,
+      poster,
+      history,
+    ]
   );
 
   return (
@@ -236,15 +243,17 @@ function ViewAndEditEvent() {
               }
             />
           </InputContainer>
-          <SubmitButton onClick={formSubmitHandler} disabled={isLoading}>
-            {isLoading
-              ? eventId
-                ? "Updating..."
-                : "Adding..."
-              : eventId
-              ? "Update"
-              : "Add"}
-          </SubmitButton>
+          <AlignCenter>
+            <SubmitButton onClick={formSubmitHandler} disabled={isLoading}>
+              {isLoading
+                ? eventId
+                  ? "Updating..."
+                  : "Adding..."
+                : eventId
+                ? "Update"
+                : "Add"}
+            </SubmitButton>
+          </AlignCenter>
         </form>
       </EventCard>
       {eventId && (
@@ -283,7 +292,11 @@ const AddEventContainer = styled.div`
   place-items: center;
   min-height: calc(100vh - 60px);
   background-color: rgba(0, 0, 0, 0.83);
-  padding: 20px 0;
+  padding: 10px;
+  @media only screen and (max-width: 500) {
+    padding: 0px;
+    width: 90%;
+  }
 `;
 
 const EventCard = styled.div`
@@ -291,9 +304,11 @@ const EventCard = styled.div`
   border-radius: 20px;
   background-color: #fff;
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.56);
+  width: 60%;
 
-  @media only screen and (max-width: 330px) {
-    padding: 20px 5px;
+  @media only screen and (max-width: 500) {
+    padding: 0px;
+    width: 90%;
   }
 
   @media print {
@@ -303,6 +318,7 @@ const EventCard = styled.div`
 
 const ParticipantCard = styled(EventCard)`
   margin-top: 40px;
+  width: 90%;
 
   @media print {
     display: block;
@@ -339,19 +355,19 @@ const TableColumn = styled.div`
   font-size: 1.1rem;
 
   :nth-child(1) {
-    width: 40px;
+    width: 5%;
   }
   :nth-child(2) {
-    width: 150px;
+    width: 25%;
   }
   :nth-child(3) {
-    width: 80px;
+    width: 40%;
   }
   :nth-child(4) {
-    width: 45px;
+    width: 20%;
   }
   :nth-child(5) {
-    width: 150px;
+    width: 30%;
   }
 `;
 
@@ -361,7 +377,7 @@ const TableColumnHeader = styled(TableColumn)`
 `;
 
 const StyledInput = css`
-  min-width: 250px;
+  min-width: 60%;
   padding: 5px;
   border: none;
   outline-width: 0;
@@ -376,4 +392,12 @@ const TextArea = styled.textarea`
 
 const StyledDateTime = styled(DateTime)`
   ${StyledInput}
+`;
+
+const AlignCenter = styled.div`
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
 `;
