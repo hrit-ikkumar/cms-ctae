@@ -1,12 +1,14 @@
 import React, { useReducer, useCallback } from "react";
 import { Button } from "@material-ui/core";
 import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import styled from "styled-components";
 
 import FormInput from "../components/FormInput";
-import { selectUser } from "../features/authSlice";
+import { selectUser, setUser } from "../features/authSlice";
 
 import { FromHeaderText } from "./RegisterScreen";
+import axios from "axios";
 
 const UPDATE_FORM = "UPDATE_FORM";
 const initialState = {
@@ -54,6 +56,7 @@ const formReducer = (state, action) => {
 
 function ProfileScreen() {
   const user = useSelector(selectUser);
+  const dispatch = useDispatch();
   const [formData, dispatchFormState] = useReducer(formReducer, initialState);
 
   const onInputChange = useCallback(
@@ -80,22 +83,51 @@ function ProfileScreen() {
       }
 
       try {
+        const prevData = user;
         const updatedData = {
-          ...user,
           name: formData.values.name,
           email: user.email,
           course: formData.values.course,
           year: formData.values.year,
           phone: formData.values.phone,
           whatsAppPhone: formData.values.whatsAppPhone,
+          prevData: prevData,
         };
         // update profile data
-         
+        await axios({
+          method: "post",
+          url: "/auth/updateProfile",
+          data: updatedData,
+        })
+          .then((result) => {
+            if (result.status !== 200) {
+              alert("Not able to fetch events");
+              return;
+            } else {
+              dispatch(setUser(result.data));
+              return;
+            }
+          })
+          .catch((err) => {
+            if (err != null) {
+              alert("Something is wrong");
+              return;
+            }
+          });
       } catch (error) {
         alert(error.message);
       }
     },
-    [formData, user]
+    [
+      dispatch,
+      formData.isFormValid,
+      formData.values.course,
+      formData.values.name,
+      formData.values.phone,
+      formData.values.whatsAppPhone,
+      formData.values.year,
+      user,
+    ]
   );
 
   return (

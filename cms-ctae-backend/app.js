@@ -12,6 +12,7 @@ const MongoDBURL = config.MONGODB_URL;
 const mongoConnect = mongoose.connect(MongoDBURL, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
+  useFindAndModify: true,
 });
 mongoConnect.then(
   (db) => console.log("Connected to MongoDB..."),
@@ -36,6 +37,12 @@ app.use(express.urlencoded({ extended: false }));
 
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
+
+app.use(function (req, res, next) {
+  console.log(`REQUEST [${req.url}] {${req.path}}: `);
+  console.log(req.body);
+  next();
+});
 
 app.use("/auth", authRouter);
 app.use("/admin/club", clubRouter);

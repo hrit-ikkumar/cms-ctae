@@ -105,9 +105,7 @@ router.post("/login", (req, res, next) => {
               return;
             }
           });
-      }
-      else
-      {
+      } else {
         res.statusCode = 406; // NOT_ACCEPTABLE ERRORS
         res.send();
         return;
@@ -119,6 +117,60 @@ router.post("/login", (req, res, next) => {
         res.send(false);
         return;
       }
+    });
+});
+
+// updateProfile
+
+router.post("/updateProfile", async (req, res, next) => {
+  const { name, email, year, course, whatsAppPhone, phone, prevData } =
+    req.body;
+  const newUser = {
+    ...prevData,
+    name,
+    email,
+    year,
+    course,
+    whatsAppPhone,
+    phone,
+  };
+
+  Club.findOne({ clubName: newUser.clubName })
+    .then((result) => {
+      if (result != null) {
+        const CurrentClubUser = ClubWiseUser(result.clubCode);
+        CurrentClubUser.findOneAndUpdate({ email: prevData.email }, newUser, {
+          new: false,
+          useFindAndModify: true
+        })
+          .then((result) => {
+            if (result === null) {
+              throw error;
+            } else {
+              res.statusCode = 200;
+              res.send(newUser);
+              return;
+            }
+          })
+          .catch((err) => {
+            if (err != null) {
+              {
+                res.statusCode = 406; // NOT_ACCEPTABLE ERRORS
+                res.send();
+                return;
+              }
+            }
+          });
+      } else {
+        res.statusCode = 406; // NOT_ACCEPTABLE ERRORS
+        res.send();
+        return;
+      }
+    })
+    .catch((err) => {
+      res.statusCode = 406; // NOT_ACCEPTABLE ERRORS
+      res.send();
+      return;
     });
 });
 
