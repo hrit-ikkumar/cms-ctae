@@ -95,7 +95,7 @@ router.post("/create", (req, res, next) => {
     });
 });
 
-// UPDATE A NEW EVENT IN CLUB
+// UPDATE A EVENT IN CLUB
 router.put("/update", (req, res, next) => {
   const { title, meetUrl, dateTime, description, poster, clubName, prevData } =
     req.body;
@@ -212,6 +212,51 @@ router.delete("/delete", (req, res, next) => {
         res.statusCode = 406;
         res.send(false);
         return;
+      }
+    })
+    .catch((err) => {
+      if (err != null) {
+        res.statusCode = 500;
+        res.send();
+        return;
+      }
+    });
+});
+
+// Participate IN A EVENT IN CLUB
+router.post("/participate", (req, res, next) => {
+  const { userDetails, clubName, title, _id } = req.body;
+
+  Club.findOne({ clubName: clubName })
+    .then((result) => {
+      if (result != null) {
+        let newParticipant = {
+          ...userDetails,
+        };
+        let CurrentClubEvent = ClubWiseEvent(result.clubCode);
+        CurrentClubEvent.updateOne(
+          { _id: _id, title: title },
+          { $push: { participants: newParticipant } },
+          { useFindAndModify: true }
+        )
+          .then((result) => {
+            if (result === null) {
+              res.statusCode = 406;
+              res.send();
+              return;
+            } else {
+              res.statusCode = 200;
+              res.send();
+              return;
+            }
+          })
+          .catch((err) => {
+            if (err != null) {
+              res.statusCode = 406;
+              res.send();
+              return;
+            }
+          });
       }
     })
     .catch((err) => {

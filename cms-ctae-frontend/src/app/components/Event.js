@@ -15,9 +15,45 @@ function Event({ eventData }) {
 
   const [participants] = useState(eventData.participants);
 
-  const enrollInEventHandler = (event) => {
-    // participant section add
-  };
+  const enrollInEventHandler = useCallback(
+    async (event) => {
+      event.preventDefault();
+      await axios({
+        method: "post",
+        url: "/club/event/participate",
+        data: {
+          userDetails: {
+            email: user.email,
+            name: user.name,
+            course: user.course,
+            clubPosition: user.clubPosition,
+            year: user.year,
+            whatsAppPhone: user.whatsAppPhone,
+          },
+          clubName: user.clubName,
+          title: eventData.title,
+          _id: eventData._id
+        },
+      })
+        .then((result) => {
+          if (result.status !== 200) {
+            alert("Not able to delete event");
+            return;
+          } else {
+            history.replace("/"); // move to the main page
+            history.push("/events"); // move back to the events to re fetch events.
+            return;
+          }
+        })
+        .catch((err) => {
+          if (err != null) {
+            alert("Something is wrong");
+            return;
+          }
+        });
+    },
+    [eventData._id, eventData.title, history, user.clubName, user.clubPosition, user.course, user.email, user.name, user.whatsAppPhone, user.year]
+  );
 
   const editEvent = () => {
     history.push(`/events/edit/${eventData._id}`);
@@ -37,7 +73,7 @@ function Event({ eventData }) {
           alert("Not able to delete event");
           return;
         } else {
-          history.replace("/"); // move to the main page 
+          history.replace("/"); // move to the main page
           history.push("/events"); // move back to the events to re fetch events.
           return;
         }
@@ -63,7 +99,7 @@ function Event({ eventData }) {
           {moment(new Date(eventData.dateTime)).format("MMM Do YYYY, HH:mm")}
         </span>
         <a href={eventData.meetUrl} target="_blank" rel="noreferrer">
-          Google Meet Url
+          Meeting URL
         </a>
         {user?.type.toLowerCase() === "admin" && (
           <ButtonContainer>
@@ -75,7 +111,7 @@ function Event({ eventData }) {
           disabled={
             user
               ? new Date(eventData.dateTime) > new Date()
-                ? participants.some((participant) => participant === user.uid)
+                ? participants.some((participant) => participant.email === user.email)
                   ? true
                   : false
                 : true
@@ -85,7 +121,7 @@ function Event({ eventData }) {
         >
           {user
             ? new Date(eventData.dateTime) > new Date()
-              ? participants.some((participant) => participant === user.uid)
+              ? participants.some((participant) => participant.email === user.email)
                 ? "You have registered"
                 : "Register Now"
               : "Registrations are over"

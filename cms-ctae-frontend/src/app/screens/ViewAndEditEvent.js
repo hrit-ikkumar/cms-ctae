@@ -99,10 +99,6 @@ function ViewAndEditEvent() {
     }
   }, [eventId, dispatchFormState, eventData]);
 
-  useEffect(() => {
-    // get all the participants here
-  }, [eventId]);
-
   const selectPoster = (event) => {
     if (event.target.files) {
       setPoster(event.target.files[0]);
@@ -265,7 +261,7 @@ function ViewAndEditEvent() {
               <TableColumnHeader>WhatsApp Contact</TableColumnHeader>
             </TableRow>
             {participants.map((participant, index) => (
-              <TableRow key={participant.uid}>
+              <TableRow key={index}>
                 <TableColumn>{index + 1}</TableColumn>
                 <TableColumn>{participant.name}</TableColumn>
                 <TableColumn>{participant.course}</TableColumn>

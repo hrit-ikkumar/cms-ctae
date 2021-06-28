@@ -74,7 +74,7 @@ const ClubCard = styled(Link)`
   display: flex;
   align-items: center;
   padding: 8px 20px;
-  width: calc(100% / 3);
+  width: calc(100% / 2);
   font-weight: bold;
   font-size: 1.5rem;
   color: #aaa;
@@ -92,8 +92,8 @@ const ClubCard = styled(Link)`
 `;
 
 const ClubIcon = styled.img`
-  height: 50px;
-  width: 50px;
+  height: 70px;
+  width: 70px;
   object-fit: cover;
   margin-right: 10px;
 `;
