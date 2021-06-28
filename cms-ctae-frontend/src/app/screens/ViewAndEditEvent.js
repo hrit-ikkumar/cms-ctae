@@ -1,15 +1,16 @@
-import React, { useCallback, useState, useReducer } from "react";
+import React, { useCallback, useState, useReducer, useEffect } from "react";
 import DateTime from "react-datetime";
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import "react-datetime/css/react-datetime.css";
 import { useSelector } from "react-redux";
-// import { useDispatch } from "react-redux";
 import styled, { css } from "styled-components";
 
 import FormInput, { InputContainer, LabelField } from "../components/FormInput";
 
+import { selectEvents } from "../features/eventsSlice";
 import { selectUser } from "../features/authSlice";
 import { SubmitButton } from "./RegisterScreen";
+
 import axios from "axios";
 
 const UPDATE_FORM = "UPDATE_FORM";
@@ -61,13 +62,46 @@ const formReducer = (state, action) => {
   }
 };
 
-function AddEvent() {
+function ViewAndEditEvent() {
   const history = useHistory();
   const user = useSelector(selectUser);
-  // const dispatch = useDispatch();
+
+  const { eventId } = useParams();
+  const events = useSelector(selectEvents);
+  const currentEvent = events.filter((event) => event._id === eventId)[0];
   const [formData, dispatchFormState] = useReducer(formReducer, initialState);
   const [isLoading, setIsLoading] = useState(false);
-  const [poster, setPoster] = useState("");
+  const [poster, setPoster] = useState(currentEvent.poster);
+  const [participants] = useState(currentEvent.participants);
+
+  const eventData = currentEvent;
+
+  useEffect(() => {
+    if (eventId) {
+      dispatchFormState({
+        type: SET_FORM,
+        payload: {
+          values: {
+            title: eventData.title,
+            description: eventData.description,
+            meetUrl: eventData.meetUrl,
+            dateTime: eventData.dateTime,
+          },
+          validities: {
+            title: true,
+            description: true,
+            meetUrl: true,
+            dateTime: true,
+          },
+          isFormValid: true,
+        },
+      });
+    }
+  }, [eventId, dispatchFormState, eventData]);
+
+  useEffect(() => {
+    // get all the participants here
+  }, [eventId]);
 
   const selectPoster = (event) => {
     if (event.target.files) {
@@ -98,33 +132,34 @@ function AddEvent() {
         return;
       }
 
-      const newEvent = {
+      const updatedEvent = {
+        ...eventData,
         ...formData.values,
-        participants: [],
         clubName: user.clubName,
         poster,
+        prevData: eventData
       };
-
       try {
         setIsLoading(true);
-        if (newEvent.poster) {
+        if (poster) {
           // upload poster here..
-          newEvent.poster =
-            "https://www.ctae.ac.in/assets/images/logo-mpuat.png"; // For now dummy image upload
+          setPoster(
+            "https://www.ctae.ac.in/images/slider/large/img9268006.jpg"
+          ); // temporary poster
         }
         await axios({
-          method: "post",
-          url: "/club/event/create",
-          data: newEvent,
+          method: "put",
+          url: "/club/event/update",
+          data: updatedEvent,
         })
           .then((result) => {
             if (result.status !== 200) {
               alert("Not able to fetch events");
               return;
             } else {
+              // dispatch(setUser(result.data));
               dispatchFormState({ type: RESET_FORM });
               history.replace("/events");
-              // dispatch(setUser(result.data));
               return;
             }
           })
@@ -140,14 +175,14 @@ function AddEvent() {
         alert(error.message);
       }
     },
-    [formData.isFormValid, formData.values, user.clubName, poster, history]
+    [formData.isFormValid, formData.values, eventData, user.clubName, poster, history]
   );
 
   return (
     <AddEventContainer>
       <EventCard>
         <div className="event_heading">
-          <h1>{"Create"} an Event</h1>
+          <h1>{eventId ? "Edit" : "Create"} an Event</h1>
         </div>
         <form method="POST">
           <FormInput
@@ -207,20 +242,45 @@ function AddEvent() {
           </InputContainer>
           <SubmitButton onClick={formSubmitHandler} disabled={isLoading}>
             {isLoading
-              ? null
+              ? eventId
                 ? "Updating..."
                 : "Adding..."
-              : null
+              : eventId
               ? "Update"
               : "Add"}
           </SubmitButton>
         </form>
       </EventCard>
+      {eventId && (
+        <ParticipantCard id="print__this" onClick={() => window.print()}>
+          <h3>
+            Participants <Badge>{participants.length}</Badge>
+          </h3>
+          <ParticipantsTable>
+            <TableRow>
+              <TableColumnHeader>Sno.</TableColumnHeader>
+              <TableColumnHeader>Name</TableColumnHeader>
+              <TableColumnHeader>Course</TableColumnHeader>
+              <TableColumnHeader>Year</TableColumnHeader>
+              <TableColumnHeader>WhatsApp Contact</TableColumnHeader>
+            </TableRow>
+            {participants.map((participant, index) => (
+              <TableRow key={participant.uid}>
+                <TableColumn>{index + 1}</TableColumn>
+                <TableColumn>{participant.name}</TableColumn>
+                <TableColumn>{participant.course}</TableColumn>
+                <TableColumn>{participant.year}</TableColumn>
+                <TableColumn>{participant.whatsAppPhone}</TableColumn>
+              </TableRow>
+            ))}
+          </ParticipantsTable>
+        </ParticipantCard>
+      )}
     </AddEventContainer>
   );
 }
 
-export default AddEvent;
+export default ViewAndEditEvent;
 
 const AddEventContainer = styled.div`
   display: grid;
@@ -243,6 +303,65 @@ const EventCard = styled.div`
   @media print {
     display: none;
   }
+`;
+
+const ParticipantCard = styled(EventCard)`
+  margin-top: 40px;
+
+  @media print {
+    display: block;
+  }
+`;
+
+const Badge = styled.p`
+  display: inline-block;
+  background: var(--primaryColor);
+  text-align: center;
+  color: #fff;
+  width: 20px;
+  height: 20px;
+  border-radius: 6px;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.56);
+`;
+
+const ParticipantsTable = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+const TableRow = styled.div`
+  display: flex;
+
+  :nth-child(even) {
+    background: #ccc;
+  }
+`;
+
+const TableColumn = styled.div`
+  display: flex;
+  margin: 0 5px;
+  font-size: 1.1rem;
+
+  :nth-child(1) {
+    width: 40px;
+  }
+  :nth-child(2) {
+    width: 150px;
+  }
+  :nth-child(3) {
+    width: 80px;
+  }
+  :nth-child(4) {
+    width: 45px;
+  }
+  :nth-child(5) {
+    width: 150px;
+  }
+`;
+
+const TableColumnHeader = styled(TableColumn)`
+  font-weight: bolder;
+  margin-top: 10px;
 `;
 
 const StyledInput = css`

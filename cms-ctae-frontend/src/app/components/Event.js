@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useCallback } from "react";
 import { Button } from "@material-ui/core";
 import { useSelector } from "react-redux";
 import moment from "moment";
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 
+import axios from "axios";
 
 import { selectUser } from "../features/authSlice";
 
@@ -12,11 +13,7 @@ function Event({ eventData }) {
   const user = useSelector(selectUser);
   const history = useHistory();
 
-  const [participants, setParticipants] = useState(eventData.participants);
-
-  useEffect(() => {
-    // fetch participants
-  }, [eventData.id]);
+  const [participants] = useState(eventData.participants);
 
   const enrollInEventHandler = (event) => {
     // participant section add
@@ -26,9 +23,32 @@ function Event({ eventData }) {
     history.push(`/events/edit/${eventData._id}`);
   };
 
-  const deleteEvent = async () => {
-    // delete event here
-  };
+  const deleteEvent = useCallback(async () => {
+    await axios({
+      method: "delete",
+      url: "/club/event/delete",
+      data: {
+        ...eventData,
+        clubName: user.clubName,
+      },
+    })
+      .then((result) => {
+        if (result.status !== 200) {
+          alert("Not able to delete event");
+          return;
+        } else {
+          history.replace("/"); // move to the main page 
+          history.push("/events"); // move back to the events to re fetch events.
+          return;
+        }
+      })
+      .catch((err) => {
+        if (err != null) {
+          alert("Something is wrong");
+          return;
+        }
+      });
+  }, [eventData, history, user.clubName]);
 
   return (
     <EventContainer poster={eventData.poster}>
@@ -47,7 +67,7 @@ function Event({ eventData }) {
         </a>
         {user?.type.toLowerCase() === "admin" && (
           <ButtonContainer>
-            <HeroButton onClick={editEvent}>Details</HeroButton>
+            <HeroButton onClick={editEvent}>Edit</HeroButton>
             <HeroButton onClick={deleteEvent}>Delete</HeroButton>
           </ButtonContainer>
         )}

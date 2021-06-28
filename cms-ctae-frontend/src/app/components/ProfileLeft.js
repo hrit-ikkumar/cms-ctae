@@ -6,8 +6,8 @@ import LinkedInIcon from "@material-ui/icons/LinkedIn";
 
 import { selectUser } from "../features/authSlice";
 import EmailIcon from "@material-ui/icons/Email";
-import { Button } from "@material-ui/core";
-import { selectClubInfo, selectClubPostData } from "../features/clubSlice";
+// import { Button } from "@material-ui/core";
+import { selectClubInfo } from "../features/clubSlice";
 
 import { useSelector } from "react-redux";
 import Logo from "../assets/images/LOGO_PC.png";
@@ -15,7 +15,6 @@ import Logo from "../assets/images/LOGO_PC.png";
 function ProfileLeft() {
   const user = useSelector(selectUser);
   const clubInfo = useSelector(selectClubInfo);
-  const clubPost = useSelector(selectClubPostData);
 
   const clubData = user.clubName;
   console.log("clubData: " + clubData);
@@ -159,32 +158,6 @@ const SocialWrapper = styled.div`
   justify-content: space-between;
   align-items: center;
   width: 90%;
-`;
-
-const JoinButton = styled(Button)`
-  border: 2px solid var(--buttonColor) !important;
-  color: var(--buttonColor) !important;
-  width: 120px;
-  border-radius: 15px !important;
-  transition: all 0.5s ease;
-
-  :hover {
-    background: var(--buttonColor) !important;
-    color: #fff !important;
-  }
-`;
-
-const MembersButton = styled(Button)`
-  display: none !important;
-  width: 120px;
-  border-radius: 15px !important;
-  background: #fd4f58 !important;
-  color: #fff !important;
-  margin-left: 5px !important;
-
-  @media only screen and (max-width: 962px) {
-    display: flex !important;
-  }
 `;
 
 const SocialLinksContainer = styled.div`

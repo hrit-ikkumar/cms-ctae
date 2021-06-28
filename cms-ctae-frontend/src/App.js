@@ -1,6 +1,6 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import { useDispatch } from "react-redux";
+// import { useDispatch } from "react-redux";
 import styled from "styled-components";
 
 import Header from "./app/components/Header";
@@ -9,29 +9,30 @@ import EventsScreen from "./app/screens/EventsScreen";
 import LoginScreen from "./app/screens/LoginScreen";
 import RegisterScreen from "./app/screens/RegisterScreen";
 import ProfileScreen from "./app/screens/ProfileScreen";
+import ViewAndEditEvent from "./app/screens/ViewAndEditEvent";
 import AddEvent from "./app/screens/AddEvent";
 import PrivateRoute from "./app/components/PrivateRoute";
 import ProtectedRoute from "./app/components/ProtectedRoute";
 
-import { selectUser, signIn, signOutAsync } from "./app/features/authSlice";
-import { setEvents } from "./app/features/eventsSlice";
+// import { selectUser, signIn, signOutAsync } from "./app/features/authSlice";
+// import { setEvents } from "./app/features/eventsSlice";
 import ClubProfileScreen from "./app/screens/ClubProfileScreen";
-import AdminProfileScreen from "./app/screens/AdminProfileScreen";
-import AdminFeedsScreen from "./app/screens/AdminFeedsScreen";
-import AdminMembersScreen from "./app/screens/AdminMembersScreen";
-import AdminEventsScreen from "./app/screens/AdminEventsScreen";
-import AdminGalleryScreen from "./app/screens/AdminGalleryScreen";
+// import AdminProfileScreen from "./app/screens/AdminProfileScreen";
+// import AdminFeedsScreen from "./app/screens/AdminFeedsScreen";
+// import AdminMembersScreen from "./app/screens/AdminMembersScreen";
+// import AdminEventsScreen from "./app/screens/AdminEventsScreen";
+// import AdminGalleryScreen from "./app/screens/AdminGalleryScreen";
 
-import axios from "axios";
+// import axios from "axios";
 
 function App() {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
-  useEffect(() => {
-    // do nothing
-  }, [dispatch]);
+  // useEffect(() => {
+  //   // do nothing
+  // }, [dispatch]);
 
-  useEffect(() => {}, [dispatch]);
+  // useEffect(() => {}, [dispatch]);
 
   return (
     <Router>
@@ -51,6 +52,10 @@ function App() {
           </PrivateRoute>
 
           <PrivateRoute path="/events/edit/:eventId">
+            <ViewAndEditEvent />
+          </PrivateRoute>
+
+          <PrivateRoute path="/event/create">
             <AddEvent />
           </PrivateRoute>
 
@@ -81,9 +86,7 @@ function App() {
           <PrivateRoute path="/admin">
             <AdminProfileScreen />
           </PrivateRoute>
-          <PrivateRoute path="/event/create">
-            <AddEvent />
-          </PrivateRoute> */}
+          */}
         </Switch>
       </AppContainer>
     </Router>

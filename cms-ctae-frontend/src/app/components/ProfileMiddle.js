@@ -6,12 +6,10 @@ import CameraEnhanceIcon from "@material-ui/icons/CameraEnhance";
 import Feed from "./Feed";
 import { useSelector } from "react-redux";
 
-import { selectClubInfo, selectClubPostData } from "../features/clubSlice";
+import { selectClubPostData } from "../features/clubSlice";
 
 function ProfileMiddle() {
-  const clubInfo = useSelector(selectClubInfo);
   const clubPost = useSelector(selectClubPostData);
-  console.log("ClubPOST DATA: " + clubPost);
   return (
     <ProfileMiddleContainer>
       <CreatePostContainer>

@@ -25,6 +25,24 @@ module.exports = function (app) {
     })
   );
   app.use(
+    proxy("/club/event/create", {
+      target: "http://localhost:3002/",
+      changeOrigin: true,
+    })
+  );
+  app.use(
+    proxy("/club/event/update", {
+      target: "http://localhost:3002/",
+      changeOrigin: true,
+    })
+  );
+  app.use(
+    proxy("/club/event/delete", {
+      target: "http://localhost:3002/",
+      changeOrigin: true,
+    })
+  );
+  app.use(
     proxy("/admin/club/getClubData", {
       target: "http://localhost:3002/",
       changeOrigin: true,

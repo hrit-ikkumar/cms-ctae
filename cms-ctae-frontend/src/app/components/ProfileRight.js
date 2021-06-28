@@ -2,15 +2,15 @@ import React from "react";
 import styled from "styled-components";
 import { useSelector } from "react-redux";
 
-import { selectClubInfo, selectClubPostData } from "../features/clubSlice";
+import { selectClubInfo } from "../features/clubSlice";
 
 function ProfileRight() {
   const clubInfo = useSelector(selectClubInfo);
-  const clubPost = useSelector(selectClubPostData);
   return (
     <ProfileRightContainer id="members">
       <ProfileRightTitle>Club Members</ProfileRightTitle>
-      {clubInfo && clubInfo.clubMembers &&
+      {clubInfo &&
+        clubInfo.clubMembers &&
         clubInfo.clubMembers.map((_, index) => (
           <MemberCard key={index}>
             <MemberImage src={clubInfo.clubMembers[index].image} />

@@ -1,8 +1,8 @@
-import { configureStore, applyMiddleware } from "@reduxjs/toolkit";
+import { configureStore } from "@reduxjs/toolkit";
 import authReducer from "./authSlice";
 import eventsReducer from "./eventsSlice";
 import clubSlice from "./clubSlice";
-import logger from 'redux-logger';
+import logger from "redux-logger";
 import thunk from "redux-thunk";
 
 export default configureStore({
@@ -11,5 +11,5 @@ export default configureStore({
     events: eventsReducer,
     club: clubSlice,
   },
-  middleware: [thunk,logger]
+  middleware: [thunk, logger],
 });

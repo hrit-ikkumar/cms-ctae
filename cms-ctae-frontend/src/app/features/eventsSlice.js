@@ -9,7 +9,7 @@ export const eventSlice = createSlice({
     setEvents: (state, action) => {
       state.allEvents = action.payload.sort(
         (a, b) => new Date(b.dateTime) - new Date(a.dateTime)
-      );
+      ).reverse();
     },
   },
 });

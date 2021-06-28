@@ -1,4 +1,4 @@
-import React, { useEffect, useCallback, useState } from "react";
+import React, { useEffect, useCallback } from "react";
 import { Button } from "@material-ui/core";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
@@ -52,10 +52,13 @@ function EventsScreen() {
   return (
     <EventsContainer>
       {user?.type.toLowerCase() === "admin" && (
-        <Button style={{
-          backgroundColor: '#0000FF',
-          color: '#FFFFFF',
-        }} onClick={() => history.push("/event/create")}>
+        <Button
+          style={{
+            backgroundColor: "#0000FF",
+            color: "#FFFFFF",
+          }}
+          onClick={() => history.push("/event/create")}
+        >
           Add An Event
         </Button>
       )}

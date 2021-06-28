@@ -1,4 +1,4 @@
-import React, { useEffect, useCallback, useState } from "react";
+import React, { useEffect, useCallback } from "react";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
 import { useDispatch } from "react-redux";
@@ -66,13 +66,12 @@ function ClubProfileScreen() {
         }
       });
   }, [dispatch, user.clubName]);
-  
 
   useEffect(() => {
-    if (user != null){
+    if (user != null) {
       fetchClubInformation();
       fetchClubPostData();
-    } 
+    }
   }, [fetchClubInformation, fetchClubPostData, user]);
   return (
     <ClubProfileContainer>
