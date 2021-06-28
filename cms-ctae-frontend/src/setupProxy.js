@@ -49,6 +49,12 @@ module.exports = function (app) {
     })
   );
   app.use(
+    proxy("/admin/club/getAllClubData", {
+      target: "http://localhost:3002/",
+      changeOrigin: true,
+    })
+  );
+  app.use(
     proxy("/club/post/getPost", {
       target: "http://localhost:3002/",
       changeOrigin: true,

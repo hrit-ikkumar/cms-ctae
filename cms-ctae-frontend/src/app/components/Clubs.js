@@ -1,19 +1,45 @@
-import React from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
-import Logo from "../assets/images/logo.png";
-import { clubsData } from "../data/dummyData";
+import axios from "axios";
 
 function Clubs() {
+  const [clubsData, setClubsData] = useState([]);
+
+  const fetchData = useCallback(async () => {
+    await axios({
+      method: "get",
+      url: "/admin/club/getAllClubData",
+    })
+      .then((result) => {
+        if (result.status !== 200) {
+          alert("Not able to fetch clubs");
+          return;
+        } else {
+          setClubsData(result.data);
+          return;
+        }
+      })
+      .catch((err) => {
+        if (err != null) {
+          alert("Something is wrong");
+          return;
+        }
+      });
+  }, []);
+
+  useEffect(() => {
+    fetchData();
+  }, [fetchData]);
   return (
     <ClubsContainer id="clubs">
       <ClubsHeading>Our College Clubs</ClubsHeading>
       <ClubsWrapper>
-        {clubsData.map(({ name, icon }) => (
-          <ClubCard key={name} to={`/clubs/${name}`}>
-            <ClubIcon src={Logo} />
-            {name}
+        {clubsData.map(({ clubName, clubLogo }) => (
+          <ClubCard key={clubName} to={`/login?clubName=${clubName}`}>
+            <ClubIcon src={clubLogo} />
+            {clubName}
           </ClubCard>
         ))}
       </ClubsWrapper>

@@ -1,5 +1,5 @@
 import React, { useCallback, useReducer, useState } from "react";
-import { Link, useHistory } from "react-router-dom";
+import { Link, useHistory, useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { signIn } from "../features/authSlice";
 
@@ -59,6 +59,12 @@ const formReducer = (state, action) => {
 function LoginScreen() {
   const dispatch = useDispatch();
   const history = useHistory();
+  const location = useLocation();
+  const search = location.search;
+  const params = new URLSearchParams(search);
+  const clubName = params.get("clubName");
+
+
   const [formData, dispatchFormState] = useReducer(formReducer, initialState);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -141,11 +147,13 @@ function LoginScreen() {
             inputType="password"
             required
             minLength={6}
-            errorText="Password must be atleast 6 characters long!"
+            errorText="Password must be at least 6 characters long!"
           />
           <FormInput
             id="clubName"
             onInputChange={onInputChange}
+            initialValue={clubName || ""}
+            initiallyValid={clubName !== null}
             label="Club Name"
             inputType="text"
             required
@@ -161,7 +169,10 @@ function LoginScreen() {
           </SubmitButton>
         </FromWrapper>
         <FromLinkContainer>
-          Don't have an account? <Link to="/register">Register Here</Link>
+          Don't have an account?{" "}
+          <Link to={clubName ? `/register?clubName=${clubName}` : "/register"}>
+            Register Here
+          </Link>
         </FromLinkContainer>
       </FormContainer>
     </RegisterScreenContainer>
