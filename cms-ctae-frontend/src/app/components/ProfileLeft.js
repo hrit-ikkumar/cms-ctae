@@ -16,10 +16,10 @@ function ProfileLeft() {
   return (
     <ProfileLeftContainer>
       <ProfileHeaderContainer>
-        <ProfileCover src={clubInfo.clubBanner} />
+        <ProfileCover src={clubInfo && clubInfo.clubBanner} />
         <ProfileLogoName>
-          <ProfileLogo src={clubInfo.clubLogo} />
-          <ProfileName>{clubInfo.clubName}</ProfileName>
+          <ProfileLogo src={clubInfo && clubInfo.clubLogo} />
+          <ProfileName>{clubInfo && clubInfo.clubName}</ProfileName>
         </ProfileLogoName>
         <ProfileLeftDescription>
           <h3>Objectives of Club: </h3>

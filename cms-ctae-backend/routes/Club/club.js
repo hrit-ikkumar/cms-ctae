@@ -26,6 +26,7 @@ router.post("/getClubData", (req, res, next) => {
               };
             });
             res.send(result);
+            console.log(result);
             return;
           })
           .catch((err) => {
