@@ -1,6 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-// import { useDispatch } from "react-redux";
+
 import styled from "styled-components";
 
 import Header from "./app/components/Header";
@@ -14,26 +14,14 @@ import AddEvent from "./app/screens/AddEvent";
 import PrivateRoute from "./app/components/PrivateRoute";
 import ProtectedRoute from "./app/components/ProtectedRoute";
 
-// import { selectUser, signIn, signOutAsync } from "./app/features/authSlice";
-// import { setEvents } from "./app/features/eventsSlice";
 import ClubProfileScreen from "./app/screens/ClubProfileScreen";
-// import AdminProfileScreen from "./app/screens/AdminProfileScreen";
-// import AdminFeedsScreen from "./app/screens/AdminFeedsScreen";
-// import AdminMembersScreen from "./app/screens/AdminMembersScreen";
-// import AdminEventsScreen from "./app/screens/AdminEventsScreen";
-// import AdminGalleryScreen from "./app/screens/AdminGalleryScreen";
-
-// import axios from "axios";
+import AdminProfileScreen from "./app/screens/AdminProfileScreen";
+import AdminFeedsScreen from "./app/screens/AdminFeedsScreen";
+import AdminMembersScreen from "./app/screens/AdminMembersScreen";
+import AdminEventsScreen from "./app/screens/AdminEventsScreen";
+import AdminGalleryScreen from "./app/screens/AdminGalleryScreen";
 
 function App() {
-  // const dispatch = useDispatch();
-
-  // useEffect(() => {
-  //   // do nothing
-  // }, [dispatch]);
-
-  // useEffect(() => {}, [dispatch]);
-
   return (
     <Router>
       <AppContainer>
@@ -67,26 +55,29 @@ function App() {
             <ProfileScreen />
           </PrivateRoute>
 
-          <Route path="/">
-            <HomeScreen />
-          </Route>
-          {/* 
           <PrivateRoute path="/admin/feeds">
             <AdminFeedsScreen />
           </PrivateRoute>
+
           <PrivateRoute path="/admin/members">
             <AdminMembersScreen />
           </PrivateRoute>
+
           <PrivateRoute path="/admin/events">
             <AdminEventsScreen />
           </PrivateRoute>
+
           <PrivateRoute path="/admin/gallery">
             <AdminGalleryScreen />
           </PrivateRoute>
+
           <PrivateRoute path="/admin">
             <AdminProfileScreen />
           </PrivateRoute>
-          */}
+
+          <Route path="/">
+            <HomeScreen />
+          </Route>
         </Switch>
       </AppContainer>
     </Router>

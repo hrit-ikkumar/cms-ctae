@@ -4,7 +4,6 @@ import MenuOpenIcon from "@material-ui/icons/MenuOpen";
 import { useDispatch, useSelector } from "react-redux";
 import styled, { css } from "styled-components";
 
-// import Logo from "../assets/images/LOGO_SRIJAN.png";
 import { selectUser, signOutAsync } from "../features/authSlice";
 
 function Header() {
@@ -79,6 +78,11 @@ function Header() {
         <HeaderRightLink to="/" $isActive={pathname === "/"}>
           <TabContainer className="home">Home</TabContainer>
         </HeaderRightLink>
+        {user && user.type === "admin" && (
+          <HeaderRightLink to="/admin" $isActive={pathname === "/admin"}>
+            <TabContainer className="admin">Admin</TabContainer>
+          </HeaderRightLink>
+        )}
         {user && (
           <HeaderRightLink to="/club" $isActive={pathname === "/club"}>
             <TabContainer className="club">Club</TabContainer>
