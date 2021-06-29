@@ -1,21 +1,24 @@
 import styled from "styled-components";
 import { Link, useLocation } from "react-router-dom";
+
+import { useSelector } from "react-redux";
+
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import EventIcon from "@material-ui/icons/Event";
 import MembersIcon from "@material-ui/icons/PermContactCalendar";
 import FeedsIcon from "@material-ui/icons/PostAdd";
 import GalleryIcon from "@material-ui/icons/PhotoLibraryOutlined";
 
-import Logo from "../assets/images/LOGO_PC.png";
+import { selectClubInfo } from "../features/clubSlice";
 
 function AdminSidebar() {
   const { pathname } = useLocation();
-
+  const clubInfo = useSelector(selectClubInfo);
   return (
     <SidebarContainer>
       <SidebarHeader>
-        <ClubIcon loading="lazy" src={Logo} />
-        <HeaderTitle>Club Name</HeaderTitle>
+        <ClubIcon loading="lazy" src={clubInfo.clubLogo} />
+        <HeaderTitle>{clubInfo.clubName}</HeaderTitle>
       </SidebarHeader>
       <SidebarNavigation>
         <SidebarTab to="/admin" $isActive={pathname === "/admin"}>

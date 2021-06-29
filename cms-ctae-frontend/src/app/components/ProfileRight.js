@@ -13,10 +13,10 @@ function ProfileRight() {
         clubInfo.clubMembers &&
         clubInfo.clubMembers.map((_, index) => (
           <MemberCard key={index}>
-            <MemberImage src={clubInfo.clubMembers[index].image} />
+            <MemberImage src={clubInfo.clubMembers[index].avatar} />
             <MemberDetails>
               <MemberName>{clubInfo.clubMembers[index].name}</MemberName>
-              <MemberTitle>{clubInfo.clubMembers[index].position}</MemberTitle>
+              <MemberTitle>{clubInfo.clubMembers[index].clubPosition}</MemberTitle>
             </MemberDetails>
           </MemberCard>
         ))}

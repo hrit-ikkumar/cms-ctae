@@ -14,6 +14,9 @@ var Club = new Schema({
     type: String,
     required: true,
   },
+  clubBanner: {
+    type: String,
+  },
   clubPhotos: {
     type: Array,
     required: false,

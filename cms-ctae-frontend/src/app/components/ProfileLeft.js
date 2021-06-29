@@ -4,31 +4,22 @@ import FacebookIcon from "@material-ui/icons/Facebook";
 import InstagramIcon from "@material-ui/icons/Instagram";
 import LinkedInIcon from "@material-ui/icons/LinkedIn";
 
-import { selectUser } from "../features/authSlice";
 import EmailIcon from "@material-ui/icons/Email";
 // import { Button } from "@material-ui/core";
 import { selectClubInfo } from "../features/clubSlice";
 
 import { useSelector } from "react-redux";
-import Logo from "../assets/images/LOGO_PC.png";
 
 function ProfileLeft() {
-  const user = useSelector(selectUser);
   const clubInfo = useSelector(selectClubInfo);
 
-  const clubData = user.clubName;
-  console.log("clubData: " + clubData);
   return (
     <ProfileLeftContainer>
       <ProfileHeaderContainer>
-        <ProfileCover
-          src={
-            "https://www.ctae.ac.in/images/editorFiles/image/CTAE%20DEPT/CSE/Workshops_events/Github%2003.jpg"
-          }
-        />
+        <ProfileCover src={clubInfo.clubBanner} />
         <ProfileLogoName>
-          <ProfileLogo src={Logo} />
-          <ProfileName>{clubData}</ProfileName>
+          <ProfileLogo src={clubInfo.clubLogo} />
+          <ProfileName>{clubInfo.clubName}</ProfileName>
         </ProfileLogoName>
         <ProfileLeftDescription>
           <h3>Objectives of Club: </h3>
