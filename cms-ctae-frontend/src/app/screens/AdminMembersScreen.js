@@ -1,10 +1,16 @@
 import styled from "styled-components";
 
 import AdminSidebar from "../components/AdminSidebar";
+
+import { useSelector } from "react-redux";
+
+import { selectClubInfo } from "../features/clubSlice";
+
 import { AdminContainer, AdminRightContainer } from "./AdminProfileScreen";
 import Member from "../components/Member";
 
 function AdminMembersScreen() {
+  const clubInfo = useSelector(selectClubInfo);
   return (
     <AdminContainer>
       <AdminSidebar />
@@ -15,14 +21,13 @@ function AdminMembersScreen() {
         </FormContainer>
         <FormContainer>
           <FormHeader>Update Members</FormHeader>
-          {Array(5)
-            .fill()
-            .map((_, index) => (
+          {clubInfo.clubMembers
+            .map((member, index) => (
               <Member
                 key={index}
-                memberName={"Hritik Kumar Sharma"}
-                memberTitle="Coordinator"
-                memberPicture=""
+                memberName={member.name}
+                memberTitle={member.clubPosition}
+                memberPicture={member.avatar}
               />
             ))}
         </FormContainer>

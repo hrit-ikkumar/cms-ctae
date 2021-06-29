@@ -32,7 +32,6 @@ function EventsScreen() {
           alert("Not able to fetch events");
           return;
         } else {
-          console.log(result.data);
           dispatch(setEvents(result.data));
           return;
         }

@@ -1,48 +1,38 @@
 import styled from "styled-components";
+import { useSelector } from "react-redux";
 import { IconButton } from "@material-ui/core";
 import DeleteIcon from "@material-ui/icons/Delete";
 import moment from "moment";
 
 import AdminSidebar from "../components/AdminSidebar";
 import { AdminContainer, AdminRightContainer } from "./AdminProfileScreen";
+import { selectClubPostData } from "../features/clubSlice";
 
 function AdminFeedsScreen() {
+  const clubPostData = useSelector(selectClubPostData);
+
   return (
     <AdminContainer>
       <AdminSidebar />
       <AdminRightContainer>
         <FeedsContainer>
-          {Array(9)
-            .fill()
-            .map((_, index) => (
-              <FeedContainer key={index}>
-                {index !== 2 && (
-                  <FeedImage
-                    src={
-                      "https://s7280.pcdn.co/wp-content/uploads/2020/04/KnowledgeManagementGuidelinesBestPractices.png"
-                    }
-                    loading="lazy"
-                  />
-                )}
-                <FeedAuthorDescription>Harshit Dabey</FeedAuthorDescription>
-                <FeedDescription>
-                  {`Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius
-                  ab in obcaecati? Id nulla magni quae nihil. Ea, nihil.
-                  Doloremque harshit harami dabey nalayak hathi`.slice(
-                    0,
-                    index !== 2 ? 50 : 300
-                  ) + "..."}
-                </FeedDescription>
-                <FeedFooter>
-                  <FeedTimeStamp>
-                    {moment(new Date()).format("MMM Do YYYY, HH:mm")}
-                  </FeedTimeStamp>
-                  <FeedDeleteButton aria-label="delete" title="delete">
-                    <DeleteIcon />
-                  </FeedDeleteButton>
-                </FeedFooter>
-              </FeedContainer>
-            ))}
+          {clubPostData.map((post, index) => (
+            <FeedContainer key={index}>
+              {index !== 2 && <FeedImage src={post.imageLink} loading="lazy" />}
+              <FeedAuthorDescription>{post.author}</FeedAuthorDescription>
+              <FeedDescription>
+                {post.content.slice(0, index !== 2 ? 50 : 300) + "..."}
+              </FeedDescription>
+              <FeedFooter>
+                <FeedTimeStamp>
+                  {moment(post.dateTime).format("MMM Do YYYY, HH:mm")}
+                </FeedTimeStamp>
+                <FeedDeleteButton aria-label="delete" title="delete">
+                  <DeleteIcon />
+                </FeedDeleteButton>
+              </FeedFooter>
+            </FeedContainer>
+          ))}
         </FeedsContainer>
       </AdminRightContainer>
     </AdminContainer>
