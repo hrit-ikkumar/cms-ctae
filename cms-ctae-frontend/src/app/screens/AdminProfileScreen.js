@@ -8,7 +8,7 @@ import { useDispatch } from "react-redux";
 import axios from "axios";
 
 import { setClubInfo, setClubPostData } from "../features/clubSlice";
-import { selectUser } from "../features/authSlice";
+import { selectUser, setClubName } from "../features/authSlice";
 import { selectClubInfo } from "../features/clubSlice";
 
 import AdminSidebar from "../components/AdminSidebar";
@@ -26,10 +26,9 @@ const initialState = {
     facebook: "",
     email: "",
     linkedin: "",
-    description: "",
+    clubDescription: "",
     clubLogo: "",
     clubBanner: "",
-    clubObjectives: [],
   },
   validities: {
     clubName: false,
@@ -37,10 +36,9 @@ const initialState = {
     facebook: false,
     email: false,
     linkedin: false,
-    description: false,
+    clubDescription: false,
     clubLogo: false,
     clubBanner: false,
-    clubObjectives: false,
   },
   isFormValid: false,
 };
@@ -91,7 +89,7 @@ function AdminProfileScreen() {
       method: "post",
       url: "/admin/club/getClubData",
       data: {
-        clubName: user.clubName,
+        clubName: user.clubName || clubInfo.clubName,
       },
     })
       .then((result) => {
@@ -154,10 +152,9 @@ function AdminProfileScreen() {
             facebook: clubInfo.socialMedia && clubInfo.socialMedia.facebook,
             email: clubInfo.socialMedia && clubInfo.socialMedia.email,
             linkedin: clubInfo.socialMedia && clubInfo.socialMedia.linkedin,
-            description: clubInfo.description,
+            clubDescription: clubInfo.clubDescription,
             clubLogo: clubInfo.clubLogo,
             clubBanner: clubInfo.clubBanner,
-            clubObjectives: clubInfo.clubObjectives,
           },
           validities: {
             clubName: true,
@@ -165,10 +162,9 @@ function AdminProfileScreen() {
             facebook: true,
             email: true,
             linkedin: true,
-            description: true,
+            clubDescription: true,
             clubLogo: true,
             clubBanner: true,
-            clubObjectives: true,
           },
           isFormValid: true,
         },
@@ -199,13 +195,13 @@ function AdminProfileScreen() {
         return;
       }
 
-      const updatedClubInfo = {
+      let updatedClubInfo = {
         clubName: formData.values.clubName,
         clubCode: clubInfo.clubCode,
         clubLogo: formData.values.clubLogo,
         clubBanner: formData.values.clubBanner,
         clubPhotos: clubInfo.clubPhotos,
-        clubObjectives: clubInfo.clubObjectives,
+        clubDescription: formData.values.clubDescription,
         socialMedia: {
           instagram: formData.values.instagram,
           linkedin: formData.values.linkedin,
@@ -226,7 +222,9 @@ function AdminProfileScreen() {
               alert("Not able to fetch events");
               return;
             } else {
-              // dispatch(setUser(result.data));
+              updatedClubInfo.prevData = null;
+              dispatch(setClubInfo({ ...clubInfo, ...updatedClubInfo }));
+              dispatch(setClubName(updatedClubInfo.clubName));
               dispatchFormState({ type: RESET_FORM });
               history.replace("/");
               history.replace("/admin");
@@ -245,7 +243,20 @@ function AdminProfileScreen() {
         alert(error.message);
       }
     },
-    [clubInfo, formData.isFormValid, formData.values, history]
+    [
+      clubInfo,
+      dispatch,
+      formData.isFormValid,
+      formData.values.clubBanner,
+      formData.values.clubDescription,
+      formData.values.clubLogo,
+      formData.values.clubName,
+      formData.values.email,
+      formData.values.facebook,
+      formData.values.instagram,
+      formData.values.linkedin,
+      history,
+    ]
   );
 
   return (
@@ -295,12 +306,13 @@ function AdminProfileScreen() {
             <DescriptionInputContainer>
               <LabelField labelColor="#fff">DESCRIPTION</LabelField>
               <ProfileDescription
-                name="Update Description"
-                id="updateDescription"
-                value={formData.values.description}
+                name="Club Description"
+                inputType="text"
+                id="clubDescription"
+                value={formData.values.clubDescription}
                 onChange={(event) =>
                   onInputChange(
-                    "description",
+                    "clubDescription",
                     event.target.value,
                     event.target.value.length ? true : false
                   )

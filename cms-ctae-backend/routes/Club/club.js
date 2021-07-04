@@ -57,7 +57,7 @@ router.post("/register", (req, res, next) => {
     clubLogo,
     clubBanner,
     clubPhotos,
-    clubObjectives,
+    clubDescription,
     socialMedia,
     clubMembers,
   } = req.body;
@@ -67,7 +67,7 @@ router.post("/register", (req, res, next) => {
     clubLogo: clubLogo,
     clubBanner: clubBanner,
     clubPhotos: clubPhotos,
-    clubObjectives: clubObjectives,
+    clubDescription: clubDescription,
     socialMedia: socialMedia,
     clubMembers: clubMembers,
   };
@@ -110,7 +110,7 @@ router.put("/update", (req, res, next) => {
     clubLogo,
     clubPhotos,
     clubBanner,
-    clubObjectives,
+    clubDescription,
     socialMedia,
     prevData,
   } = req.body;
@@ -120,7 +120,7 @@ router.put("/update", (req, res, next) => {
     clubLogo: clubLogo,
     clubBanner: clubBanner,
     clubPhotos: clubPhotos,
-    clubObjectives: clubObjectives,
+    clubDescription: clubDescription,
     socialMedia: socialMedia,
   };
   Club.findOne({ clubName: prevData.clubName })
@@ -138,9 +138,18 @@ router.put("/update", (req, res, next) => {
           { useFindAndModify: true }
         )
           .then((result) => {
-            res.statusCode = 200;
-            res.send({ ...prevData, ...newClub });
-            return;
+            ClubWiseUser(clubCode)
+              .updateMany(
+                {},
+                { $set: { clubName: clubName } },
+                { multi: true, useFindAndModify: true }
+              )
+              .then((dt) => {
+                res.statusCode = 200;
+                res.send({ ...prevData, ...newClub });
+                return;
+              })
+              .catch((err) => next(err));
           })
           .catch((err) => {
             if (err != null) {

@@ -22,13 +22,7 @@ function ProfileLeft() {
           <ProfileName>{clubInfo && clubInfo.clubName}</ProfileName>
         </ProfileLogoName>
         <ProfileLeftDescription>
-          <h3>Objectives of Club: </h3>
-          {/* club objectives section */}
-          <ol>
-            {clubInfo &&
-              clubInfo.clubObjectives &&
-              clubInfo.clubObjectives.map((text) => <li>{text}</li>)}
-          </ol>
+          {clubInfo && `${clubInfo.clubDescription}`}
         </ProfileLeftDescription>
         <SocialWrapper>
           {/* <JoinButton>JOIN</JoinButton>

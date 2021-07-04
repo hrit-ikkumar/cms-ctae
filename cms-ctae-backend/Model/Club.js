@@ -21,8 +21,8 @@ var Club = new Schema({
     type: Array,
     required: false,
   },
-  clubObjectives:{
-    type: Array,
+  clubDescription: {
+    type: String,
     required: false
   },
   socialMedia: {

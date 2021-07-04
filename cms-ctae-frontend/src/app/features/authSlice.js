@@ -15,10 +15,13 @@ export const authSlice = createSlice({
     signOut: (state) => {
       state.user = null;
     },
+    setClubName: (state, action) => {
+      state.user.clubName = action.payload;
+    }
   },
 });
 
-export const { signIn, signOut, setUser } = authSlice.actions;
+export const { signIn, signOut, setUser, setClubName } = authSlice.actions;
 
 export const signInAsync = (authUser) => async (dispatch) => {
   try {
