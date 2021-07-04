@@ -16,7 +16,6 @@ router.post('/', (req, res, next) => {
   const {name, file} = req.body;
   upload.single(na)
 
-})
-.catch((err) => console.log(err));
+});
 
 module.exports = router;

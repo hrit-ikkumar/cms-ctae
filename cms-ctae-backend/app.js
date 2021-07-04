@@ -23,6 +23,7 @@ var authRouter = require("./routes/Auth/auth");
 var clubRouter = require("./routes/Club/club");
 var clubEventRouter = require("./routes/Club/Event/event");
 var clubPostRouter = require("./routes/Club/Post/post");
+var imageRouter = require("./routes/Image/image");
 
 var app = express();
 
@@ -48,6 +49,7 @@ app.use("/auth", authRouter);
 app.use("/admin/club", clubRouter);
 app.use("/club/event", clubEventRouter);
 app.use("/club/post", clubPostRouter);
+app.use("/upload/images", imageRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
