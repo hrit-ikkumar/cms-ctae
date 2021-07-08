@@ -42,9 +42,9 @@ const upload = multer({ storage });
 // POST (UPLOAD) FILE TO GRID FS
 router.post("/", upload.single("file"), (req, res, next) => {
   const { file } = req;
-  console.log(file);
+
   res.statusCode = 200;
-  res.send();
+  res.send(file);
   return;
 });
 
@@ -85,7 +85,11 @@ router.get("/view/:filename", (req, res) => {
     }
 
     // Check if image
-    if (file.contentType === "image/jpeg" || file.contentType === "image/png") {
+    if (
+      file.contentType === "image/jpeg" ||
+      file.contentType === "image/png" ||
+      file.contentType === "image/jpg"
+    ) {
       // Read output to browser
       const readstream = gfs.createReadStream(file.filename);
       readstream.pipe(res);

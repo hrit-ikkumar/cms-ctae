@@ -107,7 +107,7 @@ function AdminProfileScreen() {
           return;
         }
       });
-  }, [dispatch, user.clubName]);
+  }, [clubInfo.clubName, dispatch, user.clubName]);
 
   const fetchClubPostData = useCallback(async () => {
     await axios({
