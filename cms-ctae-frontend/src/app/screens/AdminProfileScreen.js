@@ -2,6 +2,8 @@ import React, { useEffect, useReducer, useCallback, useState } from "react";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 
+import FormData from "form-data";
+
 import styled, { css } from "styled-components";
 
 import { useDispatch } from "react-redux";
@@ -81,6 +83,8 @@ function AdminProfileScreen() {
 
   const [formData, dispatchFormState] = useReducer(formReducer, initialState);
   const [, setIsLoading] = useState(false);
+  const [clubLogoValue, setClubLogoValue] = useState(null);
+  const [clubBannerValue, setClubBannerValue] = useState(null);
 
   // const clubInfo = useSelector(selectClubInfo);
   // const clubPost = useSelector(selectClubPostData);
@@ -107,7 +111,7 @@ function AdminProfileScreen() {
           return;
         }
       });
-  }, [clubInfo.clubName, dispatch, user.clubName]);
+  }, [clubInfo, dispatch, user.clubName]);
 
   const fetchClubPostData = useCallback(async () => {
     await axios({
@@ -135,14 +139,14 @@ function AdminProfileScreen() {
   }, [dispatch, user.clubName]);
 
   useEffect(() => {
-    if (user != null) {
+    if (user != null && clubInfo == null) {
       fetchClubInformation();
       fetchClubPostData();
     }
-  }, [fetchClubInformation, fetchClubPostData, user]);
+  }, [clubInfo, fetchClubInformation, fetchClubPostData, user]);
 
   useEffect(() => {
-    if (user != null) {
+    if (user != null && clubInfo != null) {
       dispatchFormState({
         type: SET_FORM,
         payload: {
@@ -170,7 +174,7 @@ function AdminProfileScreen() {
         },
       });
     }
-  }, [dispatchFormState, user, clubInfo]);
+  }, [clubInfo, dispatchFormState, user]);
 
   const onInputChange = useCallback(
     (id, value, isValid) => {
@@ -194,11 +198,42 @@ function AdminProfileScreen() {
         alert("Check form for errors!");
         return;
       }
+      let clubLogoData = clubInfo.clubLogo;
+      if (clubLogoValue !== null) {
+        console.log("IMAGE: " + clubLogoValue);
+        let logoData = new FormData();
+        logoData.append("file", clubLogoValue, clubLogoValue.name);
+        await axios({
+          method: "post",
+          url: "/upload/images",
+          headers: {
+            accept: "application/json",
+            "Accept-Language": "en-US,en;q=0.8",
+            "Content-Type": `multipart/form-data; boundary=${logoData._boundary}`,
+          },
+          data: logoData,
+        })
+          .then((result) => {
+            if (result.status !== 200) {
+              alert("Not able to fetch events");
+              return;
+            } else {
+              clubLogoData = result.data.filename;
+              return;
+            }
+          })
+          .catch((err) => {
+            if (err != null) {
+              alert("Something is wrong with uploading the image!");
+              return;
+            }
+          });
+      }
 
       let updatedClubInfo = {
         clubName: formData.values.clubName,
         clubCode: clubInfo.clubCode,
-        clubLogo: formData.values.clubLogo,
+        clubLogo: clubLogoData,
         clubBanner: formData.values.clubBanner,
         clubPhotos: clubInfo.clubPhotos,
         clubDescription: formData.values.clubDescription,
@@ -244,21 +279,23 @@ function AdminProfileScreen() {
       }
     },
     [
-      clubInfo,
-      dispatch,
       formData.isFormValid,
+      formData.values.clubName,
       formData.values.clubBanner,
       formData.values.clubDescription,
-      formData.values.clubLogo,
-      formData.values.clubName,
-      formData.values.email,
-      formData.values.facebook,
       formData.values.instagram,
       formData.values.linkedin,
+      formData.values.email,
+      formData.values.facebook,
+      clubInfo,
+      clubLogoValue,
+      dispatch,
       history,
     ]
   );
-
+  if (user === null || clubInfo === null) {
+    return <div></div>;
+  }
   return (
     <AdminContainer>
       <AdminSidebar />
@@ -329,13 +366,14 @@ function AdminProfileScreen() {
                   type="file"
                   name="Banner"
                   id="clubBanner"
-                  onChange={(event) =>
+                  onChange={(event) => {
+                    console.log("EVENT: " + event);
                     onInputChange(
                       "clubBanner",
                       event.target.value,
                       event.target.value.length ? true : false
-                    )
-                  }
+                    );
+                  }}
                   accept="image/*"
                 />
               </InputContainer>
@@ -345,13 +383,14 @@ function AdminProfileScreen() {
                   type="file"
                   name="logo"
                   id="clubLogo"
-                  onChange={(event) =>
+                  onChange={(event) => {
+                    setClubLogoValue(event.target.files[0]);
                     onInputChange(
                       "clubLogo",
                       event.target.value,
                       event.target.value.length ? true : false
-                    )
-                  }
+                    );
+                  }}
                   accept="image/*"
                 />
               </InputContainer>

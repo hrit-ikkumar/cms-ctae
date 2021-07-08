@@ -72,4 +72,16 @@ module.exports = function (app) {
       changeOrigin: true,
     })
   );
+  app.use(
+    proxy("/upload/images", {
+      target: "http://localhost:3002/",
+      changeOrigin: true,
+    })
+  );
+  app.use(
+    proxy("/upload/images/view/", {
+      target: "http://localhost:3002/",
+      changeOrigin: true,
+    })
+  );
 };
