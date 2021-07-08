@@ -4,8 +4,12 @@ import { IconButton } from "@material-ui/core";
 import TelegramIcon from "@material-ui/icons/Telegram";
 import CameraEnhanceIcon from "@material-ui/icons/CameraEnhance";
 import Feed from "./Feed";
+import { useSelector } from "react-redux";
+
+import { selectClubPostData } from "../features/clubSlice";
 
 function ProfileMiddle() {
+  const clubPost = useSelector(selectClubPostData);
   return (
     <ProfileMiddleContainer>
       <CreatePostContainer>
@@ -25,10 +29,9 @@ function ProfileMiddle() {
           </PostButton>
         </ActionButtonsContainer>
       </CreatePostContainer>
-      {Array(5)
-        .fill()
-        .map((_, index) => (
-          <Feed key={index} />
+      {clubPost &&
+        clubPost.map((_, index) => (
+          <Feed key={index} feedData={clubPost[index]} />
         ))}
     </ProfileMiddleContainer>
   );

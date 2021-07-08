@@ -1,7 +1,9 @@
 import React, { useCallback, useReducer, useState } from "react";
-import { Link, useHistory } from "react-router-dom";
+import { Link, useHistory, useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { signIn, signInAsync } from "../features/authSlice";
+import { signIn } from "../features/authSlice";
+import styled from "styled-components";
+
 import axios from "axios";
 import FormInput from "../components/FormInput";
 
@@ -20,12 +22,12 @@ const initialState = {
   values: {
     email: "",
     password: "",
-    clubName: ""
+    clubName: "",
   },
   validities: {
     email: false,
     password: false,
-    clubName: false
+    clubName: false,
   },
   isFormValid: false,
 };
@@ -58,6 +60,11 @@ const formReducer = (state, action) => {
 function LoginScreen() {
   const dispatch = useDispatch();
   const history = useHistory();
+  const location = useLocation();
+  const search = location.search;
+  const params = new URLSearchParams(search);
+  const clubName = params.get("clubName");
+
   const [formData, dispatchFormState] = useReducer(formReducer, initialState);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -95,19 +102,19 @@ function LoginScreen() {
           method: "post",
           url: "/auth/login",
           data: loginData,
-        }).then((res) => {
-          console.log(res);
-          if (res.status !== 200) {
-            alert("Not able to create user");
-          } else {
-            dispatchFormState({ type: RESET_FORM });
-            setIsLoading(false);
-            dispatch(signIn(res.data));
-            history.push("/");
-            return;
-          }
         })
-        .catch((err) => alert(err));
+          .then((res) => {
+            if (res.status !== 200) {
+              alert("Not able to create user");
+            } else {
+              dispatchFormState({ type: RESET_FORM });
+              setIsLoading(false);
+              dispatch(signIn(res.data));
+              history.push("/");
+              return;
+            }
+          })
+          .catch((err) => alert(err));
         dispatchFormState({ type: RESET_FORM });
         setIsLoading(false);
         history.replace("/");
@@ -116,7 +123,7 @@ function LoginScreen() {
         alert(error.message);
       }
     },
-    [ dispatch ,formData, dispatchFormState, history]
+    [dispatch, formData, dispatchFormState, history]
   );
 
   return (
@@ -140,27 +147,34 @@ function LoginScreen() {
             inputType="password"
             required
             minLength={6}
-            errorText="Password must be atleast 6 characters long!"
+            errorText="Password must be at least 6 characters long!"
           />
           <FormInput
             id="clubName"
             onInputChange={onInputChange}
+            initialValue={clubName || ""}
+            initiallyValid={clubName !== null}
             label="Club Name"
             inputType="text"
             required
             minLength={6}
             errorText="Club Name should be there!"
           />
-          <SubmitButton
-            type="submit"
-            onClick={formSubmitHandler}
-            disabled={isLoading}
-          >
-            {isLoading ? "Logging in..." : "Log In"}
-          </SubmitButton>
+          <AlignCenter>
+            <SubmitButton
+              type="submit"
+              onClick={formSubmitHandler}
+              disabled={isLoading}
+            >
+              {isLoading ? "Logging in..." : "Log In"}
+            </SubmitButton>
+          </AlignCenter>
         </FromWrapper>
         <FromLinkContainer>
-          Don't have an account? <Link to="/register">Register Here</Link>
+          Don't have an account?{" "}
+          <Link to={clubName ? `/register?clubName=${clubName}` : "/register"}>
+            Register Here
+          </Link>
         </FromLinkContainer>
       </FormContainer>
     </RegisterScreenContainer>
@@ -168,3 +182,11 @@ function LoginScreen() {
 }
 
 export default LoginScreen;
+
+const AlignCenter = styled.div`
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+`;

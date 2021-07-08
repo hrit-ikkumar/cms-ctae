@@ -1,6 +1,6 @@
 import React, { useCallback, useReducer, useState } from "react";
 import { Button } from "@material-ui/core";
-import { Link, useHistory } from "react-router-dom";
+import { Link, useHistory, useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import axios from "axios";
 
@@ -66,6 +66,11 @@ const formReducer = (state, action) => {
 function RegisterScreen() {
   const dispatch = useDispatch();
   const history = useHistory();
+  const location = useLocation();
+  const search = location.search;
+  const params = new URLSearchParams(search);
+  const clubName = params.get("clubName");
+
   const [formData, dispatchFormState] = useReducer(formReducer, initialState);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -85,7 +90,6 @@ function RegisterScreen() {
 
   const formSubmitHandler = useCallback(
     async (event) => {
-
       event.preventDefault();
       if (!formData.isFormValid) {
         alert("Please check your inputs in form!");
@@ -97,6 +101,7 @@ function RegisterScreen() {
           type: "user",
           name: formData.values.name,
           email: formData.values.email,
+          year: formData.values.year,
           password: formData.values.password,
           course: formData.values.course,
           clubName: formData.values.clubName,
@@ -108,19 +113,27 @@ function RegisterScreen() {
           method: "post",
           url: "/auth/signUp",
           data: registrationData,
-        }).then((res) => {
-          if (res.status !== 200) {
-            setIsLoading(false);
-            throw new Error();
-          } else {
-            dispatchFormState({ type: RESET_FORM });
-            setIsLoading(false);
-            dispatch(signIn(res.data));
-            history.push("/");
-            return;
-          }
         })
-        .catch((err) => alert(err));
+          .then((res) => {
+            if (res.status !== 200) {
+              setIsLoading(false);
+              alert(
+                "We are not able to create your account. Please check credentials."
+              );
+            } else {
+              dispatchFormState({ type: RESET_FORM });
+              setIsLoading(false);
+              dispatch(signIn(res.data));
+              history.push("/");
+              return;
+            }
+          })
+          .catch((err) => {
+            setIsLoading(false);
+            alert(
+              "We are not able to create your account. Please check credentials."
+            );
+          });
       } catch (error) {
         setIsLoading(false);
         alert("This account already exits or please check your information.");
@@ -176,6 +189,8 @@ function RegisterScreen() {
           <FormInput
             onInputChange={onInputChange}
             label="Club Name"
+            initialValue={clubName || ""}
+            initiallyValid={clubName !== null}
             id="clubName"
             required
             minLength={3}
@@ -205,16 +220,21 @@ function RegisterScreen() {
             required
             minLength={6}
           />
-          <SubmitButton
-            type="submit"
-            onClick={formSubmitHandler}
-            disabled={isLoading}
-          >
-            {isLoading ? "Registering..." : "Register"}
-          </SubmitButton>
+          <AlignCenter>
+            <SubmitButton
+              type="submit"
+              onClick={formSubmitHandler}
+              disabled={isLoading}
+            >
+              {isLoading ? "Registering..." : "Register"}
+            </SubmitButton>
+          </AlignCenter>
         </FromWrapper>
         <FromLinkContainer>
-          Already have an account? <Link to="/login">Login Here</Link>
+          Already have an account?{" "}
+          <Link to={clubName ? `/login?clubName=${clubName}` : "/login"}>
+            Login Here
+          </Link>
         </FromLinkContainer>
       </FormContainer>
     </RegisterScreenContainer>
@@ -222,6 +242,14 @@ function RegisterScreen() {
 }
 
 export default RegisterScreen;
+
+const AlignCenter = styled.div`
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+`;
 
 export const RegisterScreenContainer = styled.div`
   width: 100%;

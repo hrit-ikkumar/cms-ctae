@@ -1,4 +1,6 @@
 import styled, { css } from "styled-components";
+import { useHistory } from "react-router-dom";
+
 import { useSelector } from "react-redux";
 import moment from "moment";
 import DeleteIcon from "@material-ui/icons/Delete";
@@ -10,13 +12,18 @@ import { selectEvents } from "../features/eventsSlice";
 
 function AdminEventsScreen() {
   const events = useSelector(selectEvents);
+  const history = useHistory();
 
   return (
     <AdminContainer>
       <AdminSidebar />
       <AdminRightContainer>
         <EventsContainer>
-          <ClubButton buttonColor="var(--buttonColor)" margin="0">
+          <ClubButton
+            buttonColor="var(--buttonColor)"
+            margin="0"
+            onButtonPress={() => history.push("/event/create")}
+          >
             Create an Event
           </ClubButton>
           <EventsWrapper>

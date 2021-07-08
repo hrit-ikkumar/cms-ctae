@@ -4,12 +4,10 @@ import MenuOpenIcon from "@material-ui/icons/MenuOpen";
 import { useDispatch, useSelector } from "react-redux";
 import styled, { css } from "styled-components";
 
-// import Logo from "../assets/images/LOGO_SRIJAN.png";
 import { selectUser, signOutAsync } from "../features/authSlice";
 
 function Header() {
   const user = useSelector(selectUser);
-  console.log("USER: " + user);
   const dispatch = useDispatch();
   const [headerColor, setHeaderColor] = useState(false);
   const [isNavOpened, setIsNavOpened] = useState(false);
@@ -80,6 +78,16 @@ function Header() {
         <HeaderRightLink to="/" $isActive={pathname === "/"}>
           <TabContainer className="home">Home</TabContainer>
         </HeaderRightLink>
+        {user && user.type === "admin" && (
+          <HeaderRightLink to="/admin" $isActive={pathname === "/admin"}>
+            <TabContainer className="admin">Admin</TabContainer>
+          </HeaderRightLink>
+        )}
+        {user && (
+          <HeaderRightLink to="/club" $isActive={pathname === "/club"}>
+            <TabContainer className="club">Club</TabContainer>
+          </HeaderRightLink>
+        )}
         {user && (
           <HeaderRightLink to="/events" $isActive={pathname === "/events"}>
             <TabContainer className="events">Events</TabContainer>
@@ -188,7 +196,7 @@ const HeaderTitle = styled.h3`
 
 const HeaderRight = styled.nav`
   display: flex;
-  width: 22%;
+  width: 30%;
   justify-content: space-around;
   align-items: center;
 

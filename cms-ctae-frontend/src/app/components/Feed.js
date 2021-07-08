@@ -2,31 +2,36 @@ import React from "react";
 import styled from "styled-components";
 import moment from "moment";
 
-function Feed() {
+function Feed({ feedData }) {
+  const { link, title, author, authorTitle, dateTime, content, imageLink } =
+    feedData;
+
   return (
     <FeedContainer>
-      <FeedImage
-        src={`https://www.ctae.ac.in/images/editorFiles/image/CTAE%20DEPT/CSE/Workshops_events/Github%2001.jpg`}
-        loading="lazy"
-      />
+      <FeedImage src={imageLink} loading="lazy" />
+      <Title>{title}</Title>
       <FeedDetailsContainer>
         <UserDetails>
-          <MemberName>Hritik Kumar Sharma </MemberName>
-          <MemberTitle>Coordinator</MemberTitle>
+          <MemberName>{author}</MemberName>
+          <MemberTitle>{authorTitle}</MemberTitle>
         </UserDetails>
         <TimeStamp>
-          Posted On - {moment(new Date()).format("MMM Do YYYY, HH:mm")}
+          Posted On - {moment(dateTime).format("MMM Do YYYY, HH:mm")}
         </TimeStamp>
       </FeedDetailsContainer>
-      <Description>
-      One of our most recent updates is MY ABSOLUTE FAVORITE- Club staff can now add your own activities! 
-      Activities you create in MyFuture will be available to your entire organization – and once it has been created, 
-      you will be able to assign members to the activity, track completions, project uploads, and anything else you can do with a traditional MyFuture activity. 
-      For those who work to get local funders, 
-      you can also provide some local funder recognition on the activities pages themselves. You’ll also be able to go back and edit, 
-      and publish and unpublish as needed. And if you want to share the activity with ALL Clubs, 
-      you can let BGCA know, and the team here can make it available to everyone. I ABSOUTELY CANNOT WAIT to start seeing yours!!!!!
-      </Description>
+      <Description>{content}</Description>
+      {link && (
+        <Link>
+          <a
+            style={{ color: "#ffffff" }}
+            href={link}
+            target="_blank"
+            rel="noreferrer"
+          >
+            Relevant Link
+          </a>
+        </Link>
+      )}
     </FeedContainer>
   );
 }
@@ -73,7 +78,19 @@ const TimeStamp = styled.p`
   color: #ccc;
 `;
 
+const Title = styled.h3`
+  padding: 10px;
+  text-align: left;
+  align-items: left;
+`;
+
 const Description = styled.p`
   padding: 10px;
   text-align: justify;
+`;
+
+const Link = styled.p`
+  padding: 10px;
+  txt-align: left;
+  color: white;
 `;

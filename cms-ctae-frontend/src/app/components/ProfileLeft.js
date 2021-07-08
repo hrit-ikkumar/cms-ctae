@@ -2,60 +2,71 @@ import React from "react";
 import styled, { css } from "styled-components";
 import FacebookIcon from "@material-ui/icons/Facebook";
 import InstagramIcon from "@material-ui/icons/Instagram";
+import LinkedInIcon from "@material-ui/icons/LinkedIn";
+
 import EmailIcon from "@material-ui/icons/Email";
-import { Button } from "@material-ui/core";
+// import { Button } from "@material-ui/core";
+import { selectClubInfo } from "../features/clubSlice";
 
-import Logo from "../assets/images/LOGO_PC.png";
+import { useSelector } from "react-redux";
 
-function ProfileLeft({ clubData }) {
+function ProfileLeft() {
+  const clubInfo = useSelector(selectClubInfo);
+
   return (
     <ProfileLeftContainer>
       <ProfileHeaderContainer>
         <ProfileCover
-          src={
-            "https://www.ctae.ac.in/images/editorFiles/image/CTAE%20DEPT/CSE/Workshops_events/Github%2003.jpg"
-          }
+          src={`/upload/images/view/${clubInfo && clubInfo.clubBanner}`}
         />
         <ProfileLogoName>
-          <ProfileLogo src={Logo} />
-          <ProfileName>{clubData}</ProfileName>
+          <ProfileLogo
+            src={`/upload/images/view/${clubInfo && clubInfo.clubLogo}`}
+          />
+          <ProfileName>{clubInfo && clubInfo.clubName}</ProfileName>
         </ProfileLogoName>
         <ProfileLeftDescription>
-        Objectives of the Programming Club:
-          <br/><br/>
-          &nbsp;o   Promote excellence in Computer Science and Engineering education and overall practice. 
-          <br/><br/>
-          &nbsp;o   Gain technical and collaborative skills to design real-life projects.
-          <br/><br/>
-          &nbsp;o   Learn steps of the engineering design cycle 
-          (discover- evaluate, design- evaluate, develop evaluate, deliver- evaluate) 
+          {clubInfo && `${clubInfo.clubDescription}`}
         </ProfileLeftDescription>
         <SocialWrapper>
-          <JoinButton>JOIN</JoinButton>
-          <MembersButton href="#members">Members</MembersButton>
+          {/* <JoinButton>JOIN</JoinButton>
+          <MembersButton href="#members">Members</MembersButton> */}
           <SocialLinksContainer>
-            <SocialLink href="https://github.com" target="_blank">
-              <InstagramIcon />
-            </SocialLink>
-            <SocialLink href="https://github.com" target="_blank">
-              <FacebookIcon />
-            </SocialLink>
-            <SocialLink href="https://github.com" target="_blank">
-              <EmailIcon />
-            </SocialLink>
+            {clubInfo && clubInfo.socialMedia && clubInfo.socialMedia.linkedin && (
+              <SocialLink href={clubInfo.socialMedia.linkedin} target="_blank">
+                <LinkedInIcon />
+              </SocialLink>
+            )}
+            {clubInfo && clubInfo.socialMedia && clubInfo.socialMedia.email && (
+              <SocialLink href={clubInfo.socialMedia.email} target="_blank">
+                <EmailIcon />
+              </SocialLink>
+            )}
+            {clubInfo &&
+              clubInfo.socialMedia &&
+              clubInfo.socialMedia.instagram && (
+                <SocialLink
+                  href={clubInfo.socialMedia.instagram}
+                  target="_blank"
+                >
+                  <InstagramIcon />
+                </SocialLink>
+              )}
+            {clubInfo && clubInfo.socialMedia && clubInfo.socialMedia.facebook && (
+              <SocialLink href={clubInfo.socialMedia.facebook} target="_blank">
+                <FacebookIcon />
+              </SocialLink>
+            )}
           </SocialLinksContainer>
         </SocialWrapper>
       </ProfileHeaderContainer>
       <ProfileGalleryContainer>
         <GalleryTitle>Our Picture Gallery</GalleryTitle>
         <GalleryGrid>
-          {Array(9)
-            .fill()
-            .map((_, index) => (
-              <GalleryPicture
-                key={index}
-                src={`https://images.pexels.com/photos/739407/pexels-photo-739407.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500`}
-              />
+          {clubInfo &&
+            clubInfo.clubPhotos &&
+            clubInfo.clubPhotos.map((_, index) => (
+              <GalleryPicture key={index} src={clubInfo.clubPhotos[index]} />
             ))}
         </GalleryGrid>
       </ProfileGalleryContainer>
@@ -120,7 +131,7 @@ const ProfileLogo = styled.img`
 `;
 
 const ProfileName = styled.h1`
-  margin: 0 0 10px 20px;
+  margin: 0 0 0px 20px;
   font-family: "Antonio", sans-serif;
   font-size: 2rem;
 `;
@@ -136,32 +147,6 @@ const SocialWrapper = styled.div`
   justify-content: space-between;
   align-items: center;
   width: 90%;
-`;
-
-const JoinButton = styled(Button)`
-  border: 2px solid var(--buttonColor) !important;
-  color: var(--buttonColor) !important;
-  width: 120px;
-  border-radius: 15px !important;
-  transition: all 0.5s ease;
-
-  :hover {
-    background: var(--buttonColor) !important;
-    color: #fff !important;
-  }
-`;
-
-const MembersButton = styled(Button)`
-  display: none !important;
-  width: 120px;
-  border-radius: 15px !important;
-  background: #fd4f58 !important;
-  color: #fff !important;
-  margin-left: 5px !important;
-
-  @media only screen and (max-width: 962px) {
-    display: flex !important;
-  }
 `;
 
 const SocialLinksContainer = styled.div`
