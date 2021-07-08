@@ -258,7 +258,7 @@ export const RegisterScreenContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  background: url("https://i.redd.it/zgmi8frme3u31.jpg") center/cover fixed
+  background: url("https://images.unsplash.com/photo-1457369804613-52c61a468e7d?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80") center/cover fixed
     no-repeat;
 
   @media only screen and (max-width: 501px) {
