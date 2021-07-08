@@ -4,9 +4,13 @@ var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 
+const { GridFsStorage } = require("multer-gridfs-storage");
+
+
 const mongoose = require("mongoose");
 const config = require("./config");
 const MongoDBURL = config.MONGODB_URL;
+// const Grid = require("gridfs-stream");
 
 // DB Connection
 const mongoConnect = mongoose.connect(MongoDBURL, {
@@ -14,8 +18,17 @@ const mongoConnect = mongoose.connect(MongoDBURL, {
   useUnifiedTopology: true,
   useFindAndModify: true,
 });
+
+// // Init gfs
+// let gfs;
+
 mongoConnect.then(
-  (db) => console.log("Connected to MongoDB..."),
+  (db) => {
+    console.log("Connected to MongoDB...");
+    // gfs = Grid(db, mongoose.mongo);
+    // gfs.collection("uploads");
+    mongoose.storage = new GridFsStorage({ db: mongoConnect });
+  },
   (err) => console.log(err)
 );
 

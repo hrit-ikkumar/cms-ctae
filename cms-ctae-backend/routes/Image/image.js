@@ -1,21 +1,50 @@
-var express = require('express');
+var express = require("express");
 var router = express.Router();
+const path = require("path");
 
-const multer  = require('multer');
-const {GridFsStorage} = require('multer-gridfs-storage');
-const url = require('../../config').MONGODB_URL;
+const crypto = require("crypto");
+const mongoose = require("mongoose");
+const MongoUrl = require("../../config").MONGODB_URL;
+const multer = require("multer");
+const { GridFsStorage } = require("multer-gridfs-storage");
+var Grid = require("gridfs-stream");
 
-// Create a storage object with a given configuration
-const storage = new GridFsStorage({ url });
+let gfs;
 
-// Set multer storage engine to the newly created object
+mongoose.connection.once("open", () => {
+  // Init stream
+  gfs = Grid(mongoose.connection.db, mongoose.mongo);
+  gfs.collection("uploads");
+});
+
+// Create storage engine
+const storage = new GridFsStorage({
+  url: MongoUrl,
+  file: (req, file) => {
+    return new Promise((resolve, reject) => {
+      crypto.randomBytes(16, (err, buf) => {
+        if (err) {
+          return reject(err);
+        }
+        const filename = buf.toString("hex") + path.extname(file.originalname);
+        const fileInfo = {
+          filename: filename,
+          bucketName: "uploads",
+        };
+        resolve(fileInfo);
+      });
+    });
+  },
+});
+
 const upload = multer({ storage });
 
-
-router.post('/', (req, res, next) => {
-  const {name, file} = req.body;
-  upload.single(na)
-
+router.post("/", upload.single("file"), (req, res, next) => {
+  const { file } = req;
+  console.log(file);
+  res.statusCode = 200;
+  res.send();
+  return;
 });
 
 module.exports = router;
