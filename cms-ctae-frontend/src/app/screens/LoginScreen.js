@@ -1,8 +1,10 @@
 import React, { useCallback, useReducer, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
-
+import { useDispatch } from "react-redux";
+import { signIn, signInAsync } from "../features/authSlice";
+import axios from "axios";
 import FormInput from "../components/FormInput";
-import { auth } from "../features/firebase";
+
 import {
   RegisterScreenContainer,
   FormContainer,
@@ -18,10 +20,12 @@ const initialState = {
   values: {
     email: "",
     password: "",
+    clubName: ""
   },
   validities: {
     email: false,
     password: false,
+    clubName: false
   },
   isFormValid: false,
 };
@@ -40,7 +44,6 @@ const formReducer = (state, action) => {
       for (let key in validities) {
         isFormValid = isFormValid && validities[key];
       }
-
       return {
         ...state,
         values,
@@ -53,6 +56,7 @@ const formReducer = (state, action) => {
 };
 
 function LoginScreen() {
+  const dispatch = useDispatch();
   const history = useHistory();
   const [formData, dispatchFormState] = useReducer(formReducer, initialState);
   const [isLoading, setIsLoading] = useState(false);
@@ -82,10 +86,28 @@ function LoginScreen() {
 
       try {
         setIsLoading(true);
-        await auth.signInWithEmailAndPassword(
-          formData.values.email,
-          formData.values.password
-        );
+        const loginData = {
+          email: formData.values.email,
+          password: formData.values.password,
+          clubName: formData.values.clubName,
+        };
+        await axios({
+          method: "post",
+          url: "/auth/login",
+          data: loginData,
+        }).then((res) => {
+          console.log(res);
+          if (res.status !== 200) {
+            alert("Not able to create user");
+          } else {
+            dispatchFormState({ type: RESET_FORM });
+            setIsLoading(false);
+            dispatch(signIn(res.data));
+            history.push("/");
+            return;
+          }
+        })
+        .catch((err) => alert(err));
         dispatchFormState({ type: RESET_FORM });
         setIsLoading(false);
         history.replace("/");
@@ -94,7 +116,7 @@ function LoginScreen() {
         alert(error.message);
       }
     },
-    [formData, dispatchFormState, history]
+    [ dispatch ,formData, dispatchFormState, history]
   );
 
   return (
@@ -119,6 +141,15 @@ function LoginScreen() {
             required
             minLength={6}
             errorText="Password must be atleast 6 characters long!"
+          />
+          <FormInput
+            id="clubName"
+            onInputChange={onInputChange}
+            label="Club Name"
+            inputType="text"
+            required
+            minLength={6}
+            errorText="Club Name should be there!"
           />
           <SubmitButton
             type="submit"

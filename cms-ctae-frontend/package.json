@@ -10,7 +10,9 @@
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
     "axios": "^0.21.1",
+    "body-parser": "^1.19.0",
     "firebase": "^8.2.9",
+    "http-proxy-middleware": "^0.19.1",
     "moment": "^2.29.1",
     "react": "^17.0.2",
     "react-datetime": "^3.0.4",
@@ -19,6 +21,8 @@
     "react-responsive-carousel": "^3.2.18",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
+    "redux-logger": "^3.0.6",
+    "redux-thunk": "^2.3.0",
     "styled-components": "^5.2.1"
   },
   "scripts": {

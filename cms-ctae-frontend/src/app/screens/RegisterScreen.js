@@ -1,30 +1,37 @@
 import React, { useCallback, useReducer, useState } from "react";
 import { Button } from "@material-ui/core";
 import { Link, useHistory } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import axios from "axios";
 
 import FormInput from "../components/FormInput";
-import { auth, db } from "../features/firebase";
+import { signIn } from "../features/authSlice";
 import styled from "styled-components";
 
 const UPDATE_FORM = "UPDATE_FORM";
 const RESET_FORM = "RESET_FORM";
+
 const initialState = {
   values: {
     name: "",
     email: "",
+    clubName: "",
+    clubPosition: "",
     course: "",
     year: "",
     phone: "",
-    whatsappPhone: "",
+    whatsAppPhone: "",
     password: "",
   },
   validities: {
     name: false,
     email: false,
     course: false,
+    clubName: false,
+    clubPosition: false,
     year: false,
     phone: false,
-    whatsappPhone: false,
+    whatsAppPhone: false,
     password: false,
   },
   isFormValid: false,
@@ -57,6 +64,7 @@ const formReducer = (state, action) => {
 };
 
 function RegisterScreen() {
+  const dispatch = useDispatch();
   const history = useHistory();
   const [formData, dispatchFormState] = useReducer(formReducer, initialState);
   const [isLoading, setIsLoading] = useState(false);
@@ -77,40 +85,48 @@ function RegisterScreen() {
 
   const formSubmitHandler = useCallback(
     async (event) => {
-      event.preventDefault();
 
+      event.preventDefault();
       if (!formData.isFormValid) {
-        alert("Check form for errors!");
+        alert("Please check your inputs in form!");
         return;
       }
-
       try {
         setIsLoading(true);
-        const { user } = await auth.createUserWithEmailAndPassword(
-          formData.values.email,
-          formData.values.password
-        );
         const registrationData = {
-          uid: user.uid,
           type: "user",
           name: formData.values.name,
-          email: user.email,
+          email: formData.values.email,
+          password: formData.values.password,
           course: formData.values.course,
-          year: formData.values.year,
+          clubName: formData.values.clubName,
+          clubPosition: formData.values.clubPosition,
           phone: formData.values.phone,
-          whatsappPhone: formData.values.whatsappPhone,
+          whatsAppPhone: formData.values.whatsAppPhone,
         };
-        await db.collection("users").doc(user.uid).set(registrationData);
-        // dispatch(signIn(formData.values));
-        dispatchFormState({ type: RESET_FORM });
-        setIsLoading(false);
-        history.replace("/");
+        await axios({
+          method: "post",
+          url: "/auth/signUp",
+          data: registrationData,
+        }).then((res) => {
+          if (res.status !== 200) {
+            setIsLoading(false);
+            throw new Error();
+          } else {
+            dispatchFormState({ type: RESET_FORM });
+            setIsLoading(false);
+            dispatch(signIn(res.data));
+            history.push("/");
+            return;
+          }
+        })
+        .catch((err) => alert(err));
       } catch (error) {
         setIsLoading(false);
-        alert(error.message);
+        alert("This account already exits or please check your information.");
       }
     },
-    [formData, history]
+    [dispatch, formData, history]
   );
 
   return (
@@ -159,8 +175,24 @@ function RegisterScreen() {
           />
           <FormInput
             onInputChange={onInputChange}
+            label="Club Name"
+            id="clubName"
+            required
+            minLength={3}
+            errorText="Invalid Club Name"
+          />
+          <FormInput
+            onInputChange={onInputChange}
+            label="Club Position"
+            id="clubPosition"
+            required
+            minLength={3}
+            errorText="Invalid Club Position"
+          />
+          <FormInput
+            onInputChange={onInputChange}
             label="whatsapp Phone"
-            id="whatsappPhone"
+            id="whatsAppPhone"
             required
             minLength={10}
             errorText="Invalid WhatsApp Contact!"

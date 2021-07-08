@@ -5,7 +5,7 @@ import styled from "styled-components";
 
 import FormInput from "../components/FormInput";
 import { selectUser } from "../features/authSlice";
-import { db } from "../features/firebase";
+
 import { FromHeaderText } from "./RegisterScreen";
 
 const UPDATE_FORM = "UPDATE_FORM";
@@ -89,7 +89,7 @@ function ProfileScreen() {
           phone: formData.values.phone,
           whatsappPhone: formData.values.whatsappPhone,
         };
-        await db.collection("users").doc(user.uid).update(updatedData);
+        // update profile data 
       } catch (error) {
         alert(error.message);
       }

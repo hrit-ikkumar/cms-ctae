@@ -12,7 +12,8 @@ import ProfileScreen from "./app/screens/ProfileScreen";
 import AddEvent from "./app/screens/AddEvent";
 import PrivateRoute from "./app/components/PrivateRoute";
 import ProtectedRoute from "./app/components/ProtectedRoute";
-import { auth, db } from "./app/features/firebase";
+
+
 import { signIn, signOutAsync } from "./app/features/authSlice";
 import { setEvents } from "./app/features/eventsSlice";
 import ClubProfileScreen from "./app/screens/ClubProfileScreen";
@@ -26,31 +27,11 @@ function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    let unsubscribe;
-    auth.onAuthStateChanged((authUser) => {
-      if (authUser) {
-        unsubscribe = db
-          .collection("users")
-          .doc(authUser.uid)
-          .onSnapshot((doc) => dispatch(signIn(doc.data())));
-      } else {
-        dispatch(signOutAsync()).catch((error) => alert(error));
-      }
-    });
-
-    return unsubscribe;
+    // do nothing
   }, [dispatch]);
 
   useEffect(() => {
-    const unsubscribe = db
-      .collection("events")
-      .onSnapshot((snapshot) =>
-        dispatch(
-          setEvents(snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() })))
-        )
-      );
-
-    return unsubscribe;
+    // do nothing
   }, [dispatch]);
 
   return (
