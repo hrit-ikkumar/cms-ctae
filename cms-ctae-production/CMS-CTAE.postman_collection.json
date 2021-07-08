@@ -359,13 +359,105 @@
 			]
 		},
 		{
+			"name": "Update User Profile",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\": \"Hritik KUmar SHarma\",\n\t\"email\": \"hritix@gmail.com\",\n\t\"year\": \"Final Year\",\n\t\"course\": \"B.Tech. in Computer Science and Engineering\",\n\t\"whatsAppPhone\": \"8209062638\",\n\t\"phone\": \"8209062638\",\n\t\"prevData\": {\n\t\t\"type\": \"admin\",\n\t\t\"name\": \"Kumar\",\n\t\t\"email\": \"hritix@gmail.com\",\n\t\t\"year\": \"Final Year\",\n\t\t\"password\": \"hritikkumar\",\n\t\t\"course\": \"B.Tech. in Computer Science and Engineering\",\n\t\t\"whatsAppPhone\": \"8209062638\",\n\t\t\"phone\": \"8209062638\",\n\t\t\"clubName\": \"Programming Club, CTAE\",\n\t\t\"clubPosition\": \"Student Coordinator\"\n\t}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/auth/updateProfile",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"auth",
+						"updateProfile"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Update User Profile",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"Kumar\",\n\t\"email\": \"hritix@gmail.com\",\n\t\"year\": \"Final Year\",\n\t\"course\": \"B.Tech. in Computer Science and Engineering\",\n\t\"whatsAppPhone\": \"8209062638\",\n\t\"phone\": \"8209062638\",\n\t\"prevData\": {\n\t\t\"type\": \"Dude\",\n\t\t\"name\": \"Kumar\",\n\t\t\"email\": \"hritik@gmail.com\",\n\t\t\"year\": \"Final Year\",\n\t\t\"password\": \"hritik\",\n\t\t\"course\": \"B.Tech. in Computer Science and Engineering\",\n\t\t\"whatsAppPhone\": \"8209062638\",\n\t\t\"phone\": \"8209062638\",\n\t\t\"clubName\": \"Programming Club, CTAE\",\n\t\t\"clubPosition\": \"Student Coordinator\"\n\t}\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3002/auth/updateProfile",
+							"host": [
+								"localhost"
+							],
+							"port": "3002",
+							"path": [
+								"auth",
+								"updateProfile"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "316"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"13c-+8uFiYDP7Smt9phLD00RIluXcPI\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 28 Jun 2021 17:01:33 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"type\": \"Dude\",\n    \"name\": \"Kumar\",\n    \"course\": \"B.Tech. in Computer Science and Engineering\",\n    \"year\": \"Final Year\",\n    \"clubName\": \"Programming Club, CTAE\",\n    \"clubPosition\": \"Student Coordinator\",\n    \"_id\": \"60d8d81657efd7aef8751376\",\n    \"email\": \"hritik@gmail.com\",\n    \"password\": \"hritik\",\n    \"whatsAppPhone\": \"8209062638\",\n    \"phone\": \"8209062638\",\n    \"__v\": 0\n}"
+				}
+			]
+		},
+		{
 			"name": "New Club Creation",
 			"request": {
 				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"clubName\": \"NSS, CTAE\", \n\t\"clubCode\": \"Club002\",\n\t\"clubLogo\": \"Link\",\n\t\"clubPhotos\": [],\n\t\"clubObjectives\": [],\n\t\"socialMedia\": {\n\t\t\"instagram\": \"insta link\",\n\t\t\"email\": \"email\",\n\t\t\"linkedin\": \"linkedin link\"\n\t},\n\t\"clubMembers\": []\n}",
+					"raw": "{\n\t\"clubName\": \"Web Development Programming Club\", \n\t\"clubCode\": \"Club004\",\n\t\"clubLogo\": \"Link\",\n\t\"clubBanner\": \"link\",\n\t\"clubPhotos\": [],\n\t\"clubDescription\": \"Something regarding club\",\n\t\"socialMedia\": {\n\t\t\"instagram\": \"insta link\",\n\t\t\"email\": \"email\",\n\t\t\"linkedin\": \"linkedin link\"\n\t}\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -386,6 +478,225 @@
 				}
 			},
 			"response": [
+				{
+					"name": "New Club Creation",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"clubName\": \"NSS, CTAE\", \n\t\"clubCode\": \"Club002\",\n\t\"clubLogo\": \"Link\",\n\t\"clubPhotos\": [],\n\t\"clubObjectives\": [],\n\t\"socialMedia\": {\n\t\t\"instagram\": \"insta link\",\n\t\t\"email\": \"email\",\n\t\t\"linkedin\": \"linkedin link\"\n\t},\n\t\"clubMembers\": []\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3002/admin/club/register",
+							"host": [
+								"localhost"
+							],
+							"port": "3002",
+							"path": [
+								"admin",
+								"club",
+								"register"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "241"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"f1-APqAgDLQDJJgQjJ/JcRev8biDC4\""
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 27 Jun 2021 20:19:00 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"clubPhotos\": [],\n    \"clubObjectives\": [],\n    \"clubMembers\": [],\n    \"_id\": \"60d8dd3306f05eb4da5fbb9c\",\n    \"clubName\": \"NSS, CTAE\",\n    \"clubCode\": \"Club002\",\n    \"clubLogo\": \"Link\",\n    \"socialMedia\": {\n        \"instagram\": \"insta link\",\n        \"email\": \"email\",\n        \"linkedin\": \"linkedin link\"\n    },\n    \"__v\": 0\n}"
+				},
+				{
+					"name": "New Club Creation",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"clubName\": \"Web Development Programming Club\", \n\t\"clubCode\": \"Club004\",\n\t\"clubLogo\": \"Link\",\n\t\"clubBanner\": \"link\",\n\t\"clubPhotos\": [],\n\t\"clubDescription\": \"Something regarding club\",\n\t\"socialMedia\": {\n\t\t\"instagram\": \"insta link\",\n\t\t\"email\": \"email\",\n\t\t\"linkedin\": \"linkedin link\"\n\t},\n\t\"clubMembers\": []\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3002/admin/club/register",
+							"host": [
+								"localhost"
+							],
+							"port": "3002",
+							"path": [
+								"admin",
+								"club",
+								"register"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "309"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"135-inst3fD1kC4WTEJhtUltgj9IFik\""
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 04 Jul 2021 18:30:50 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"clubPhotos\": [],\n    \"clubMembers\": [],\n    \"_id\": \"60e1fe5966e3fbbe1dd4521f\",\n    \"clubName\": \"Web Development Programming Club\",\n    \"clubCode\": \"Club004\",\n    \"clubLogo\": \"Link\",\n    \"clubBanner\": \"link\",\n    \"clubDescription\": \"Something regarding club\",\n    \"socialMedia\": {\n        \"instagram\": \"insta link\",\n        \"email\": \"email\",\n        \"linkedin\": \"linkedin link\"\n    },\n    \"__v\": 0\n}"
+				}
+			]
+		},
+		{
+			"name": "Update Club",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"clubName\": \"Programming Club, CTAE\",\n\t\"clubCode\": \"Club001\",\n\t\"clubLogo\": \"https://studentlife.santarosa.edu/sites/studentlife.santarosa.edu/files/Club%20Icon%402x.png\",\n\t\"clubPhotos\": [\n\t\t\"https://www.ctae.ac.in/images/editorFiles/image/CTAE%20DEPT/CSE/Workshops_events/Club%20Introduction%20Event.jpg\",\n\t\t\"https://www.ctae.ac.in/images/editorFiles/image/CTAE%20DEPT/CSE/Workshops_events/Club%20Introduction%20Event.jpg\"\n\t],\n\t\"clubDescription\": \"Something regarding club\",\n\t\"socialMedia\": {\n\t\t\"instagram\": \"insta link\",\n\t\t\"facebook\": \"facebook link\",\n\t\t\"email\": \"gmail id\",\n\t\t\"linkedin\": \"linkedin link\"\n\t},\n\t\"prevData\": {\n\t\t\"_id\": \"60d4b2a90051716ac9a73f1c\",\n\t\t\"clubName\": \"Programming Club, CTAE\",\n\t\t\"clubCode\": \"Club001\",\n\t\t\"clubLogo\": \"https://studentlife.santarosa.edu/sites/studentlife.santarosa.edu/files/Club%20Icon%402x.png\",\n\t\t\"clubPhotos\": [\n\t\t\t\"https://www.ctae.ac.in/images/editorFiles/image/CTAE%20DEPT/CSE/Workshops_events/Club%20Introduction%20Event.jpg\",\n\t\t\t\"https://www.ctae.ac.in/images/editorFiles/image/CTAE%20DEPT/CSE/Workshops_events/Club%20Introduction%20Event.jpg\"\n\t\t],\n\t\t\"clubObjectives\": [\n\t\t\t\"Promote excellence in Computer Science and Engineering education and overall practice.\",\n\t\t\t\"Gain technical and collaborative skills to design real-life projects.\",\n\t\t\t\"Learn steps of the engineering design cycle (discover- evaluate, design- evaluate, develop evaluate, deliver- evaluate)\"\n\t\t],\n\t\t\"socialMedia\": {\n\t\t\t\"instagram\": \"insta link\",\n\t\t\t\"facebook\": \"facebook link\",\n\t\t\t\"email\": \"gmail id\",\n\t\t\t\"linkedin\": \"linkedin link\"\n\t\t}\n\t}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3002/admin/club/update",
+					"host": [
+						"localhost"
+					],
+					"port": "3002",
+					"path": [
+						"admin",
+						"club",
+						"update"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Update Club",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"clubName\": \"Programming Club, CTAE\",\n\t\"clubCode\": \"Club001\",\n\t\"clubLogo\": \"https://studentlife.santarosa.edu/sites/studentlife.santarosa.edu/files/Club%20Icon%402x.png\",\n\t\"clubPhotos\": [\n\t\t\"https://www.ctae.ac.in/images/editorFiles/image/CTAE%20DEPT/CSE/Workshops_events/Club%20Introduction%20Event.jpg\",\n\t\t\"https://www.ctae.ac.in/images/editorFiles/image/CTAE%20DEPT/CSE/Workshops_events/Club%20Introduction%20Event.jpg\"\n\t],\n\t\"clubObjectives\": [\n\t\t\"Promote excellence in Computer Science and Engineering education and overall practice.\",\n\t\t\"Gain technical and collaborative skills to design real-life projects.\",\n\t\t\"Learn steps of the engineering design cycle (discover- evaluate, design- evaluate, develop evaluate, deliver- evaluate)\"\n\t],\n\t\"socialMedia\": {\n\t\t\"instagram\": \"insta link\",\n\t\t\"facebook\": \"facebook link\",\n\t\t\"email\": \"gmail id\",\n\t\t\"linkedin\": \"linkedin link\"\n\t},\n\t\"clubMembers\": [\n\t\t{\n\t\t\t\"name\": \"Hritik Kumar Sharma\",\n\t\t\t\"position\": \"Member\",\n\t\t\t\"image\": \"https://www.codechef.com/sites/default/files/uploads/pictures/ab42d8bf38939a7b8f5dc0d5ff9e5672.jpeg\"\n\t\t}\n\t],\n\t\"prevData\": {\n\t\t\"_id\": \"60d4b2a90051716ac9a73f1c\",\n\t\t\"clubName\": \"Programming Club, CTAE\",\n\t\t\"clubCode\": \"Club001\",\n\t\t\"clubLogo\": \"https://studentlife.santarosa.edu/sites/studentlife.santarosa.edu/files/Club%20Icon%402x.png\",\n\t\t\"clubPhotos\": [\n\t\t\t\"https://www.ctae.ac.in/images/editorFiles/image/CTAE%20DEPT/CSE/Workshops_events/Club%20Introduction%20Event.jpg\",\n\t\t\t\"https://www.ctae.ac.in/images/editorFiles/image/CTAE%20DEPT/CSE/Workshops_events/Club%20Introduction%20Event.jpg\"\n\t\t],\n\t\t\"clubObjectives\": [\n\t\t\t\"Promote excellence in Computer Science and Engineering education and overall practice.\",\n\t\t\t\"Gain technical and collaborative skills to design real-life projects.\",\n\t\t\t\"Learn steps of the engineering design cycle (discover- evaluate, design- evaluate, develop evaluate, deliver- evaluate)\"\n\t\t],\n\t\t\"socialMedia\": {\n\t\t\t\"instagram\": \"insta link\",\n\t\t\t\"facebook\": \"facebook link\",\n\t\t\t\"email\": \"gmail id\",\n\t\t\t\"linkedin\": \"linkedin link\"\n\t\t},\n\t\t\"clubMembers\": [\n\t\t\t{\n\t\t\t\t\"name\": \"Hritik Kumar Sharma\",\n\t\t\t\t\"position\": \"Member\",\n\t\t\t\t\"image\": \"https://www.codechef.com/sites/default/files/uploads/pictures/ab42d8bf38939a7b8f5dc0d5ff9e5672.jpeg\"\n\t\t\t}\n\t\t]\n\t}\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3002/admin/club/update",
+							"host": [
+								"localhost"
+							],
+							"port": "3002",
+							"path": [
+								"admin",
+								"club",
+								"update"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "1043"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"413-3Py77RMpMmrTRsVIwMh0BfjCMWs\""
+						},
+						{
+							"key": "Date",
+							"value": "Tue, 29 Jun 2021 18:36:49 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"clubPhotos\": [\n        \"https://www.ctae.ac.in/images/editorFiles/image/CTAE%20DEPT/CSE/Workshops_events/Club%20Introduction%20Event.jpg\",\n        \"https://www.ctae.ac.in/images/editorFiles/image/CTAE%20DEPT/CSE/Workshops_events/Club%20Introduction%20Event.jpg\"\n    ],\n    \"clubObjectives\": [\n        \"Promote excellence in Computer Science and Engineering education and overall practice.\",\n        \"Gain technical and collaborative skills to design real-life projects.\",\n        \"Learn steps of the engineering design cycle (discover- evaluate, design- evaluate, develop evaluate, deliver- evaluate)\"\n    ],\n    \"clubMembers\": [\n        {\n            \"name\": \"Hritik Kumar Sharma\",\n            \"position\": \"Member\",\n            \"image\": \"https://www.codechef.com/sites/default/files/uploads/pictures/ab42d8bf38939a7b8f5dc0d5ff9e5672.jpeg\"\n        }\n    ],\n    \"_id\": \"60d4b2a90051716ac9a73f1c\",\n    \"clubName\": \"Programming Club, CTAE\",\n    \"clubCode\": \"Club001\",\n    \"clubLogo\": \"https://studentlife.santarosa.edu/sites/studentlife.santarosa.edu/files/Club%20Icon%402x.png\",\n    \"socialMedia\": {\n        \"instagram\": \"insta link\",\n        \"facebook\": \"facebook link\",\n        \"email\": \"gmail id\",\n        \"linkedin\": \"linkedin link\"\n    },\n    \"__v\": 0\n}"
+				},
 				{
 					"name": "New Club Creation",
 					"originalRequest": {
@@ -475,6 +786,102 @@
 						"admin",
 						"club",
 						"getClubData"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "View All the Club Details",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"clubName\": \"Programming Club, CTAE\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3002/admin/club/getClubData",
+							"host": [
+								"localhost"
+							],
+							"port": "3002",
+							"path": [
+								"admin",
+								"club",
+								"getClubData"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "1047"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"417-tTSwutQvXz5IwY1Sqst45LW3evc\""
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 27 Jun 2021 20:06:12 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"_id\": \"60d4b2a90051716ac9a73f1c\",\n    \"clubName\": \"Programming Club, CTAE\",\n    \"clubCode\": \"Club001\",\n    \"clubLogo\": \"https://www.ctae.ac.in/images/editorFiles/image/CTAE%20DEPT/CSE/Workshops_events/Github%2003.jpg\",\n    \"clubPhotos\": [\n        \"https://www.ctae.ac.in/images/editorFiles/image/CTAE%20DEPT/CSE/Workshops_events/Club%20Introduction%20Event.jpg\",\n        \"https://www.ctae.ac.in/images/editorFiles/image/CTAE%20DEPT/CSE/Workshops_events/Club%20Introduction%20Event.jpg\"\n    ],\n    \"clubObjectives\": [\n        \"Promote excellence in Computer Science and Engineering education and overall practice.\",\n        \"Gain technical and collaborative skills to design real-life projects.\",\n        \"Learn steps of the engineering design cycle (discover- evaluate, design- evaluate, develop evaluate, deliver- evaluate)\"\n    ],\n    \"socialMedia\": {\n        \"instagram\": \"insta link\",\n        \"facebook\": \"facebook link\",\n        \"email\": \"gmail id\",\n        \"linkedin\": \"linkedin link\"\n    },\n    \"__v\": 0,\n    \"clubMembers\": [\n        {\n            \"name\": \"Hritik Kumar Sharma\",\n            \"position\": \"Member\",\n            \"image\": \"https://www.codechef.com/sites/default/files/uploads/pictures/ab42d8bf38939a7b8f5dc0d5ff9e5672.jpeg\"\n        }\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "View Public Details of All the clubs",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"clubName\": \"Programming Club, CTAE\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3002/admin/club/getAllClubData",
+					"host": [
+						"localhost"
+					],
+					"port": "3002",
+					"path": [
+						"admin",
+						"club",
+						"getAllClubData"
 					]
 				}
 			},
@@ -764,6 +1171,718 @@
 			]
 		},
 		{
+			"name": "New Participant to the event.",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"userDetails\":{\n\t\t\"name\":\"Hritik Kumar Sharma\",\n\t\t\"email\": \"hritix@gmail.com\",\n\t\t\"course\": \"B.Tech.\",\n\t\t\"clubPosition\":\"Member\",\n\t\t\"year\": \"Final Year\",\n\t\t\"whatsAppPhone\": \"8209062638\"\n\t},\n\t\"clubName\":\"Programming Club, CTAE\",\n\t\"title\": \"MERN Stack Introduction\",\n\t\"_id\": \"60da22c3ac94b68492141d11\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3002/club/event/participate",
+					"host": [
+						"localhost"
+					],
+					"port": "3002",
+					"path": [
+						"club",
+						"event",
+						"participate"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "New Participant to the event.",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"userDetails\":{\n\t\t\"name\":\"Hritik Kumar Sharma\",\n\t\t\"email\": \"hritix@gmail.com\",\n\t\t\"course\": \"B.Tech.\",\n\t\t\"clubPosition\":\"Member\",\n\t\t\"year\": \"Final Year\",\n\t\t\"whatsAppPhone\": \"8209062638\"\n\t},\n\t\"clubName\":\"Programming Club, CTAE\",\n\t\"title\": \"MERN Stack Introduction\",\n\t\"_id\": \"60da22c3ac94b68492141d11\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3002/club/event/participate",
+							"host": [
+								"localhost"
+							],
+							"port": "3002",
+							"path": [
+								"club",
+								"event",
+								"participate"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "plain",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 28 Jun 2021 21:25:21 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						},
+						{
+							"key": "Content-Length",
+							"value": "0"
+						}
+					],
+					"cookie": [],
+					"body": null
+				}
+			]
+		},
+		{
+			"name": "Event Updation for Particular Club",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"title\": \"Fairwell of Club\",\n\t\"meetUrl\": \"https://www.ctae.ac.in/singlePage.php?id=41&type=SP\",\n\t\"dateTime\": \"Thu Jun 24 2021 00:00:00 GMT+0530 (India Standard Time)\",\n\t\"description\": \"Introductory Session\",\n\t\"poster\": \"https://firebasestorage.googleapis.com/v0/b/cms-ctae.appspot.com/o/posters%2FIMG-1623733060128.png?alt=media&token=75f20ace-8275-4b27-9b51-012f476707c2\",\n\t\"clubName\": \"Programming Club, CTAE\",\n\t\"prevData\": {\n\t\t\"_id\": \"60d4db1303ff0eb20ba02c14\",\n\t\t\"title\": \"Introduction to Programming Clubds\",\n\t\t\"meetUrl\": \"https://www.ctae.ac.in/singlePage.php?id=41&type=SP\",\n\t\t\"dateTime\": \"Thu Jun 24 2021 00:00:00 GMT+0530 (India Standard Time)\",\n\t\t\"description\": \"Introductory Session\",\n\t\t\"poster\": \"https://firebasestorage.googleapis.com/v0/b/cms-ctae.appspot.com/o/posters%2FIMG-1623733060128.png?alt=media&token=75f20ace-8275-4b27-9b51-012f476707c2\",\n\t\t\"participants\": [\n\t\t\t{\n\t\t\t\t\"name\": \"Hritik Kumar Sharma\",\n\t\t\t\t\"email\": \"hritix@gmail.com\"\n\t\t\t}\n\t\t]\n\t}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3002/club/event/update",
+					"host": [
+						"localhost"
+					],
+					"port": "3002",
+					"path": [
+						"club",
+						"event",
+						"update"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Event Creation for Particular Club",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"title\": \"Introduction to Programming Clubds\",\n\t\"meetUrl\": \"https://www.ctae.ac.in/singlePage.php?id=41&type=SP\",\n\t\"dateTime\": \"Thu Jun 24 2021 00:00:00 GMT+0530 (India Standard Time)\",\n\t\"description\":\"Introductory Session\",\n\t\"poster\": \"https://firebasestorage.googleapis.com/v0/b/cms-ctae.appspot.com/o/posters%2FIMG-1623733060128.png?alt=media&token=75f20ace-8275-4b27-9b51-012f476707c2\",\n\t\"clubName\": \"Programming Club, CTAE\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3002/club/event/create",
+							"host": [
+								"localhost"
+							],
+							"port": "3002",
+							"path": [
+								"club",
+								"event",
+								"create"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "420"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"1a4-R8Kj2LUp+eItssovyqbRGqy9oxM\""
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 24 Jun 2021 19:17:29 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"_id\": \"60d4da490d845fb163fc12ff\",\n    \"title\": \"Introduction to Programming Clubds\",\n    \"meetUrl\": \"https://www.ctae.ac.in/singlePage.php?id=41&type=SP\",\n    \"dateTime\": \"Thu Jun 24 2021 00:00:00 GMT+0530 (India Standard Time)\",\n    \"description\": \"Introductory Session\",\n    \"poster\": \"https://firebasestorage.googleapis.com/v0/b/cms-ctae.appspot.com/o/posters%2FIMG-1623733060128.png?alt=media&token=75f20ace-8275-4b27-9b51-012f476707c2\",\n    \"__v\": 0\n}"
+				},
+				{
+					"name": "Event Creation for Particular Club",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"title\": \"Fairwell of Club\",\n\t\"meetUrl\": \"https://www.ctae.ac.in/singlePage.php?id=41&type=SP\",\n\t\"dateTime\": \"Thu Jun 24 2021 00:00:00 GMT+0530 (India Standard Time)\",\n\t\"description\":\"Introductory Session\",\n\t\"poster\": \"https://firebasestorage.googleapis.com/v0/b/cms-ctae.appspot.com/o/posters%2FIMG-1623733060128.png?alt=media&token=75f20ace-8275-4b27-9b51-012f476707c2\",\n\t\"clubName\": \"Programming Club, CTAE\",\n\t\"participants\": []\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3002/club/event/create",
+							"host": [
+								"localhost"
+							],
+							"port": "3002",
+							"path": [
+								"club",
+								"event",
+								"create"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "420"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"1a4-uf9J9WSOLOXX/x+d+FkLRMJ1sYs\""
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 27 Jun 2021 20:05:23 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"participants\": [],\n    \"_id\": \"60d8da030db6fcb2bb6d16df\",\n    \"title\": \"Fairwell of Club\",\n    \"meetUrl\": \"https://www.ctae.ac.in/singlePage.php?id=41&type=SP\",\n    \"dateTime\": \"Thu Jun 24 2021 00:00:00 GMT+0530 (India Standard Time)\",\n    \"description\": \"Introductory Session\",\n    \"poster\": \"https://firebasestorage.googleapis.com/v0/b/cms-ctae.appspot.com/o/posters%2FIMG-1623733060128.png?alt=media&token=75f20ace-8275-4b27-9b51-012f476707c2\",\n    \"__v\": 0\n}"
+				},
+				{
+					"name": "Event Creation for Particular Club",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"title\": \"Fairwell of Club\",\n\t\"meetUrl\": \"https://www.ctae.ac.in/singlePage.php?id=41&type=SP\",\n\t\"dateTime\": \"Thu Jun 24 2021 00:00:00 GMT+0530 (India Standard Time)\",\n\t\"description\":\"Introductory Session\",\n\t\"poster\": \"https://firebasestorage.googleapis.com/v0/b/cms-ctae.appspot.com/o/posters%2FIMG-1623733060128.png?alt=media&token=75f20ace-8275-4b27-9b51-012f476707c2\",\n\t\"clubName\": \"Programming Club, CTAE\",\n\t\"participants\": []\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3002/club/event/create",
+							"host": [
+								"localhost"
+							],
+							"port": "3002",
+							"path": [
+								"club",
+								"event",
+								"create"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "420"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"1a4-uf9J9WSOLOXX/x+d+FkLRMJ1sYs\""
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 27 Jun 2021 20:05:23 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"participants\": [],\n    \"_id\": \"60d8da030db6fcb2bb6d16df\",\n    \"title\": \"Fairwell of Club\",\n    \"meetUrl\": \"https://www.ctae.ac.in/singlePage.php?id=41&type=SP\",\n    \"dateTime\": \"Thu Jun 24 2021 00:00:00 GMT+0530 (India Standard Time)\",\n    \"description\": \"Introductory Session\",\n    \"poster\": \"https://firebasestorage.googleapis.com/v0/b/cms-ctae.appspot.com/o/posters%2FIMG-1623733060128.png?alt=media&token=75f20ace-8275-4b27-9b51-012f476707c2\",\n    \"__v\": 0\n}"
+				},
+				{
+					"name": "Event Updation for Particular Club",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"title\": \"Fairwell of Club\",\n\t\"meetUrl\": \"https://www.ctae.ac.in/singlePage.php?id=41&type=SP\",\n\t\"dateTime\": \"Thu Jun 24 2021 00:00:00 GMT+0530 (India Standard Time)\",\n\t\"description\": \"Introductory Session\",\n\t\"poster\": \"https://firebasestorage.googleapis.com/v0/b/cms-ctae.appspot.com/o/posters%2FIMG-1623733060128.png?alt=media&token=75f20ace-8275-4b27-9b51-012f476707c2\",\n\t\"clubName\": \"Programming Club, CTAE\",\n\t\"prevData\": {\n\t\t\"_id\": \"60d4db1303ff0eb20ba02c14\",\n\t\t\"title\": \"Introduction to Programming Clubds\",\n\t\t\"meetUrl\": \"https://www.ctae.ac.in/singlePage.php?id=41&type=SP\",\n\t\t\"dateTime\": \"Thu Jun 24 2021 00:00:00 GMT+0530 (India Standard Time)\",\n\t\t\"description\": \"Introductory Session\",\n\t\t\"poster\": \"https://firebasestorage.googleapis.com/v0/b/cms-ctae.appspot.com/o/posters%2FIMG-1623733060128.png?alt=media&token=75f20ace-8275-4b27-9b51-012f476707c2\",\n\t\t\"participants\": [\n\t\t\t{\n\t\t\t\t\"name\": \"Hritik Kumar Sharma\",\n\t\t\t\t\"email\": \"hritix@gmail.com\"\n\t\t\t}\n\t\t]\n\t}\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3002/club/event/update",
+							"host": [
+								"localhost"
+							],
+							"port": "3002",
+							"path": [
+								"club",
+								"event",
+								"update"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "469"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"1d5-jEDhkLDGqdmCCTtOh2in2DofQZw\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 28 Jun 2021 18:32:08 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"_id\": \"60d4db1303ff0eb20ba02c14\",\n    \"title\": \"Fairwell of Club\",\n    \"meetUrl\": \"https://www.ctae.ac.in/singlePage.php?id=41&type=SP\",\n    \"dateTime\": \"Thu Jun 24 2021 00:00:00 GMT+0530 (India Standard Time)\",\n    \"description\": \"Introductory Session\",\n    \"poster\": \"https://firebasestorage.googleapis.com/v0/b/cms-ctae.appspot.com/o/posters%2FIMG-1623733060128.png?alt=media&token=75f20ace-8275-4b27-9b51-012f476707c2\",\n    \"participants\": [\n        {\n            \"name\": \"Hritik Kumar Sharma\",\n            \"email\": \"hritix@gmail.com\"\n        }\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "Event Deletion for Particular Club Copy",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"_id\": \"60d8da030db6fcb2bb6d16df\",\n\t\"participants\": [],\n\t\"title\": \"Fairwell of Club\",\n\t\"meetUrl\": \"https://www.ctae.ac.in/singlePage.php?id=41&type=SP\",\n\t\"dateTime\": \"Wed Jun 30 2021 00:00:00 GMT+0530 (India Standard Time)\",\n\t\"description\": \"Introductory Session\",\n\t\"poster\": \"https://coderdojo.com/_nuxt/img/what-is.8a78caf.png\",\n\t\"clubName\": \"Programming Club, CTAE\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3002/club/event/delete",
+					"host": [
+						"localhost"
+					],
+					"port": "3002",
+					"path": [
+						"club",
+						"event",
+						"delete"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Event Creation for Particular Club",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"title\": \"Introduction to Programming Clubds\",\n\t\"meetUrl\": \"https://www.ctae.ac.in/singlePage.php?id=41&type=SP\",\n\t\"dateTime\": \"Thu Jun 24 2021 00:00:00 GMT+0530 (India Standard Time)\",\n\t\"description\":\"Introductory Session\",\n\t\"poster\": \"https://firebasestorage.googleapis.com/v0/b/cms-ctae.appspot.com/o/posters%2FIMG-1623733060128.png?alt=media&token=75f20ace-8275-4b27-9b51-012f476707c2\",\n\t\"clubName\": \"Programming Club, CTAE\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3002/club/event/create",
+							"host": [
+								"localhost"
+							],
+							"port": "3002",
+							"path": [
+								"club",
+								"event",
+								"create"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "420"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"1a4-R8Kj2LUp+eItssovyqbRGqy9oxM\""
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 24 Jun 2021 19:17:29 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"_id\": \"60d4da490d845fb163fc12ff\",\n    \"title\": \"Introduction to Programming Clubds\",\n    \"meetUrl\": \"https://www.ctae.ac.in/singlePage.php?id=41&type=SP\",\n    \"dateTime\": \"Thu Jun 24 2021 00:00:00 GMT+0530 (India Standard Time)\",\n    \"description\": \"Introductory Session\",\n    \"poster\": \"https://firebasestorage.googleapis.com/v0/b/cms-ctae.appspot.com/o/posters%2FIMG-1623733060128.png?alt=media&token=75f20ace-8275-4b27-9b51-012f476707c2\",\n    \"__v\": 0\n}"
+				},
+				{
+					"name": "Event Deletion for Particular Club Copy",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"_id\": \"60d8da030db6fcb2bb6d16df\",\n\t\"participants\": [],\n\t\"title\": \"Fairwell of Club\",\n\t\"meetUrl\": \"https://www.ctae.ac.in/singlePage.php?id=41&type=SP\",\n\t\"dateTime\": \"Wed Jun 30 2021 00:00:00 GMT+0530 (India Standard Time)\",\n\t\"description\": \"Introductory Session\",\n\t\"poster\": \"https://coderdojo.com/_nuxt/img/what-is.8a78caf.png\",\n\t\"clubName\": \"Programming Club, CTAE\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3002/club/event/delete",
+							"host": [
+								"localhost"
+							],
+							"port": "3002",
+							"path": [
+								"club",
+								"event",
+								"delete"
+							]
+						}
+					},
+					"status": "Not Acceptable",
+					"code": 406,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "5"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"5-fLbvuYullyqbUJDcLlF/4U0SywQ\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 28 Jun 2021 19:02:50 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "false"
+				},
+				{
+					"name": "Event Creation for Particular Club",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"title\": \"Fairwell of Club\",\n\t\"meetUrl\": \"https://www.ctae.ac.in/singlePage.php?id=41&type=SP\",\n\t\"dateTime\": \"Thu Jun 24 2021 00:00:00 GMT+0530 (India Standard Time)\",\n\t\"description\":\"Introductory Session\",\n\t\"poster\": \"https://firebasestorage.googleapis.com/v0/b/cms-ctae.appspot.com/o/posters%2FIMG-1623733060128.png?alt=media&token=75f20ace-8275-4b27-9b51-012f476707c2\",\n\t\"clubName\": \"Programming Club, CTAE\",\n\t\"participants\": []\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3002/club/event/create",
+							"host": [
+								"localhost"
+							],
+							"port": "3002",
+							"path": [
+								"club",
+								"event",
+								"create"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "420"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"1a4-uf9J9WSOLOXX/x+d+FkLRMJ1sYs\""
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 27 Jun 2021 20:05:23 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"participants\": [],\n    \"_id\": \"60d8da030db6fcb2bb6d16df\",\n    \"title\": \"Fairwell of Club\",\n    \"meetUrl\": \"https://www.ctae.ac.in/singlePage.php?id=41&type=SP\",\n    \"dateTime\": \"Thu Jun 24 2021 00:00:00 GMT+0530 (India Standard Time)\",\n    \"description\": \"Introductory Session\",\n    \"poster\": \"https://firebasestorage.googleapis.com/v0/b/cms-ctae.appspot.com/o/posters%2FIMG-1623733060128.png?alt=media&token=75f20ace-8275-4b27-9b51-012f476707c2\",\n    \"__v\": 0\n}"
+				},
+				{
+					"name": "Event Creation for Particular Club",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"title\": \"Fairwell of Club\",\n\t\"meetUrl\": \"https://www.ctae.ac.in/singlePage.php?id=41&type=SP\",\n\t\"dateTime\": \"Thu Jun 24 2021 00:00:00 GMT+0530 (India Standard Time)\",\n\t\"description\":\"Introductory Session\",\n\t\"poster\": \"https://firebasestorage.googleapis.com/v0/b/cms-ctae.appspot.com/o/posters%2FIMG-1623733060128.png?alt=media&token=75f20ace-8275-4b27-9b51-012f476707c2\",\n\t\"clubName\": \"Programming Club, CTAE\",\n\t\"participants\": []\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3002/club/event/create",
+							"host": [
+								"localhost"
+							],
+							"port": "3002",
+							"path": [
+								"club",
+								"event",
+								"create"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "420"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"1a4-uf9J9WSOLOXX/x+d+FkLRMJ1sYs\""
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 27 Jun 2021 20:05:23 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"participants\": [],\n    \"_id\": \"60d8da030db6fcb2bb6d16df\",\n    \"title\": \"Fairwell of Club\",\n    \"meetUrl\": \"https://www.ctae.ac.in/singlePage.php?id=41&type=SP\",\n    \"dateTime\": \"Thu Jun 24 2021 00:00:00 GMT+0530 (India Standard Time)\",\n    \"description\": \"Introductory Session\",\n    \"poster\": \"https://firebasestorage.googleapis.com/v0/b/cms-ctae.appspot.com/o/posters%2FIMG-1623733060128.png?alt=media&token=75f20ace-8275-4b27-9b51-012f476707c2\",\n    \"__v\": 0\n}"
+				},
+				{
+					"name": "Event Updation for Particular Club",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"title\": \"Fairwell of Club\",\n\t\"meetUrl\": \"https://www.ctae.ac.in/singlePage.php?id=41&type=SP\",\n\t\"dateTime\": \"Thu Jun 24 2021 00:00:00 GMT+0530 (India Standard Time)\",\n\t\"description\": \"Introductory Session\",\n\t\"poster\": \"https://firebasestorage.googleapis.com/v0/b/cms-ctae.appspot.com/o/posters%2FIMG-1623733060128.png?alt=media&token=75f20ace-8275-4b27-9b51-012f476707c2\",\n\t\"clubName\": \"Programming Club, CTAE\",\n\t\"prevData\": {\n\t\t\"_id\": \"60d4db1303ff0eb20ba02c14\",\n\t\t\"title\": \"Introduction to Programming Clubds\",\n\t\t\"meetUrl\": \"https://www.ctae.ac.in/singlePage.php?id=41&type=SP\",\n\t\t\"dateTime\": \"Thu Jun 24 2021 00:00:00 GMT+0530 (India Standard Time)\",\n\t\t\"description\": \"Introductory Session\",\n\t\t\"poster\": \"https://firebasestorage.googleapis.com/v0/b/cms-ctae.appspot.com/o/posters%2FIMG-1623733060128.png?alt=media&token=75f20ace-8275-4b27-9b51-012f476707c2\",\n\t\t\"participants\": [\n\t\t\t{\n\t\t\t\t\"name\": \"Hritik Kumar Sharma\",\n\t\t\t\t\"email\": \"hritix@gmail.com\"\n\t\t\t}\n\t\t]\n\t}\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3002/club/event/update",
+							"host": [
+								"localhost"
+							],
+							"port": "3002",
+							"path": [
+								"club",
+								"event",
+								"update"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "469"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"1d5-jEDhkLDGqdmCCTtOh2in2DofQZw\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 28 Jun 2021 18:32:08 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"_id\": \"60d4db1303ff0eb20ba02c14\",\n    \"title\": \"Fairwell of Club\",\n    \"meetUrl\": \"https://www.ctae.ac.in/singlePage.php?id=41&type=SP\",\n    \"dateTime\": \"Thu Jun 24 2021 00:00:00 GMT+0530 (India Standard Time)\",\n    \"description\": \"Introductory Session\",\n    \"poster\": \"https://firebasestorage.googleapis.com/v0/b/cms-ctae.appspot.com/o/posters%2FIMG-1623733060128.png?alt=media&token=75f20ace-8275-4b27-9b51-012f476707c2\",\n    \"participants\": [\n        {\n            \"name\": \"Hritik Kumar Sharma\",\n            \"email\": \"hritix@gmail.com\"\n        }\n    ]\n}"
+				}
+			]
+		},
+		{
 			"name": "Get all the events of a club",
 			"request": {
 				"method": "POST",
@@ -1018,8 +2137,8 @@
 				"method": "POST",
 				"header": [],
 				"body": {
-					"mode": "raw",
-					"raw": "{\n\t\"clubName\": \"Programming Club, CTAE\"\n}",
+					"mode": "urlencoded",
+					"urlencoded": [],
 					"options": {
 						"raw": {
 							"language": "json"
@@ -1166,6 +2285,96 @@
 					"body": "[\n    {\n        \"link\": \"https://www.ctae.ac.in/\",\n        \"_id\": \"60d4e1cf0e0c13bc55673b5c\",\n        \"title\": \"C++ Programming\",\n        \"author\": \"Hritik\",\n        \"authorTitle\": \"Coordinator\",\n        \"dateTime\": \"Thu Jun 24 2021 00:00:00 GMT+0530 (India Standard Time)\",\n        \"content\": \"One of our most recent updates is MY ABSOLUTE FAVORITE- Club staff can now add your own activities! Activities you create in MyFuture will be available to your entire organization – and once it has been created, you will be able to assign members to the activity, track completions, project uploads, and anything else you can do with a traditional MyFuture activity. For those who work to get local funders, you can also provide some local funder recognition on the activities pages themselves. You’ll also be able to go back and edit, and publish and unpublish as needed. And if you want to share the activity with ALL Clubs, you can let BGCA know, and the team here can make it available to everyone. I ABSOUTELY CANNOT WAIT to start seeing yours!!!!!\",\n        \"__v\": 0\n    }\n]"
 				}
 			]
+		},
+		{
+			"name": "View all the files in GridFS",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3002/upload/images",
+					"host": [
+						"localhost"
+					],
+					"port": "3002",
+					"path": [
+						"upload",
+						"images"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Upload file to GridFS",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"contentType": "image/jpg",
+							"type": "file",
+							"src": "/home/hritikkumar/Downloads/20210702_191617.jpg"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:3002/upload/images",
+					"host": [
+						"localhost"
+					],
+					"port": "3002",
+					"path": [
+						"upload",
+						"images"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "View Particular File in GridFS",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3002/upload/images/4481dc112349c5929eac1c0efb2291ca.png",
+					"host": [
+						"localhost"
+					],
+					"port": "3002",
+					"path": [
+						"upload",
+						"images",
+						"4481dc112349c5929eac1c0efb2291ca.png"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "View Particular File in GridFS (Display that)",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3002/upload/images/view/d6c978b8689309be8dbe6420de854866.jpg",
+					"host": [
+						"localhost"
+					],
+					"port": "3002",
+					"path": [
+						"upload",
+						"images",
+						"view",
+						"d6c978b8689309be8dbe6420de854866.jpg"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }

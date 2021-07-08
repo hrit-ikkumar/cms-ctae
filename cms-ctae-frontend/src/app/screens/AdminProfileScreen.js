@@ -309,7 +309,6 @@ function AdminProfileScreen() {
     [
       formData.isFormValid,
       formData.values.clubName,
-      formData.values.clubBanner,
       formData.values.clubDescription,
       formData.values.instagram,
       formData.values.linkedin,
@@ -317,6 +316,7 @@ function AdminProfileScreen() {
       formData.values.facebook,
       clubInfo,
       clubLogoValue,
+      clubBannerValue,
       dispatch,
       history,
     ]
