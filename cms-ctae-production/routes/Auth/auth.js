@@ -90,6 +90,7 @@ router.post("/login", (req, res, next) => {
           .then((result) => {
             if (result != null) {
               res.statusCode = 200;
+              console.log(clubName);
               res.send(result);
               return;
             } else {
