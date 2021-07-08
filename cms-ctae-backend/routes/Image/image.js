@@ -39,12 +39,40 @@ const storage = new GridFsStorage({
 
 const upload = multer({ storage });
 
+// POST (UPLOAD) FILE TO GRID FS
 router.post("/", upload.single("file"), (req, res, next) => {
   const { file } = req;
   console.log(file);
   res.statusCode = 200;
   res.send();
   return;
+});
+
+// GET ALL THE FILES
+router.get("/", (req, res) => {
+  gfs.files.find().toArray((err, files) => {
+    // Check if files
+    if (!files || files.length === 0) {
+      return res.status(404).json({
+        err: "No files exist",
+      });
+    }
+    // Files exist
+    return res.json(files);
+  });
+});
+
+router.get("/:filename", (req, res) => {
+  gfs.files.findOne({ filename: req.params.filename }, (err, file) => {
+    // Check if file
+    if (!file || file.length === 0) {
+      return res.status(404).json({
+        err: "No file exists",
+      });
+    }
+    // File exists
+    return res.json(file);
+  });
 });
 
 module.exports = router;
