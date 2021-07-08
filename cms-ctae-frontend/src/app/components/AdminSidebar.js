@@ -17,7 +17,10 @@ function AdminSidebar() {
   return (
     <SidebarContainer>
       <SidebarHeader>
-        <ClubIcon loading="lazy" src={clubInfo.clubLogo} />
+        <ClubIcon
+          loading="lazy"
+          src={`upload/images/view/${clubInfo.clubLogo}`}
+        />
         <HeaderTitle>{clubInfo.clubName}</HeaderTitle>
       </SidebarHeader>
       <SidebarNavigation>

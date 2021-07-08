@@ -91,8 +91,8 @@ router.get("/view/:filename", (req, res) => {
       file.contentType === "image/jpg"
     ) {
       // Read output to browser
-      const readstream = gfs.createReadStream(file.filename);
-      readstream.pipe(res);
+      const readStream = gfs.createReadStream(file.filename);
+      readStream.pipe(res);
     } else {
       res.status(404).json({
         err: "Not an image",

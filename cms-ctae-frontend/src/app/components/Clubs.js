@@ -38,7 +38,7 @@ function Clubs() {
       <ClubsWrapper>
         {clubsData.map(({ clubName, clubLogo }) => (
           <ClubCard key={clubName} to={`/login?clubName=${clubName}`}>
-            <ClubIcon src={clubLogo} />
+            <ClubIcon src={`upload/images/view/${clubLogo}`} />
             {clubName}
           </ClubCard>
         ))}
