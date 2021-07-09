@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 import Hero from "../components/Hero";
 import Clubs from "../components/Clubs";
-import Gallery from "../components/Gallery";
+// import Gallery from "../components/Gallery";
 import ClubDescription from "../components/ClubDescription";
 import Testimonial from "../components/Testimonial";
 import EventSchedule from "../components/EventSchedule";
@@ -15,11 +15,11 @@ function HomeScreen() {
   return (
     <HomeScreenContainer>
       <Hero />
-      <Clubs />
+      {!user && <Clubs />}
 
-      <EventSchedule />
+      {!user && <EventSchedule />}
 
-      {user && <Gallery />}
+      {/* {user && <Gallery />} */}
 
       <ClubDescription />
 

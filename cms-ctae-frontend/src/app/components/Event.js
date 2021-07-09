@@ -32,7 +32,7 @@ function Event({ eventData }) {
           },
           clubName: user.clubName,
           title: eventData.title,
-          _id: eventData._id
+          _id: eventData._id,
         },
       })
         .then((result) => {
@@ -52,7 +52,18 @@ function Event({ eventData }) {
           }
         });
     },
-    [eventData._id, eventData.title, history, user.clubName, user.clubPosition, user.course, user.email, user.name, user.whatsAppPhone, user.year]
+    [
+      eventData._id,
+      eventData.title,
+      history,
+      user.clubName,
+      user.clubPosition,
+      user.course,
+      user.email,
+      user.name,
+      user.whatsAppPhone,
+      user.year,
+    ]
   );
 
   const editEvent = () => {
@@ -87,9 +98,13 @@ function Event({ eventData }) {
   }, [eventData, history, user.clubName]);
 
   return (
-    <EventContainer poster={eventData.poster}>
+    <EventContainer poster={`/upload/images/view/${eventData.poster}`}>
       <EventPoster>
-        <img src={eventData.poster} alt="poster" loading="lazy" />
+        <img
+          src={`/upload/images/view/${eventData.poster}`}
+          alt="poster"
+          loading="lazy"
+        />
       </EventPoster>
       <EventDetails>
         <h2>{eventData.title}</h2>
@@ -111,7 +126,9 @@ function Event({ eventData }) {
           disabled={
             user
               ? new Date(eventData.dateTime) > new Date()
-                ? participants.some((participant) => participant.email === user.email)
+                ? participants.some(
+                    (participant) => participant.email === user.email
+                  )
                   ? true
                   : false
                 : true
@@ -121,7 +138,9 @@ function Event({ eventData }) {
         >
           {user
             ? new Date(eventData.dateTime) > new Date()
-              ? participants.some((participant) => participant.email === user.email)
+              ? participants.some(
+                  (participant) => participant.email === user.email
+                )
                 ? "You have registered"
                 : "Register Now"
               : "Registrations are over"

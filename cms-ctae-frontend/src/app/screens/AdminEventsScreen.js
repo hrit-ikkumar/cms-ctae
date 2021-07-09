@@ -1,18 +1,55 @@
 import styled, { css } from "styled-components";
 import { useHistory } from "react-router-dom";
+import { useCallback } from "react";
 
 import { useSelector } from "react-redux";
 import moment from "moment";
+import axios from "axios";
 import DeleteIcon from "@material-ui/icons/Delete";
 
 import AdminSidebar from "../components/AdminSidebar";
 import ClubButton from "../components/UI/ClubButton";
 import { AdminContainer, AdminRightContainer } from "./AdminProfileScreen";
 import { selectEvents } from "../features/eventsSlice";
+import { selectUser } from "../features/authSlice";
 
 function AdminEventsScreen() {
   const events = useSelector(selectEvents);
+  const user = useSelector(selectUser);
   const history = useHistory();
+
+  const EditEvent = (eventId) => {
+    history.push(`/admin/events/edit/${eventId}`);
+  };
+
+  const DeleteEvent = useCallback(
+    async (eventData) => {
+      await axios({
+        method: "delete",
+        url: "/club/event/delete",
+        data: {
+          ...eventData,
+          clubName: user.clubName,
+        },
+      })
+        .then((result) => {
+          if (result.status !== 200) {
+            alert("Not able to delete event");
+            return;
+          } else {
+            history.goBack();
+            return;
+          }
+        })
+        .catch((err) => {
+          if (err != null) {
+            alert("Something is wrong");
+            return;
+          }
+        });
+    },
+    [history, user.clubName]
+  );
 
   return (
     <AdminContainer>
@@ -43,8 +80,19 @@ function AdminEventsScreen() {
                   )}
                 </EventTimeStamp>
                 <ActionButtons>
-                  <ClubButton margin="0">Update</ClubButton>
-                  <ClubButton margin="0 0 0 10px" buttonColor="#ba0013">
+                  <ClubButton
+                    margin="0"
+                    onButtonPress={() => {
+                      EditEvent(event._id);
+                    }}
+                  >
+                    Update
+                  </ClubButton>
+                  <ClubButton
+                    margin="0 0 0 10px"
+                    onButtonPress={() => DeleteEvent(event)}
+                    buttonColor="#ba0013"
+                  >
                     <DeleteIcon />
                   </ClubButton>
                 </ActionButtons>
