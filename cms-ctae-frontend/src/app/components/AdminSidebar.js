@@ -19,7 +19,7 @@ function AdminSidebar() {
       <SidebarHeader>
         <ClubIcon
           loading="eager"
-          src={`localhost/upload/images/view/${clubInfo.clubLogo}`}
+          src={`https://cms-ctae.herokuapp.com/upload/images/view/${clubInfo.clubLogo}`}
         />
         <HeaderTitle>{clubInfo.clubName}</HeaderTitle>
       </SidebarHeader>
