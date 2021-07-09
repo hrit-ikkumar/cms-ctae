@@ -103,7 +103,7 @@ function AddFeed() {
         author: user.name,
         authorTitle: user.clubPosition,
         clubName: user.clubName,
-        imageLink:imageLink,
+        imageLink: imageLink,
       };
 
       try {
@@ -151,8 +151,9 @@ function AddFeed() {
               return;
             } else {
               dispatchFormState({ type: RESET_FORM });
+              history.push("/club");
               history.goBack();
-
+              history.goBack();
               return;
             }
           })
