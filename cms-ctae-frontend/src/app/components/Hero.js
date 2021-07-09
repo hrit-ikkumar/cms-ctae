@@ -1,25 +1,39 @@
 import { Button } from "@material-ui/core";
 import styled from "styled-components";
 import { useHistory } from "react-router";
+import { useSelector } from "react-redux";
+import { selectUser } from "../features/authSlice";
 
 function Hero() {
   const history = useHistory();
+  const user = useSelector(selectUser);
 
   const goToEventsHandler = () => {
     history.push("/events");
   };
 
+  const goToEventsHandlerHome = () => {
+    document.getElementById("programSection").scrollIntoView();
+  };
   const goToClub = () => {
     history.push("/club");
-  }
-
+  };
+  const goToClubHome = () => {
+    document.getElementById("clubs").scrollIntoView();
+  };
   return (
     <HeroContainer>
       <ClubDescription>
         <Test>Team work is dream work!</Test>
         <ButtonsContainer>
-          <EventsButton onClick={goToEventsHandler}>Go To Events</EventsButton>
-          <ClubsButton onClick={goToClub}>Our Club</ClubsButton>
+          <EventsButton
+            onClick={user ? goToEventsHandler : goToEventsHandlerHome}
+          >
+            {user ? "Go To Events" : "Go to Programs"}
+          </EventsButton>
+          <ClubsButton onClick={user ? goToClub : goToClubHome}>
+            {user ? "Our Club" : "Our Clubs"}
+          </ClubsButton>
         </ButtonsContainer>
       </ClubDescription>
     </HeroContainer>
