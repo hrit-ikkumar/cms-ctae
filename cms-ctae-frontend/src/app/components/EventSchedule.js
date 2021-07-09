@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 function EventSchedule() {
   return (
-    <EventScheduleContainer>
+    <EventScheduleContainer id="programSection">
       <EventScheduleHeading>Programs</EventScheduleHeading>
       <EventScheduleCard>
         <EventTime>

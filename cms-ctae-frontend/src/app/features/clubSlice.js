@@ -13,10 +13,14 @@ export const clubSlice = createSlice({
     setClubPostData: (state, action) => {
       state.clubPostData = action.payload; // set club post data
     },
+    eraseClubInfoAndPost: (state) => {
+      state.clubInfo = null;
+      state.clubPostData = null;
+    }
   },
 });
 
-export const { setClubInfo, setClubPostData } = clubSlice.actions;
+export const { setClubInfo, setClubPostData, eraseClubInfoAndPost } = clubSlice.actions;
 
 export const selectClubInfo = (state) => state.club.clubInfo;
 

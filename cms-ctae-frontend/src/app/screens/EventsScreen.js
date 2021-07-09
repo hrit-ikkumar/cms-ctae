@@ -61,9 +61,12 @@ function EventsScreen() {
           Add An Event
         </Button>
       )}
-      {events.map((event) => (
-        <Event key={event.id} eventData={event} />
-      ))}
+
+      {events && events.length ? (
+        events.map((event) => <Event key={event.id} eventData={event} />)
+      ) : (
+        <h3 style={{ color: "#ffffff" }}>"There is NO Events right now!"</h3>
+      )}
     </EventsContainer>
   );
 }

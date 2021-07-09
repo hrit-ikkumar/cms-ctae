@@ -18,8 +18,8 @@ function AdminSidebar() {
     <SidebarContainer>
       <SidebarHeader>
         <ClubIcon
-          loading="lazy"
-          src={`upload/images/view/${clubInfo.clubLogo}`}
+          loading="eager"
+          src={`http://localhost:3000/upload/images/view/${clubInfo.clubLogo}`}
         />
         <HeaderTitle>{clubInfo.clubName}</HeaderTitle>
       </SidebarHeader>

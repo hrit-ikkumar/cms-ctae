@@ -107,11 +107,38 @@ function AddEvent() {
 
       try {
         setIsLoading(true);
-        if (newEvent.poster) {
-          // upload poster here..
-          newEvent.poster =
-            "https://www.ctae.ac.in/assets/images/logo-mpuat.png"; // For now dummy image upload
+        let posterValue =
+          "https://blogmedia.evbstatic.com/wp-content/uploads/wpmulti/sites/3/2019/07/GP-socialdistancing-04_Blog-Header.png";
+        if (poster) {
+          let posterData = new FormData();
+          posterData.append("file", poster, poster.name);
+          await axios({
+            method: "post",
+            url: "/upload/images",
+            headers: {
+              accept: "application/json",
+              "Accept-Language": "en-US,en;q=0.8",
+              "Content-Type": `multipart/form-data; boundary=${posterData._boundary}`,
+            },
+            data: posterData,
+          })
+            .then((result) => {
+              if (result.status !== 200) {
+                alert("Not able to fetch events");
+                return;
+              } else {
+                posterValue = result.data.filename;
+                return;
+              }
+            })
+            .catch((err) => {
+              if (err != null) {
+                alert("Something is wrong with uploading the image!");
+                return;
+              }
+            });
         }
+        newEvent.poster = posterValue;
         await axios({
           method: "post",
           url: "/club/event/create",

@@ -63,6 +63,10 @@ function App() {
             <AdminMembersScreen />
           </PrivateRoute>
 
+          <PrivateRoute path="/admin/events/edit/:eventId">
+            <ViewAndEditEvent />
+          </PrivateRoute>
+
           <PrivateRoute path="/admin/events">
             <AdminEventsScreen />
           </PrivateRoute>

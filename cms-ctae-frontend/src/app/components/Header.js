@@ -5,6 +5,8 @@ import { useDispatch, useSelector } from "react-redux";
 import styled, { css } from "styled-components";
 
 import { selectUser, signOutAsync } from "../features/authSlice";
+import { eraseClubInfoAndPost } from "../features/clubSlice";
+import {eraseEvents} from "../features/eventsSlice";
 
 function Header() {
   const user = useSelector(selectUser);
@@ -50,6 +52,8 @@ function Header() {
 
   const signOutUser = async () => {
     try {
+      await dispatch(eraseClubInfoAndPost());
+      await dispatch(eraseEvents());
       await dispatch(signOutAsync());
     } catch (error) {
       alert(error);

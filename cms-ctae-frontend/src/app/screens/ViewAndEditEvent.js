@@ -71,7 +71,7 @@ function ViewAndEditEvent() {
   const currentEvent = events.filter((event) => event._id === eventId)[0];
   const [formData, dispatchFormState] = useReducer(formReducer, initialState);
   const [isLoading, setIsLoading] = useState(false);
-  const [poster, setPoster] = useState(currentEvent.poster);
+  const [poster, setPoster] = useState(null);
   const [participants] = useState(currentEvent.participants);
 
   const eventData = currentEvent;
@@ -137,12 +137,37 @@ function ViewAndEditEvent() {
       };
       try {
         setIsLoading(true);
+        let posterValue = currentEvent.poster;
         if (poster) {
-          // upload poster here..
-          setPoster(
-            "https://www.ctae.ac.in/images/slider/large/img9268006.jpg"
-          ); // temporary poster
+          let posterData = new FormData();
+          posterData.append("file", poster, poster.name);
+          await axios({
+            method: "post",
+            url: "/upload/images",
+            headers: {
+              accept: "application/json",
+              "Accept-Language": "en-US,en;q=0.8",
+              "Content-Type": `multipart/form-data; boundary=${posterData._boundary}`,
+            },
+            data: posterData,
+          })
+            .then((result) => {
+              if (result.status !== 200) {
+                alert("Not able to fetch events");
+                return;
+              } else {
+                posterValue = result.data.filename;
+                return;
+              }
+            })
+            .catch((err) => {
+              if (err != null) {
+                alert("Something is wrong with uploading the image!");
+                return;
+              }
+            });
         }
+        updatedEvent.poster = posterValue;
         await axios({
           method: "put",
           url: "/club/event/update",
@@ -155,7 +180,7 @@ function ViewAndEditEvent() {
             } else {
               // dispatch(setUser(result.data));
               dispatchFormState({ type: RESET_FORM });
-              history.replace("/events");
+              history.goBack();
               return;
             }
           })
@@ -177,6 +202,7 @@ function ViewAndEditEvent() {
       eventData,
       user.clubName,
       poster,
+      currentEvent.poster,
       history,
     ]
   );
