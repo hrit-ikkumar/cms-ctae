@@ -10,7 +10,7 @@ import { selectClubPostData } from "../features/clubSlice";
 
 function AdminFeedsScreen() {
   const clubPostData = useSelector(selectClubPostData);
-
+  // ADMIN FEED PART
   return (
     <AdminContainer>
       <AdminSidebar />
