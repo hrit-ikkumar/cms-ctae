@@ -1,24 +1,46 @@
 import styled from "styled-components";
 import { useSelector } from "react-redux";
 import { IconButton } from "@material-ui/core";
+import { Button } from "@material-ui/core";
 import DeleteIcon from "@material-ui/icons/Delete";
 import moment from "moment";
+import { useHistory } from "react-router-dom";
 
 import AdminSidebar from "../components/AdminSidebar";
 import { AdminContainer, AdminRightContainer } from "./AdminProfileScreen";
 import { selectClubPostData } from "../features/clubSlice";
+import { selectUser } from "../features/authSlice";
 
 function AdminFeedsScreen() {
   const clubPostData = useSelector(selectClubPostData);
+  const history = useHistory();
+  const user = useSelector(selectUser);
+
   // ADMIN FEED PART
   return (
     <AdminContainer>
       <AdminSidebar />
       <AdminRightContainer>
+        {user?.type.toLowerCase() === "admin" && (
+          <Button
+            style={{
+              backgroundColor: "#0000FF",
+              color: "#FFFFFF",
+            }}
+            onClick={() => history.push("/admin/feeds/create")}
+          >
+            Add A Feed/Post
+          </Button>
+        )}
         <FeedsContainer>
           {clubPostData.map((post, index) => (
             <FeedContainer key={index}>
-              {index !== 2 && <FeedImage src={post.imageLink} loading="lazy" />}
+              {index !== 2 && (
+                <FeedImage
+                  src={`/upload/images/view/${post.imageLink}`}
+                  loading="lazy"
+                />
+              )}
               <FeedAuthorDescription>{post.author}</FeedAuthorDescription>
               <FeedDescription>
                 {post.content.slice(0, index !== 2 ? 50 : 300) + "..."}

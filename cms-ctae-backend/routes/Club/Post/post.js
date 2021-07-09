@@ -38,13 +38,29 @@ router.post("/getPost", (req, res, next) => {
 });
 
 router.post("/create", (req, res, next) => {
-  const { title, author, authorTitle, dateTime, content, link, clubName, imageLink } =
-    req.body;
+  const {
+    title,
+    author,
+    authorTitle,
+    dateTime,
+    content,
+    link,
+    clubName,
+    imageLink,
+  } = req.body;
   Club.findOne({ clubName: clubName })
     .then((result) => {
       if (result != null) {
         let CurrentClubPost = ClubWisePost(result.clubCode);
-        let postData = { title, author, authorTitle, dateTime, content, link };
+        let postData = {
+          title,
+          author,
+          authorTitle,
+          dateTime,
+          content,
+          link,
+          imageLink,
+        };
         let newPostInClub = new CurrentClubPost(postData);
         newPostInClub
           .save()

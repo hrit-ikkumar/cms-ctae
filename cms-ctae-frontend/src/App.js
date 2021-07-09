@@ -11,6 +11,7 @@ import RegisterScreen from "./app/screens/RegisterScreen";
 import ProfileScreen from "./app/screens/ProfileScreen";
 import ViewAndEditEvent from "./app/screens/ViewAndEditEvent";
 import AddEvent from "./app/screens/AddEvent";
+import AddFeed from "./app/screens/AddFeed";
 import PrivateRoute from "./app/components/PrivateRoute";
 import ProtectedRoute from "./app/components/ProtectedRoute";
 
@@ -53,6 +54,10 @@ function App() {
 
           <PrivateRoute path="/profile">
             <ProfileScreen />
+          </PrivateRoute>
+
+          <PrivateRoute path="/admin/feeds/create">
+            <AddFeed />
           </PrivateRoute>
 
           <PrivateRoute path="/admin/feeds">
