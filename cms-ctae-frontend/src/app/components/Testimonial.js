@@ -17,13 +17,13 @@ function Testimonial() {
           .map((_, index) => (
             <TestimonialCard key={index}>
               <TestimonialImage
-                src={"https://i.quotev.com/img/q/u/12/08/07/imagesCA6GPBML.jpg"}
+                src={"https://news.itmo.ru/images/news/big/p7642.jpg"}
               />
               <TestimonialText>
                 " The place where I learnt how to code!"
               </TestimonialText>
               <TestimonialUser>
-                - Mudit Jain (Programming Club ❤ Coordinator){" "}
+                - Gennady Korotkevich (Programming Club ❤ Member){" "}
               </TestimonialUser>
             </TestimonialCard>
           ))}

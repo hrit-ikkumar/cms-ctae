@@ -49,7 +49,7 @@ const HeroContainer = styled.section`
   justify-content: center;
   align-items: center;
   background: rgba(0, 0, 0, 0.6)
-    url("https://images.unsplash.com/photo-1604933762161-67313106146c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=750&q=80")
+    url("https://news.itmo.ru/images/news/big/p4835.jpg")
     center/cover fixed no-repeat;
   background-blend-mode: darken;
 `;

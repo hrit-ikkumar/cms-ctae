@@ -201,7 +201,7 @@ const ProfileScreenContainer = styled.div`
   align-items: center;
   padding: 30px 20px;
   min-height: calc(100vh - 60px);
-  background: url("https://images.pexels.com/photos/1840624/pexels-photo-1840624.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940")
+  background: url("https://cdn.wallpapersafari.com/92/99/zo4Xps.jpg")
     center/cover fixed no-repeat;
 `;
 
