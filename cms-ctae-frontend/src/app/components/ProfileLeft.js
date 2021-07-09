@@ -66,7 +66,10 @@ function ProfileLeft() {
           {clubInfo &&
             clubInfo.clubPhotos &&
             clubInfo.clubPhotos.map((_, index) => (
-              <GalleryPicture key={index} src={clubInfo.clubPhotos[index]} />
+              <GalleryPicture
+                key={index}
+                src={`/upload/images/view/${clubInfo.clubPhotos[index]}`}
+              />
             ))}
         </GalleryGrid>
       </ProfileGalleryContainer>

@@ -169,6 +169,31 @@ router.put("/update", (req, res, next) => {
     });
 });
 
+// Add gallery images to club
+router.post("/addImageForGallery", (req, res, next) => {
+  const { clubName, image } = req.body;
+  console.log(req.body);
+  Club.findOneAndUpdate(
+    { clubName },
+    { $push: { clubPhotos: image } },
+    { useFindAndModify: true }
+  )
+    .then((result) => {
+      if (result != null) {
+        res.statusCode = 200;
+        res.send(true);
+        return;
+      }
+    })
+    .catch((err) => {
+      if (err != null) {
+        res.statusCode = 406;
+        res.send();
+        return;
+      }
+    });
+});
+
 // All Club Details
 router.get("/getAllClubData", (req, res, next) => {
   Club.find({})
