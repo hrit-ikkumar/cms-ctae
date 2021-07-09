@@ -19,7 +19,7 @@ function AdminSidebar() {
       <SidebarHeader>
         <ClubIcon
           loading="eager"
-          src={`http://localhost:3000/upload/images/view/${clubInfo.clubLogo}`}
+          src={`/upload/images/view/${clubInfo.clubLogo}`}
         />
         <HeaderTitle>{clubInfo.clubName}</HeaderTitle>
       </SidebarHeader>
