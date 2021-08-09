@@ -1,12 +1,101 @@
 import styled from "styled-components";
+import { useState, useCallback } from "react";
 
 import AdminSidebar from "../components/AdminSidebar";
 import { AdminContainer, AdminRightContainer } from "./AdminProfileScreen";
 import { InputContainer, LabelField } from "../components/FormInput";
+import { useHistory } from "react-router-dom";
+
+import { useSelector } from "react-redux";
+
+// import { selectUser } from "../features/authSlice";
+import { selectClubInfo } from "../features/clubSlice";
+import axios from "axios";
 
 import ClubButton from "../components/UI/ClubButton";
 
 function AdminGalleryScreen() {
+  // const user = useSelector(selectUser);
+  const history = useHistory();
+
+  const clubInfo = useSelector(selectClubInfo);
+  const { clubPhotos } = clubInfo;
+
+  const [image, setImage] = useState(null);
+
+  const selectImage = (event) => {
+    if (event.target.files) {
+      setImage(event.target.files[0]);
+    }
+  };
+
+  const addImageToGallery = useCallback(
+    async (event) => {
+      event.preventDefault();
+      try {
+        let imageLinkValue = null;
+        console.log(image);
+        if (image) {
+          let imageLinkData = new FormData();
+          imageLinkData.append("file", image, image.name);
+          await axios({
+            method: "post",
+            url: "/upload/images",
+            headers: {
+              accept: "application/json",
+              "Accept-Language": "en-US,en;q=0.8",
+              "Content-Type": `multipart/form-data; boundary=${imageLinkData._boundary}`,
+            },
+            data: imageLinkData,
+          })
+            .then((result) => {
+              if (result.status !== 200) {
+                alert("Not able to fetch events");
+                return;
+              } else {
+                imageLinkValue = result.data.filename;
+                return;
+              }
+            })
+            .catch((err) => {
+              if (err != null) {
+                alert("Something is wrong with uploading the image!");
+                return;
+              }
+            });
+        }
+        if (imageLinkValue === null) {
+          alert("Not able to upload image!");
+          return;
+        }
+        await axios({
+          method: "post",
+          url: "/admin/club/addImageForGallery",
+          data: { clubName: clubInfo.clubName, image: imageLinkValue },
+        })
+          .then((result) => {
+            if (result.status !== 200) {
+              alert("Not able to fetch events");
+              return;
+            } else {
+              history.push("/club");
+              history.goBack();
+              return;
+            }
+          })
+          .catch((err) => {
+            if (err != null) {
+              alert("Something is wrong");
+              return;
+            }
+          });
+      } catch (error) {
+        alert(error.message);
+      }
+    },
+    [image, clubInfo.clubName, history]
+  );
+
   return (
     <AdminContainer>
       <AdminSidebar />
@@ -18,100 +107,30 @@ function AdminGalleryScreen() {
         <GalleryWrapper>
           <PictureGalleryInputContainer>
             <InputContainer>
-              <LabelField labelColor="#fff">Image 1</LabelField>
+              <LabelField labelColor="#fff">Image</LabelField>
               <UpdateBanner
                 type="file"
-                name="Image 1"
-                id="image1"
+                name="Image"
+                id="image"
+                onChange={selectImage}
                 accept="image/*"
               />
             </InputContainer>
-            <InputContainer>
-              <LabelField labelColor="#fff">Image 2</LabelField>
-              <UpdateBanner
-                type="file"
-                name="Image2"
-                id="Image2"
-                accept="image/*"
-              />
-            </InputContainer>
-            <InputContainer>
-              <LabelField labelColor="#fff">Image 3</LabelField>
-              <UpdateBanner
-                type="file"
-                name="logo"
-                id="logo"
-                accept="image/*"
-              />
-            </InputContainer>
-            <InputContainer>
-              <LabelField labelColor="#fff">Image 4</LabelField>
-              <UpdateBanner
-                type="file"
-                name="logo"
-                id="logo"
-                accept="image/*"
-              />
-            </InputContainer>
-            <InputContainer>
-              <LabelField labelColor="#fff">Image 5</LabelField>
-              <UpdateBanner
-                type="file"
-                name="logo"
-                id="logo"
-                accept="image/*"
-              />
-            </InputContainer>
-            <InputContainer>
-              <LabelField labelColor="#fff">Image 6</LabelField>
-              <UpdateBanner
-                type="file"
-                name="logo"
-                id="logo"
-                accept="image/*"
-              />
-            </InputContainer>
-            <InputContainer>
-              <LabelField labelColor="#fff">Image 7</LabelField>
-              <UpdateBanner
-                type="file"
-                name="logo"
-                id="logo"
-                accept="image/*"
-              />
-            </InputContainer>
-            <InputContainer>
-              <LabelField labelColor="#fff">Image 8</LabelField>
-              <UpdateBanner
-                type="file"
-                name="logo"
-                id="logo"
-                accept="image/*"
-              />
-            </InputContainer>
-            <InputContainer>
-              <LabelField labelColor="#fff">Image 9</LabelField>
-              <UpdateBanner
-                type="file"
-                name="logo"
-                id="logo"
-                accept="image/*"
-              />
-            </InputContainer>
+            <ClubButton onButtonPress={addImageToGallery} margin="20px 30px">
+              Add
+            </ClubButton>
           </PictureGalleryInputContainer>
+
           <GalleryGrid>
-            {Array(9)
-              .fill()
-              .map((_, index) => (
-                <GalleryPicture
-                  key={index}
-                  src={`https://mrmoviefilmblog.files.wordpress.com/2017/03/before-i-fall-03.jpg`}
-                  loading="lazy"
-                />
-              ))}
+            {clubPhotos.map((imageLink, index) => (
+              <GalleryPicture
+                key={index}
+                src={`/upload/images/view/${imageLink}`}
+                loading="lazy"
+              />
+            ))}
           </GalleryGrid>
         </GalleryWrapper>
-        <ClubButton margin="20px 30px">Update</ClubButton>
       </AdminRightContainer>
     </AdminContainer>
   );

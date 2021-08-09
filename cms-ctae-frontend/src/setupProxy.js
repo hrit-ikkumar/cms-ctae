@@ -49,6 +49,18 @@ module.exports = function (app) {
     })
   );
   app.use(
+    proxy("/club/post/create", {
+      target: "http://localhost:3002/",
+      changeOrigin: true,
+    })
+  );
+  app.use(
+    proxy("/club/post/delete", {
+      target: "http://localhost:3002/",
+      changeOrigin: true,
+    })
+  );
+  app.use(
     proxy("/admin/club/getClubData", {
       target: "http://localhost:3002/",
       changeOrigin: true,
@@ -62,6 +74,12 @@ module.exports = function (app) {
   );
   app.use(
     proxy("/admin/club/getAllClubData", {
+      target: "http://localhost:3002/",
+      changeOrigin: true,
+    })
+  );
+  app.use(
+    proxy("/admin/club/addImageForGallery", {
       target: "http://localhost:3002/",
       changeOrigin: true,
     })

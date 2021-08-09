@@ -8,7 +8,7 @@ function Feed({ feedData }) {
 
   return (
     <FeedContainer>
-      <FeedImage src={imageLink} loading="lazy" />
+      <FeedImage src={`/upload/images/view/${imageLink}`} loading="lazy" />
       <Title>{title}</Title>
       <FeedDetailsContainer>
         <UserDetails>

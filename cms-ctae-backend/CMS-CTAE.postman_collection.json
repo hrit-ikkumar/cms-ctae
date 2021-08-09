@@ -2132,6 +2132,162 @@
 			]
 		},
 		{
+			"name": "Delete New Post in Club",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"title\": \"C++ Programming\",\n  \"author\": \"Hritik\",\n  \"authorTitle\": \"Coordinator\",\n  \"dateTime\": \"Thu Jun 24 2021 00:00:00 GMT+0530 (India Standard Time)\",\n  \"content\": \"One of our most recent updates is MY ABSOLUTE FAVORITE- Club staff can now add your own activities! Activities you create in MyFuture will be available to your entire organization – and once it has been created, you will be able to assign members to the activity, track completions, project uploads, and anything else you can do with a traditional MyFuture activity. For those who work to get local funders, you can also provide some local funder recognition on the activities pages themselves. You’ll also be able to go back and edit, and publish and unpublish as needed. And if you want to share the activity with ALL Clubs, you can let BGCA know, and the team here can make it available to everyone. I ABSOUTELY CANNOT WAIT to start seeing yours!!!!!\",\n  \"link\": \"https://www.ctae.ac.in/\",\n  \"clubName\": \"Programming Club, CTAE\",\n  \"imageLink\": \"https://www.ctae.ac.in/\",\n  \"_id\": \"60e7f5c852e9d377681c8d7e\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3002/club/post/delete",
+					"host": [
+						"localhost"
+					],
+					"port": "3002",
+					"path": [
+						"club",
+						"post",
+						"delete"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Create New Post in Club",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"title\": \"C++ Programming\",\n  \"author\": \"Hritik\",\n  \"authorTitle\": \"Coordinator\",\n  \"dateTime\": \"Thu Jun 24 2021 00:00:00 GMT+0530 (India Standard Time)\",\n  \"content\": \"One of our most recent updates is MY ABSOLUTE FAVORITE- Club staff can now add your own activities! Activities you create in MyFuture will be available to your entire organization – and once it has been created, you will be able to assign members to the activity, track completions, project uploads, and anything else you can do with a traditional MyFuture activity. For those who work to get local funders, you can also provide some local funder recognition on the activities pages themselves. You’ll also be able to go back and edit, and publish and unpublish as needed. And if you want to share the activity with ALL Clubs, you can let BGCA know, and the team here can make it available to everyone. I ABSOUTELY CANNOT WAIT to start seeing yours!!!!!\",\n  \"link\": \"https://www.ctae.ac.in/\",\n  \"clubName\": \"Programming Club, CTAE\",\n  \"imageLink\": \"https://www.ctae.ac.in/\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3002/club/post/create",
+							"host": [
+								"localhost"
+							],
+							"port": "3002",
+							"path": [
+								"club",
+								"post",
+								"create"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "1001"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"3e9-2UqSrkCM5hyUNOAC4YPbifd6P5w\""
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 27 Jun 2021 20:02:15 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"link\": \"https://www.ctae.ac.in/\",\n    \"imageLink\": \"\",\n    \"_id\": \"60d8d947b3bf0fb1bfde78b4\",\n    \"title\": \"C++ Programming\",\n    \"author\": \"Hritik\",\n    \"authorTitle\": \"Coordinator\",\n    \"dateTime\": \"Thu Jun 24 2021 00:00:00 GMT+0530 (India Standard Time)\",\n    \"content\": \"One of our most recent updates is MY ABSOLUTE FAVORITE- Club staff can now add your own activities! Activities you create in MyFuture will be available to your entire organization – and once it has been created, you will be able to assign members to the activity, track completions, project uploads, and anything else you can do with a traditional MyFuture activity. For those who work to get local funders, you can also provide some local funder recognition on the activities pages themselves. You’ll also be able to go back and edit, and publish and unpublish as needed. And if you want to share the activity with ALL Clubs, you can let BGCA know, and the team here can make it available to everyone. I ABSOUTELY CANNOT WAIT to start seeing yours!!!!!\",\n    \"__v\": 0\n}"
+				},
+				{
+					"name": "Create New Post in Club",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"title\": \"C++ Programming\",\n  \"author\": \"Hritik\",\n  \"authorTitle\": \"Coordinator\",\n  \"dateTime\": \"Thu Jun 24 2021 00:00:00 GMT+0530 (India Standard Time)\",\n  \"content\": \"One of our most recent updates is MY ABSOLUTE FAVORITE- Club staff can now add your own activities! Activities you create in MyFuture will be available to your entire organization – and once it has been created, you will be able to assign members to the activity, track completions, project uploads, and anything else you can do with a traditional MyFuture activity. For those who work to get local funders, you can also provide some local funder recognition on the activities pages themselves. You’ll also be able to go back and edit, and publish and unpublish as needed. And if you want to share the activity with ALL Clubs, you can let BGCA know, and the team here can make it available to everyone. I ABSOUTELY CANNOT WAIT to start seeing yours!!!!!\",\n  \"link\": \"https://www.ctae.ac.in/\",\n  \"clubName\": \"Programming Club, CTAE\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3002/club/post/create",
+							"host": [
+								"localhost"
+							],
+							"port": "3002",
+							"path": [
+								"club",
+								"post",
+								"create"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "986"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"3da-OGkYcXyvDDiiB2WxXLBuJ1K70O0\""
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 24 Jun 2021 19:49:36 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"link\": \"https://www.ctae.ac.in/\",\n    \"_id\": \"60d4e1cf0e0c13bc55673b5c\",\n    \"title\": \"C++ Programming\",\n    \"author\": \"Hritik\",\n    \"authorTitle\": \"Coordinator\",\n    \"dateTime\": \"Thu Jun 24 2021 00:00:00 GMT+0530 (India Standard Time)\",\n    \"content\": \"One of our most recent updates is MY ABSOLUTE FAVORITE- Club staff can now add your own activities! Activities you create in MyFuture will be available to your entire organization – and once it has been created, you will be able to assign members to the activity, track completions, project uploads, and anything else you can do with a traditional MyFuture activity. For those who work to get local funders, you can also provide some local funder recognition on the activities pages themselves. You’ll also be able to go back and edit, and publish and unpublish as needed. And if you want to share the activity with ALL Clubs, you can let BGCA know, and the team here can make it available to everyone. I ABSOUTELY CANNOT WAIT to start seeing yours!!!!!\",\n    \"__v\": 0\n}"
+				}
+			]
+		},
+		{
 			"name": "View All the posts of a club",
 			"request": {
 				"method": "POST",
@@ -2371,6 +2527,35 @@
 						"images",
 						"view",
 						"d6c978b8689309be8dbe6420de854866.jpg"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Images to Club Gallery",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"clubName\": \"Programming Club, CTAE\",\n\t\"image\": \"6f955f7f565263fa9cf9e0da8752c8f7.jpg\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3002/admin/club/addImageForGallery",
+					"host": [
+						"localhost"
+					],
+					"port": "3002",
+					"path": [
+						"admin",
+						"club",
+						"addImageForGallery"
 					]
 				}
 			},
